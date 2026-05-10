@@ -366,27 +366,35 @@ function toggleMenu(){const h=document.getElementById('hamburger'),m=document.ge
 function closeMenu(){const h=document.getElementById('hamburger'),m=document.getElementById('mobileNav');h.classList.remove('open');m.classList.remove('open');document.body.style.overflow=''}
 
 /* ═══════════════════════════════════════════════════════
-   🔐 CHANGE THIS PASSWORD — only you should know it
-   To open admin: triple-click the "Kunj" logo in nav
+   🔐 ADMIN PASSWORD — sirf tum jaano
+   Triple-click "Kunj" logo to open admin
    ═══════════════════════════════════════════════════════ */
 const ADMIN_PASSWORD = 'kunj@admin2026';
 
 /* ═══════════════════════════════════════════════════════
-   BACKEND FOLDER CONFIGURATION
-   Add your image filenames here.
-   Place images in an "images/" folder next to this file.
-   Format: { file: 'filename.jpg', caption: 'Caption', tag: 'Tag' }
+   ☁️  CLOUDINARY CONFIG
+   Setup karo (ek baar sirf):
+   1. cloudinary.com → free account banao
+   2. Dashboard mein apna Cloud Name copy karo
+   3. Settings → Upload → "Add upload preset" click karo
+      · Preset name: gallery_unsigned
+      · Signing Mode: Unsigned   ← zaroori hai!
+      · Save karo
+   4. Neeche CLOUDINARY_CLOUD_NAME mein apna naam daalo
+   ═══════════════════════════════════════════════════════ */
+const CLOUDINARY_CLOUD_NAME   = 'YOUR_CLOUD_NAME';    // ← YAHAN APNA CLOUD NAME DAALO
+const CLOUDINARY_UPLOAD_PRESET = 'gallery_unsigned';   // preset name jo banaya
+
+/* ═══════════════════════════════════════════════════════
+   FOLDER IMAGES (optional)
+   Local images/  folder se seedha add karo:
+   { file: 'campus.jpg', caption: 'IIT Bombay', tag: 'IIT' }
    ═══════════════════════════════════════════════════════ */
 const PHOTO_FOLDER = 'images/';
-
 const FOLDER_IMAGES = [
-  // { file: 'campus.jpg',     caption: 'IIT Bombay Campus',       tag: 'IIT' },
-  // { file: 'cricket.jpg',    caption: 'Cricket match win!',       tag: 'Cricket' },
-  // { file: 'gym.jpg',        caption: 'Gym day',                  tag: 'Fitness' },
-  // { file: 'graduation.jpg', caption: 'Graduation day',           tag: 'Life' },
-  // { file: 'goa.jpg',        caption: 'Internship at GIM Goa',    tag: 'Work' },
+  // { file: 'campus.jpg',     caption: 'IIT Bombay Campus', tag: 'IIT' },
+  // { file: 'cricket.jpg',    caption: 'Cricket match win!', tag: 'Cricket' },
 ];
-/* ═══════════════════════════════════════════════════════ */
 
 /* ── STATE ── */
 let allPhotos = [];
@@ -399,18 +407,16 @@ let isAdmin = false;
 function handlePhotoUpload(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=document.getElementById('logoPhoto');const ph=document.getElementById('logoPlaceholder');img.src=ev.target.result;img.style.display='block';ph.style.display='none';localStorage.setItem('profilePhoto',ev.target.result)};reader.readAsDataURL(file)}
 const savedPfp=localStorage.getItem('profilePhoto');if(savedPfp){const img=document.getElementById('logoPhoto');const ph=document.getElementById('logoPlaceholder');img.src=savedPfp;img.style.display='block';ph.style.display='none'}
 
-/* ── ADMIN: TRIPLE-CLICK LOGO TO OPEN LOGIN ── */
+/* ── ADMIN: TRIPLE-CLICK LOGO ── */
 let logoClickCount = 0, logoClickTimer = null;
 document.querySelector('.nav-logo').addEventListener('click', function(e) {
-  // don't intercept the file input inside the placeholder
   if (e.target.tagName === 'INPUT') return;
   logoClickCount++;
   clearTimeout(logoClickTimer);
   logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 600);
   if (logoClickCount >= 3) {
     logoClickCount = 0;
-    if (!isAdmin) openAdminLogin();
-    else adminLogout();
+    if (!isAdmin) openAdminLogin(); else adminLogout();
   }
 });
 
@@ -422,12 +428,10 @@ function openAdminLogin() {
   setTimeout(() => document.getElementById('adminPwInput').focus(), 100);
   document.body.style.overflow = 'hidden';
 }
-
 function closeAdminLogin() {
   document.getElementById('adminLoginOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
-
 function checkAdminPw() {
   const val = document.getElementById('adminPwInput').value;
   if (val === ADMIN_PASSWORD) {
@@ -435,7 +439,7 @@ function checkAdminPw() {
     sessionStorage.setItem('galleryAdmin', '1');
     closeAdminLogin();
     document.getElementById('adminToolbar').style.display = 'block';
-    renderGallery(); // re-render with edit/delete buttons
+    renderGallery();
     updateCount();
   } else {
     const err = document.getElementById('adminPwError');
@@ -445,23 +449,103 @@ function checkAdminPw() {
     setTimeout(() => { err.textContent = ''; }, 2000);
   }
 }
-
 function adminLogout() {
   isAdmin = false;
   sessionStorage.removeItem('galleryAdmin');
   document.getElementById('adminToolbar').style.display = 'none';
-  renderGallery(); // re-render without edit/delete buttons
+  renderGallery();
 }
 
-/* ── INIT: LOAD FOLDER IMAGES ── */
+/* ════════════════════════════════════════════════════════
+   ☁️  CLOUDINARY UPLOAD
+   Photo seedha Cloudinary pe jaati hai → permanent URL milta hai
+   Sirf URL localStorage mein save hota hai (bahut chhota — koi limit nahi)
+   ════════════════════════════════════════════════════════ */
+async function uploadToCloudinary(file) {
+  if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
+    throw new Error('Cloudinary setup nahi kiya! CLOUDINARY_CLOUD_NAME update karo.');
+  }
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+  formData.append('folder', 'kunj-gallery');
+
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+    { method: 'POST', body: formData }
+  );
+  if (!res.ok) throw new Error('Cloudinary upload failed: ' + res.statusText);
+  const data = await res.json();
+  return data.secure_url; // permanent HTTPS URL
+}
+
+/* ── GALLERY UPLOAD (admin only) ── */
+async function handleGalleryUpload(e) {
+  if (!isAdmin) return;
+  const files = Array.from(e.target.files);
+  if (!files.length) return;
+
+  const countEl = document.getElementById('photoCount');
+  if (countEl) countEl.textContent = 'UPLOADING…';
+
+  let done = 0;
+  for (const file of files) {
+    try {
+      const url = await uploadToCloudinary(file);
+      const photo = {
+        src: url,
+        caption: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
+        tag: 'General',
+        id: 'upload_' + Date.now() + '_' + Math.random().toString(36).slice(2),
+        source: 'upload'
+      };
+      allPhotos.push(photo);
+      saveToStorage(); // sirf URL + metadata save hota hai localStorage mein
+    } catch (err) {
+      alert('Upload error: ' + err.message);
+      console.error(err);
+    }
+    done++;
+    if (countEl) countEl.textContent = `UPLOADING ${done}/${files.length}…`;
+  }
+
+  renderGallery();
+  buildFilters();
+  updateCount();
+  e.target.value = '';
+}
+
+/* ── SAVE (sirf URLs + metadata — very small, no limit issues) ── */
+function saveToStorage() {
+  const uploads = allPhotos.filter(p => p.source === 'upload');
+  // Only storing URLs and text — each entry ~200 bytes, thousands of photos OK
+  const minimal = uploads.map(p => ({
+    id: p.id, src: p.src, caption: p.caption, tag: p.tag, source: p.source
+  }));
+  try { localStorage.setItem('galleryPhotos', JSON.stringify(minimal)); } catch(e) {
+    console.error('localStorage save failed:', e);
+  }
+}
+
+/* ── CLEAR UPLOADS (admin only) ── */
+function clearUploaded() {
+  if (!isAdmin) return;
+  if (!confirm('Clear all uploaded photos?\n(Cloudinary pe bhi rahein, sirf gallery se hatein)')) return;
+  allPhotos = allPhotos.filter(p => p.source !== 'upload');
+  localStorage.removeItem('galleryPhotos');
+  renderGallery();
+  buildFilters();
+  updateCount();
+}
+
+/* ── INIT ── */
 function initGallery() {
-  // Restore admin session
   if (sessionStorage.getItem('galleryAdmin') === '1') {
     isAdmin = true;
     document.getElementById('adminToolbar').style.display = 'block';
   }
 
-  // Load from folder config
+  // Folder images
   FOLDER_IMAGES.forEach((item, i) => {
     allPhotos.push({
       src: PHOTO_FOLDER + item.file,
@@ -472,56 +556,21 @@ function initGallery() {
     });
   });
 
-  // Load uploaded photos from localStorage
+  // Cloudinary photos — sirf URL localStorage se load, actual image Cloudinary se serve hoti hai
   const stored = JSON.parse(localStorage.getItem('galleryPhotos') || '[]');
   stored.forEach(p => allPhotos.push(p));
 
-  renderGallery();
-  buildFilters();
-  updateCount();
-}
+  // Cloudinary configured check
+  if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
+    const toolbar = document.getElementById('adminToolbar');
+    if (toolbar) {
+      const notice = document.createElement('div');
+      notice.style.cssText = 'background:rgba(255,96,96,.1);border:1px solid rgba(255,96,96,.3);padding:.6rem 1rem;font-family:Space Mono,monospace;font-size:.6rem;color:#ff6060;letter-spacing:.05em;margin-bottom:.5rem';
+      notice.innerHTML = '⚠ CLOUDINARY_CLOUD_NAME set nahi hai — gallery.html mein line ~372 pe apna cloud name daalo. <a href="https://cloudinary.com" target="_blank" style="color:#00e5a0">cloudinary.com</a>';
+      toolbar.prepend(notice);
+    }
+  }
 
-/* ── GALLERY UPLOAD (admin only) ── */
-function handleGalleryUpload(e) {
-  if (!isAdmin) return;
-  const files = Array.from(e.target.files);
-  let loaded = 0;
-  files.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = ev => {
-      const photo = {
-        src: ev.target.result,
-        caption: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g,' '),
-        tag: 'General',
-        id: 'upload_' + Date.now() + '_' + Math.random().toString(36).slice(2),
-        source: 'upload'
-      };
-      allPhotos.push(photo);
-      loaded++;
-      if (loaded === files.length) {
-        saveToStorage();
-        renderGallery();
-        buildFilters();
-        updateCount();
-      }
-    };
-    reader.readAsDataURL(file);
-  });
-  e.target.value = '';
-}
-
-/* ── SAVE UPLOADS ── */
-function saveToStorage() {
-  const uploads = allPhotos.filter(p => p.source === 'upload');
-  try { localStorage.setItem('galleryPhotos', JSON.stringify(uploads)); } catch(e) {}
-}
-
-/* ── CLEAR UPLOADS (admin only) ── */
-function clearUploaded() {
-  if (!isAdmin) return;
-  if (!confirm('Clear all uploaded photos?')) return;
-  allPhotos = allPhotos.filter(p => p.source !== 'upload');
-  localStorage.removeItem('galleryPhotos');
   renderGallery();
   buildFilters();
   updateCount();

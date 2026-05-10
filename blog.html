@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Kunjbihari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07101f;--bg2:#0c1a2e;--bg3:#0f2040;--accent:#00e5a0;--acc2:#00b8d9;--acc3:#7c6cfa;--text:#d9e8f5;--muted:#7a93b4;--dim:#3a4d63;--border:#172234;--red:#ff6060;--card:#0c1828;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Lora',serif;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 3rem;background:rgba(7,16,31,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
+.logo-photo-wrap{position:relative;width:38px;height:38px;flex-shrink:0}
+.logo-photo{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--accent);display:block}
+.logo-photo-placeholder{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,rgba(0,229,160,.15),rgba(124,108,250,.2));border:1.5px solid rgba(0,229,160,.4);display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;position:relative;overflow:hidden;}
+.logo-photo-placeholder input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.logo-photo-ring{position:absolute;inset:-3px;border-radius:50%;border:1px solid transparent;background:linear-gradient(135deg,var(--accent),var(--acc3)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.logo-wordmark{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;color:var(--text);letter-spacing:-.02em;line-height:1}
+.logo-wordmark em{color:var(--accent);font-style:normal}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;transition:color .2s;position:relative;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent);transition:width .25s}
+.nav-links a:hover,.nav-links a.nav-page-active{color:var(--accent)}
+.nav-links a.nav-page-active::after{width:100%}
+.nav-pill{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--bg);background:var(--accent);padding:.25rem .8rem;letter-spacing:.08em;border-radius:1px;text-decoration:none;transition:background .2s}
+.nav-pill:hover{background:#00ffb2}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.nav-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;animation:blink 1.4s infinite;display:inline-block}
+
+/* ── PAGE HERO ── */
+.page-hero{position:relative;z-index:1;padding:9rem 3rem 4rem;max-width:1100px;margin:0 auto}
+.page-breadcrumb{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.18em;margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem}
+.page-breadcrumb a{color:var(--muted);text-decoration:none;transition:color .2s}.page-breadcrumb a:hover{color:var(--accent)}
+.page-breadcrumb span{color:var(--dim)}
+.page-title{font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(2.8rem,5.5vw,5rem);line-height:.95;letter-spacing:-.04em;margin-bottom:1.2rem}
+.page-title em{color:var(--accent);font-style:normal}
+.page-subtitle{font-family:'Lora',serif;font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:560px;margin-bottom:2rem}
+.page-subtitle strong{color:var(--text)}
+
+/* ── FILTER BAR ── */
+.filter-bar{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 3rem 3rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.filter-btn{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;padding:.35rem 1rem;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(0,229,160,.05)}
+
+/* ── BLOG GRID ── */
+.blog-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 3rem 6rem}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem}
+.blog-card{background:var(--card);border:1px solid var(--border);padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.blog-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent),var(--acc2),transparent);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.blog-card:hover{border-color:rgba(0,229,160,.22);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
+.blog-card:hover::before{transform:scaleX(1)}
+.blog-card-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.blog-tag{font-family:'Space Mono',monospace;font-size:.53rem;padding:.22rem .65rem;border:1px solid rgba(0,229,160,.22);color:var(--accent);letter-spacing:.06em;background:rgba(0,229,160,.04)}
+.blog-date{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--dim);letter-spacing:.1em}
+.blog-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.08rem;color:var(--text);line-height:1.35}
+.blog-excerpt{font-size:.88rem;color:var(--muted);line-height:1.72;flex:1}
+.blog-footer{display:flex;align-items:center;justify-content:space-between;padding-top:.8rem;border-top:1px solid var(--border)}
+.blog-read-time{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--dim);letter-spacing:.08em}
+.blog-arrow{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--acc2);transition:transform .2s}
+.blog-card:hover .blog-arrow{transform:translateX(4px)}
+.blog-featured{grid-column:1/-1}
+.blog-featured .blog-title{font-size:1.4rem}
+.blog-featured .blog-excerpt{font-size:.95rem;max-width:720px}
+.featured-badge{font-family:'Space Mono',monospace;font-size:.52rem;padding:.2rem .7rem;background:rgba(124,108,250,.12);border:1px solid rgba(124,108,250,.3);color:var(--acc3);letter-spacing:.1em;margin-left:auto}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:5rem 1.5rem 2rem;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--bg2);border:1px solid rgba(0,229,160,.15);max-width:760px;width:100%;max-height:80vh;overflow-y:auto;padding:2.5rem;position:relative}
+.modal::-webkit-scrollbar{width:3px}.modal::-webkit-scrollbar-thumb{background:var(--accent)}
+.modal-close{position:absolute;top:1.2rem;right:1.2rem;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);cursor:pointer;background:none;border:1px solid var(--border);padding:.2rem .6rem;transition:all .2s}
+.modal-close:hover{color:var(--accent);border-color:var(--accent)}
+.modal-tag{font-family:'Space Mono',monospace;font-size:.55rem;padding:.22rem .65rem;border:1px solid rgba(0,229,160,.22);color:var(--accent);letter-spacing:.06em;background:rgba(0,229,160,.04);display:inline-block;margin-bottom:1rem}
+.modal-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(1.5rem,3vw,2.2rem);color:var(--text);line-height:1.15;margin-bottom:.8rem;letter-spacing:-.03em}
+.modal-meta{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:.1em;margin-bottom:2rem;display:flex;gap:1.5rem;flex-wrap:wrap}
+.modal-body h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text);margin:1.8rem 0 .6rem;letter-spacing:-.02em}
+.modal-body p{font-size:.92rem;color:var(--muted);line-height:1.85;margin-bottom:1rem}
+.modal-body code{font-family:'Space Mono',monospace;font-size:.78rem;background:rgba(0,229,160,.06);border:1px solid rgba(0,229,160,.12);padding:.12rem .4rem;color:var(--accent)}
+.modal-body ul{padding-left:1.2rem;margin-bottom:1rem}
+.modal-body ul li{font-size:.9rem;color:var(--muted);line-height:1.75;margin-bottom:.3rem}
+.modal-body strong{color:var(--text)}
+.modal-body em{color:var(--acc2);font-style:normal}
+.modal-divider{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(7,16,31,.95)}
+.foot-name{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--muted);font-weight:500}
+.foot-name span{color:var(--accent)}
+.foot-copy{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:.1em}
+
+/* ── HAMBURGER ── */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;background:none;border:1px solid var(--border);padding:6px;flex-shrink:0;transition:border-color .2s}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;height:1.5px;background:var(--muted);border-radius:1px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--accent)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--accent)}
+/* Mobile drawer */
+.mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;background:rgba(7,16,31,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-nav.open{opacity:1;pointer-events:all}
+.mobile-nav a{font-family:'Space Mono',monospace;font-size:1rem;color:var(--muted);text-decoration:none;letter-spacing:.18em;transition:color .2s;padding:.4rem 0}
+.mobile-nav a:hover,.mobile-nav a.nav-page-active{color:var(--accent)}
+.mobile-nav .mobile-pill{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--bg);background:var(--accent);padding:.55rem 1.6rem;letter-spacing:.1em;border-radius:1px;margin-top:.5rem;text-decoration:none}
+@media(max-width:900px){nav{padding:.8rem 1.5rem}.page-hero{padding:8rem 1.5rem 3rem}.filter-bar,.blog-section{padding-left:1.5rem;padding-right:1.5rem}}
+@media(max-width:700px){
+  .nav-links,.nav-pill{display:none}
+  .hamburger{display:flex}
+  .mobile-nav{display:flex}
+  .blog-grid{grid-template-columns:1fr}
+  .blog-featured{grid-column:auto}
+  .modal{padding:1.5rem}
+  .modal-title{font-size:1.3rem}
+}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-photo-wrap">
+      <div class="logo-photo-ring"></div>
+      <div class="logo-photo-placeholder" id="logoPlaceholder" title="Click to upload your photo">
+        🧑‍💻
+        <input type="file" accept="image/*" onchange="handlePhotoUpload(event)">
+      </div>
+      <img class="logo-photo" id="logoPhoto" src="" alt="Kunj" style="display:none;position:absolute;top:0;left:0">
+    </div>
+    <div>
+      <div class="logo-wordmark"><em>Ku</em>nj</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#projects">Projects</a></li>
+    <li><a href="blog.html" class="nav-page-active">Blog</a></li>
+    <li><a href="freelance.html">Freelance</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+  </ul>
+  <a href="freelance.html" class="nav-pill">Hire Me →</a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html" onclick="closeMenu()">HOME</a>
+  <a href="index.html#about" onclick="closeMenu()">ABOUT</a>
+  <a href="index.html#experience" onclick="closeMenu()">EXPERIENCE</a>
+  <a href="index.html#projects" onclick="closeMenu()">PROJECTS</a>
+  <a href="blog.html" class="nav-page-active" onclick="closeMenu()">BLOG</a>
+  <a href="freelance.html" onclick="closeMenu()">FREELANCE</a>
+  <a href="gallery.html" onclick="closeMenu()">GALLERY</a>
+  <a href="freelance.html" class="mobile-pill">HIRE ME →</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-breadcrumb">
+    <a href="index.html">HOME</a><span>/</span><span style="color:var(--accent)">BLOG</span>
+  </div>
+  <h1 class="page-title reveal">AI &amp; ML<br><em>Writings</em></h1>
+  <p class="page-subtitle reveal">Deep dives into <strong>AI systems</strong>, recommendation engines, LLMs, agentic workflows, and the math behind the models. Written by a practitioner, for practitioners.</p>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterPosts('all',this)">ALL</button>
+  <button class="filter-btn" onclick="filterPosts('LLM',this)">LLM</button>
+  <button class="filter-btn" onclick="filterPosts('RecSys',this)">REC SYS</button>
+  <button class="filter-btn" onclick="filterPosts('ML',this)">ML / STATS</button>
+  <button class="filter-btn" onclick="filterPosts('NLP',this)">NLP</button>
+  <button class="filter-btn" onclick="filterPosts('Agentic',this)">AGENTIC AI</button>
+</div>
+
+<!-- BLOG GRID -->
+<div class="blog-section">
+  <div class="blog-grid" id="blogGrid">
+
+    <!-- FEATURED -->
+    <div class="blog-card blog-featured reveal" data-tag="RecSys" onclick="openPost(0)">
+      <div class="blog-card-head">
+        <span class="blog-tag">REC SYS</span>
+        <span class="featured-badge">✦ FEATURED</span>
+        <span class="blog-date">MAY 2026</span>
+      </div>
+      <div class="blog-title">How Recommendation Systems Actually Work — From Collaborative Filtering to Two-Tower Neural Nets</div>
+      <div class="blog-excerpt">Every time Netflix suggests a show, Spotify builds your Discover Weekly, or Amazon shows "customers also bought" — a recommendation system is running behind the scenes. But what's actually happening? This deep dive traces the full evolution from simple user-item matrices to the transformer-powered ranking models used at scale today.</div>
+      <div class="blog-footer">
+        <span class="blog-read-time">⏱ 12 MIN READ</span>
+        <span class="blog-arrow">READ MORE →</span>
+      </div>
+    </div>
+
+    <div class="blog-card reveal" data-tag="LLM" onclick="openPost(1)">
+      <div class="blog-card-head"><span class="blog-tag">LLM</span><span class="blog-date">APR 2026</span></div>
+      <div class="blog-title">RAG vs Fine-Tuning: Which One Should You Actually Use?</div>
+      <div class="blog-excerpt">The two most popular ways to customize LLMs — and they solve completely different problems. A practical breakdown with benchmarks, cost analysis, and when each approach wins.</div>
+      <div class="blog-footer"><span class="blog-read-time">⏱ 8 MIN READ</span><span class="blog-arrow">READ MORE →</span></div>
+    </div>
+
+    <div class="blog-card reveal" data-tag="Agentic" onclick="openPost(2)">
+      <div class="blog-card-head"><span class="blog-tag">AGENTIC AI</span><span class="blog-date">APR 2026</span></div>
+      <div class="blog-title">Building Multi-Agent Systems That Don't Fall Apart</div>
+      <div class="blog-excerpt">Multi-agent AI sounds great in demos. In production, agents loop, hallucinate, and deadlock. Here's what I learned building a multi-agent resume evaluation system from scratch.</div>
+      <div class="blog-footer"><span class="blog-read-time">⏱ 10 MIN READ</span><span class="blog-arrow">READ MORE →</span></div>
+    </div>
+
+    <div class="blog-card reveal" data-tag="NLP" onclick="openPost(3)">
+      <div class="blog-card-head"><span class="blog-tag">NLP</span><span class="blog-date">MAR 2026</span></div>
+      <div class="blog-title">Sentence Embeddings Are Underrated: A Practical Guide to Semantic Search</div>
+      <div class="blog-excerpt">Most people use embeddings as a black box. Understanding the geometry — cosine similarity, clustering, dimensionality collapse — unlocks dramatically better retrieval pipelines.</div>
+      <div class="blog-footer"><span class="blog-read-time">⏱ 7 MIN READ</span><span class="blog-arrow">READ MORE →</span></div>
+    </div>
+
+    <div class="blog-card reveal" data-tag="ML" onclick="openPost(4)">
+      <div class="blog-card-head"><span class="blog-tag">ML / STATS</span><span class="blog-date">MAR 2026</span></div>
+      <div class="blog-title">XGBoost vs LSTM for Time-Series Forecasting: A Head-to-Head on Real Data</div>
+      <div class="blog-excerpt">I ran both models on 1.2M NYC taxi trip records. The results surprised me. Spoiler: the "simpler" model won in most conditions — and here's the math behind why.</div>
+      <div class="blog-footer"><span class="blog-read-time">⏱ 9 MIN READ</span><span class="blog-arrow">READ MORE →</span></div>
+    </div>
+
+    <div class="blog-card reveal" data-tag="LLM" onclick="openPost(5)">
+      <div class="blog-card-head"><span class="blog-tag">LLM</span><span class="blog-date">FEB 2026</span></div>
+      <div class="blog-title">Prompt Engineering Is Real Engineering: Techniques That Actually Move the Needle</div>
+      <div class="blog-excerpt">Chain-of-thought, few-shot, self-consistency, and structured output prompting — with concrete before/after examples and measurable accuracy improvements across different task types.</div>
+      <div class="blog-footer"><span class="blog-read-time">⏱ 6 MIN READ</span><span class="blog-arrow">READ MORE →</span></div>
+    </div>
+
+    <div class="blog-card reveal" data-tag="ML" onclick="openPost(6)">
+      <div class="blog-card-head"><span class="blog-tag">ML / STATS</span><span class="blog-date">FEB 2026</span></div>
+      <div class="blog-title">Bayesian vs Frequentist: Choosing the Right Framework for Your Problem</div>
+      <div class="blog-excerpt">Not a philosophy debate — a practical guide. With PyMC code examples, real-world use cases, and a decision framework for when Bayesian inference is worth the overhead.</div>
+      <div class="blog-footer"><span class="blog-read-time">⏱ 8 MIN READ</span><span class="blog-arrow">READ MORE →</span></div>
+    </div>
+
+    <div class="blog-card reveal" data-tag="Agentic" onclick="openPost(7)">
+      <div class="blog-card-head"><span class="blog-tag">AGENTIC AI</span><span class="blog-date">JAN 2026</span></div>
+      <div class="blog-title">LangGraph vs AutoGen: A Brutally Honest Comparison for Production Agentic Workflows</div>
+      <div class="blog-excerpt">Two popular frameworks, very different philosophies. After building real pipelines in both, here's where each one shines — and where it breaks under pressure.</div>
+      <div class="blog-footer"><span class="blog-read-time">⏱ 7 MIN READ</span><span class="blog-arrow">READ MORE →</span></div>
+    </div>
+
+    <div class="blog-card reveal" data-tag="NLP" onclick="openPost(8)">
+      <div class="blog-card-head"><span class="blog-tag">NLP</span><span class="blog-date">JAN 2026</span></div>
+      <div class="blog-title">Emotion Mining from Unstructured Text: Lessons from an LLM-Powered Research Paper</div>
+      <div class="blog-excerpt">The pipeline we built for mining emotions from student feedback — PyMuPDF extraction, UMAP clustering, Hungarian algorithm role assignment — and what we'd do differently next time.</div>
+      <div class="blog-footer"><span class="blog-read-time">⏱ 11 MIN READ</span><span class="blog-arrow">READ MORE →</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOnOverlay(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closePost()">✕ CLOSE</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-name">Kunj<span>bihari</span> · IIT Bombay MS</div>
+  <div class="foot-copy">© 2026 · Thoughts on AI &amp; ML</div>
+</footer>
+
+<script>
+/* ── HAMBURGER ── */
+function toggleMenu(){const h=document.getElementById('hamburger'),m=document.getElementById('mobileNav');h.classList.toggle('open');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':''}
+function closeMenu(){const h=document.getElementById('hamburger'),m=document.getElementById('mobileNav');h.classList.remove('open');m.classList.remove('open');document.body.style.overflow=''}
+
+/* ── PHOTO UPLOAD ── */
+function handlePhotoUpload(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=document.getElementById('logoPhoto');const ph=document.getElementById('logoPlaceholder');img.src=ev.target.result;img.style.display='block';ph.style.display='none';localStorage.setItem('profilePhoto',ev.target.result)};reader.readAsDataURL(file)}
+const saved=localStorage.getItem('profilePhoto');if(saved){const img=document.getElementById('logoPhoto');const ph=document.getElementById('logoPlaceholder');img.src=saved;img.style.display='block';ph.style.display='none'}
+
+/* ── BLOG POST CONTENT ── */
+const posts = [
+  {
+    tag:'REC SYS', date:'MAY 2026', readTime:'12 MIN READ',
+    title:'How Recommendation Systems Actually Work — From Collaborative Filtering to Two-Tower Neural Nets',
+    content:`
+      <h3>Why This Matters</h3>
+      <p>Recommendation systems are among the highest-ROI ML systems ever deployed. Netflix estimates their recommendation engine saves them over <strong>$1 billion per year</strong> in subscriber retention. Understanding how they work isn't just academic — it's one of the most commercially valuable ML skills you can develop.</p>
+      <h3>Stage 1 — Collaborative Filtering (The Classic)</h3>
+      <p>The original insight: <em>users who agreed in the past will agree in the future</em>. We build a user-item matrix where each cell holds a rating (explicit) or an interaction signal (implicit — views, clicks, purchases). The challenge is sparsity — most users interact with a tiny fraction of items.</p>
+      <p>Matrix Factorization (SVD, ALS) solves this by decomposing the matrix into latent factor vectors. Each user and item gets a low-dimensional embedding, and the predicted rating is simply their dot product. This is the foundation of most industrial systems — even today.</p>
+      <h3>Stage 2 — Content-Based Features</h3>
+      <p>Pure collaborative filtering fails on cold-start (new users, new items). Content-based systems use item features — genre, runtime, cast, description embeddings — to bootstrap recommendations without historical data. Hybrid systems combine both signals.</p>
+      <h3>Stage 3 — Two-Tower Neural Networks</h3>
+      <p>Modern industrial recommendation runs a <strong>two-tower architecture</strong>: one tower encodes the user (demographics, history, context), another encodes the item (features, metadata, embeddings). Both towers output a dense vector; the score is their cosine similarity. This enables <em>approximate nearest-neighbor search</em> (FAISS, ScaNN) over millions of items in milliseconds.</p>
+      <p>YouTube, Pinterest, Twitter (X), and virtually every large platform runs some variant of this architecture. The key advantage: you can precompute item embeddings offline and only compute the user tower at inference time.</p>
+      <h3>Stage 4 — Ranking and Re-Ranking</h3>
+      <p>Retrieval (Two-Tower) fetches a few hundred candidates. A separate, heavier <strong>ranking model</strong> (often a gradient-boosted tree or small neural net) scores each candidate with richer features — freshness, diversity, session context, business rules — and produces the final ordered list.</p>
+      <h3>The Math That Holds It Together</h3>
+      <p>At its core, everything reduces to learning representations such that <em>similar users and items cluster in embedding space</em>. Loss functions range from MSE (explicit ratings) to BPR (Bayesian Personalized Ranking for implicit feedback) to in-batch negative sampling for two-tower contrastive training.</p>
+      <h3>Key Metrics</h3>
+      <p>Offline: Precision@K, Recall@K, NDCG, MRR. Online: Click-through rate, watch time, conversion rate. The gap between offline and online metrics is often where recommendation systems fail — optimizing NDCG doesn't always improve CTR.</p>
+    `
+  },
+  {
+    tag:'LLM', date:'APR 2026', readTime:'8 MIN READ',
+    title:'RAG vs Fine-Tuning: Which One Should You Actually Use?',
+    content:`
+      <h3>The Fundamental Difference</h3>
+      <p>Fine-tuning changes the model's weights — it teaches the model new behavior, style, or domain knowledge permanently. RAG (Retrieval-Augmented Generation) keeps the model frozen and injects relevant context at inference time. They solve different problems.</p>
+      <h3>When RAG Wins</h3>
+      <p>RAG is better when your knowledge changes frequently (documentation, news, internal wikis), when you need <em>source attribution</em>, when hallucination risk is high and you need grounding, or when you can't afford the compute and data cost of fine-tuning. Most enterprise knowledge-base chatbots should use RAG.</p>
+      <h3>When Fine-Tuning Wins</h3>
+      <p>Fine-tuning wins when you need a specific <em>style or format</em> (e.g., always respond as JSON, or match a brand voice), when you have high-quality labeled examples in a specialized domain (medical, legal, code), or when inference latency is critical and you can't afford the retrieval step.</p>
+      <h3>Cost Reality Check</h3>
+      <p>Fine-tuning a 7B model requires significant GPU hours and a carefully curated dataset — often $500–5,000+. RAG requires a vector database, an embedding model, and a chunking pipeline — often much cheaper, but adds latency on every call. The right choice depends heavily on your budget and use case frequency.</p>
+      <h3>The Hybrid Future</h3>
+      <p>The state-of-the-art is actually <strong>both</strong>: fine-tune for format and domain adaptation, then use RAG for current knowledge grounding. Models like GPT-4 with file search or Claude with tool use are moving in this direction by design.</p>
+    `
+  },
+  {
+    tag:'AGENTIC AI', date:'APR 2026', readTime:'10 MIN READ',
+    title:'Building Multi-Agent Systems That Don\'t Fall Apart',
+    content:`
+      <h3>The Hype vs Reality Gap</h3>
+      <p>Multi-agent demos are impressive. One agent researches, another writes, another reviews. In practice, when you deploy these systems on real tasks, you encounter: infinite loops, agents calling the wrong tools, state corruption across handoffs, and hallucinated tool parameters. Here's how to design your way out of these problems.</p>
+      <h3>Lesson 1 — Define Clear Agent Contracts</h3>
+      <p>Each agent should have a <em>single, well-scoped responsibility</em> with a defined input schema and output schema. When agents produce free-form text that other agents parse, errors compound. Use structured outputs (JSON) at every handoff boundary.</p>
+      <h3>Lesson 2 — Build Explicit State Management</h3>
+      <p>Don't let agents maintain implicit state through conversation history alone. Use a <strong>shared state object</strong> (a Pydantic model works great with LangGraph) that every agent reads from and writes to. This makes debugging possible — you can inspect the state at any step.</p>
+      <h3>Lesson 3 — Design for Failure</h3>
+      <p>Every agent call can fail. Build retry logic, fallback agents, and dead-letter queues for tasks that can't be completed. The worst multi-agent systems I've seen have no error handling — when one agent fails, the whole pipeline silently produces garbage.</p>
+      <h3>Lesson 4 — Evaluation Is Non-Negotiable</h3>
+      <p>You cannot eyeball multi-agent system quality. Build an automated evaluation harness that runs representative tasks and scores outputs. Without evals, you're flying blind when you make changes.</p>
+      <h3>What I'd Do Differently</h3>
+      <p>In my multi-agent resume evaluation system, I initially had agents communicating through natural language. I rewrote the handoffs to use structured JSON schemas, added explicit state tracking, and latency dropped by 40% while accuracy improved measurably. The lesson: <em>treat agent boundaries like API contracts</em>.</p>
+    `
+  },
+  {
+    tag:'NLP', date:'MAR 2026', readTime:'7 MIN READ',
+    title:'Sentence Embeddings Are Underrated: A Practical Guide to Semantic Search',
+    content:`
+      <h3>What Are Sentence Embeddings?</h3>
+      <p>A sentence embedding is a dense vector (typically 384–1536 dimensions) where semantically similar sentences are geometrically close. Unlike TF-IDF which counts words, embeddings capture <em>meaning</em>. "The car broke down" and "The vehicle stopped working" have very different word overlap but similar embeddings.</p>
+      <h3>Choosing Your Model</h3>
+      <p>For most tasks: <code>all-MiniLM-L6-v2</code> (fast, compact, great quality). For highest accuracy: <code>text-embedding-3-large</code> (OpenAI) or <code>e5-large-v2</code>. For multilingual: <code>paraphrase-multilingual-mpnet</code>. Don't default to the biggest model — benchmarks on your specific domain data matter more than general leaderboard rankings.</p>
+      <h3>The Geometry You Need to Understand</h3>
+      <p>Embeddings live in high-dimensional space. Cosine similarity measures the angle between vectors (ignores magnitude — important for text). Euclidean distance can also work but is sensitive to embedding norm. Most retrieval systems use cosine similarity or inner product on normalized vectors (equivalent).</p>
+      <h3>Building a Semantic Search Pipeline</h3>
+      <p>Encode your corpus → store in a vector database (FAISS for local, Pinecone/Weaviate for production) → at query time, encode the query → retrieve top-K by cosine similarity → optionally rerank with a cross-encoder for higher precision. The cross-encoder trick is underused — it dramatically improves precision at the cost of some latency.</p>
+      <h3>Common Failure Modes</h3>
+      <p>Dimensionality collapse (all embeddings cluster together — check your model on your domain), chunk size mismatch (embedding 10-page documents vs querying with single sentences), and retrieval-reranking misalignment. Monitor your retrieval quality with a labeled evaluation set.</p>
+    `
+  },
+  {
+    tag:'ML / STATS', date:'MAR 2026', readTime:'9 MIN READ',
+    title:'XGBoost vs LSTM for Time-Series Forecasting: A Head-to-Head on Real Data',
+    content:`
+      <h3>The Setup</h3>
+      <p>I used the NYC Green Taxi dataset — 1.2 million trip records — to forecast hourly demand across grid zones in Manhattan. Both models received the same features: hour of day, day of week, month, lag features (1h, 24h, 168h), rolling statistics, and external weather data.</p>
+      <h3>XGBoost — The Feature Engineering Champion</h3>
+      <p>XGBoost achieved <strong>R² = 0.94</strong> on the test set. The key insight: with good lag features and temporal embeddings (cyclic encoding of hour/day), XGBoost can capture most patterns that LSTM sees through its recurrent structure. Training time: ~4 minutes on CPU. Interpretable via SHAP values.</p>
+      <h3>LSTM — When Sequences Really Matter</h3>
+      <p>A stacked 2-layer LSTM with attention achieved R² = 0.93 — slightly lower, with <em>10x the training time</em> and significantly more hyperparameter tuning overhead. However, LSTM excelled on longer forecast horizons (12h+) and captured irregular patterns that XGBoost's fixed lag window missed.</p>
+      <h3>The Verdict</h3>
+      <p>For most structured time-series tasks with well-engineered features, <em>XGBoost is the pragmatic choice</em>. It's faster to train, easier to tune, and more interpretable. LSTM wins when you have long sequences with complex temporal dependencies and can afford the training cost. For real-time production forecasting, XGBoost is often deployed first; LSTM (or Transformers) become worth it at scale.</p>
+      <h3>One More Trick</h3>
+      <p>The biggest performance gain in both models came from <strong>spatial features</strong> — encoding which grid zone and its neighbors, rather than treating each zone independently. Demand in adjacent zones is correlated. Adding this lifted R² by ~0.04 in XGBoost.</p>
+    `
+  },
+  {
+    tag:'LLM', date:'FEB 2026', readTime:'6 MIN READ',
+    title:'Prompt Engineering Is Real Engineering: Techniques That Actually Move the Needle',
+    content:`
+      <h3>It's Not Just "Better Wording"</h3>
+      <p>Prompt engineering is systematic experimentation — measuring output quality across prompt variations against a labeled evaluation set. Without evals, you're guessing. With evals, you can run controlled experiments and measure improvement.</p>
+      <h3>Chain-of-Thought (CoT)</h3>
+      <p>Adding <code>"Let's think step by step"</code> to reasoning prompts improves accuracy on math and logic tasks by 15–30% in benchmarks. For complex tasks, explicitly ask the model to show intermediate reasoning before giving a final answer. This works because CoT forces the model to allocate more computation to hard steps.</p>
+      <h3>Few-Shot Examples</h3>
+      <p>Including 3–5 examples of input → output pairs dramatically shapes output format and style. The examples you choose matter more than the number — pick examples that cover edge cases in your distribution. Order also matters: the last few examples have disproportionate influence.</p>
+      <h3>Structured Output Prompting</h3>
+      <p>For applications consuming LLM output programmatically, always specify output format explicitly: <em>"Respond only in valid JSON with keys: {result, confidence, reasoning}"</em>. Better yet, use APIs with native JSON mode or function calling to enforce the schema at the API level.</p>
+      <h3>Self-Consistency</h3>
+      <p>Sample the model multiple times with temperature > 0, then take the majority answer. This simple technique improves accuracy on reasoning tasks significantly without any prompt changes — just more inference calls. Expensive, but highly effective for high-stakes tasks.</p>
+    `
+  },
+  {
+    tag:'ML / STATS', date:'FEB 2026', readTime:'8 MIN READ',
+    title:'Bayesian vs Frequentist: Choosing the Right Framework for Your Problem',
+    content:`
+      <h3>The Core Philosophical Difference</h3>
+      <p>Frequentist statistics treats probability as the long-run frequency of events — parameters are fixed (unknown) constants, data is random. Bayesian statistics treats parameters as random variables with distributions — you start with a prior belief, update with data, and get a posterior distribution.</p>
+      <h3>When Bayesian Wins</h3>
+      <p>Bayesian inference is superior when you have <em>small sample sizes</em> (prior knowledge prevents overfitting), when you need <em>full uncertainty quantification</em> (not just a point estimate and p-value), when you're doing sequential analysis (update beliefs as new data arrives), or when domain expertise should inform the model (informative priors).</p>
+      <h3>When Frequentist Is Fine</h3>
+      <p>A/B testing with large samples, standard regression, most classification tasks — frequentist methods are faster, simpler, and well-understood by stakeholders. Don't add Bayesian complexity unless the problem genuinely requires it.</p>
+      <h3>PyMC in Practice</h3>
+      <p>PyMC makes Bayesian modeling accessible. A basic Bayesian linear regression in PyMC is about 10 lines of code. MCMC sampling (NUTS by default) is automatic. The main cost: sampling is slow compared to closed-form frequentist solutions — often 10–100x slower for equivalent models.</p>
+      <h3>My Rule of Thumb</h3>
+      <p>Start frequentist. If you need uncertainty propagation through a complex model, have strong domain priors, or are working with limited data where regularization via priors is critical — go Bayesian. The overhead is worth it in those cases; in most others, it isn't.</p>
+    `
+  },
+  {
+    tag:'AGENTIC AI', date:'JAN 2026', readTime:'7 MIN READ',
+    title:'LangGraph vs AutoGen: A Brutally Honest Comparison for Production Agentic Workflows',
+    content:`
+      <h3>The Core Architecture Difference</h3>
+      <p>LangGraph is a <em>graph-based state machine</em> — you explicitly define nodes (agents/functions) and edges (transitions), and a shared state object flows through the graph. AutoGen is a <em>conversation-based multi-agent framework</em> — agents communicate through structured chat messages, and you define which agents can talk to which.</p>
+      <h3>LangGraph Strengths</h3>
+      <p>Explicit control flow is LangGraph's superpower. You define exactly when an agent runs, what state it sees, and where execution goes next. This makes complex, conditional workflows feasible. The built-in persistence layer (checkpointing) is excellent for long-running workflows that need to survive failures. Best for: deterministic pipelines, workflows with complex branching logic, production systems.</p>
+      <h3>AutoGen Strengths</h3>
+      <p>AutoGen excels at <em>emergent collaboration</em> — when you want agents to negotiate and coordinate without fully predefined logic. The GroupChat abstraction handles complex multi-agent conversations naturally. Human-in-the-loop integration is straightforward. Best for: research workflows, complex reasoning tasks, scenarios where agent coordination should emerge dynamically.</p>
+      <h3>Production Reality</h3>
+      <p>In production, I prefer LangGraph. The explicit state management means I can inspect, debug, and replay any step. AutoGen's conversation-based coordination is harder to deterministically test and monitor. That said, AutoGen's CodeExecutor agents are genuinely impressive for code generation and testing workflows.</p>
+      <h3>The Honest Verdict</h3>
+      <p>Neither framework is mature enough that the choice is obvious. Both have significant rough edges. If you're starting a new project: LangGraph for structured workflows, AutoGen for emergent reasoning tasks. Expect to write adaptation code either way.</p>
+    `
+  },
+  {
+    tag:'NLP', date:'JAN 2026', readTime:'11 MIN READ',
+    title:'Emotion Mining from Unstructured Text: Lessons from an LLM-Powered Research Paper',
+    content:`
+      <h3>The Problem</h3>
+      <p>We had thousands of student feedback forms — scanned PDFs, inconsistent formatting, mixed languages. The research goal: extract emotional signals, cluster faculty performance themes, and optimally assign faculty to roles based on feedback-derived strengths. Here's the full pipeline and what we learned.</p>
+      <h3>Stage 1 — PDF Extraction with PyMuPDF</h3>
+      <p>PyMuPDF (fitz) handled the extraction. The challenge was inconsistent PDF structure — some were scanned images, others had embedded text. For scanned pages, we used Tesseract OCR as a fallback. Key learning: always validate extraction quality on a sample before running the full corpus.</p>
+      <h3>Stage 2 — Sentence Embeddings + UMAP</h3>
+      <p>We encoded all feedback sentences with MiniLM and applied UMAP to reduce from 384 dimensions to 100 (preserving local structure better than PCA for high-dimensional embeddings). K-Means clustering on the UMAP output identified latent feedback themes with Silhouette score 0.95 and Davies-Bouldin index 0.15 — indicating well-separated, compact clusters.</p>
+      <h3>Stage 3 — Transformer Sentiment Analysis</h3>
+      <p>We ran three models in parallel: VADER (rule-based baseline), FinBERT (adapted for sentiment polarity), and RoBERTa (fine-tuned on our domain data). Ensemble voting with confidence weighting outperformed any single model by ~4% F1. The domain-fine-tuned RoBERTa model was worth the effort for this specific task.</p>
+      <h3>Stage 4 — The Hungarian Algorithm</h3>
+      <p>The most interesting part: optimal faculty-role assignment. We built a cost matrix where entry (i, j) = 1 - cosine_similarity(faculty_embedding_i, role_embedding_j). The <strong>Hungarian algorithm</strong> finds the globally optimal assignment in O(n³). This is a classic combinatorial optimization problem elegantly solved by a 70-year-old algorithm.</p>
+      <h3>What We'd Do Differently</h3>
+      <p>More data cleaning upfront, earlier human validation of cluster semantics (we over-trusted the Silhouette score), and a feedback loop where faculty could see and respond to their cluster assignments. The pipeline was technically sound; the deployment process needed more stakeholder involvement.</p>
+    `
+  }
+];
+
+function openPost(idx) {
+  const p = posts[idx];
+  document.getElementById('modalContent').innerHTML = `
+    <span class="modal-tag">${p.tag}</span>
+    <h2 class="modal-title">${p.title}</h2>
+    <div class="modal-meta"><span>${p.date}</span><span>⏱ ${p.readTime}</span></div>
+    <hr class="modal-divider">
+    <div class="modal-body">${p.content}</div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePost() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOnOverlay(e) {
+  if (e.target === document.getElementById('modalOverlay')) closePost();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePost(); });
+
+/* ── FILTER ── */
+function filterPosts(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.blog-card').forEach(card => {
+    if (tag === 'all' || card.dataset.tag === tag) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+/* ── BG CANVAS ── */
+const bgCanvas=document.getElementById('bg-canvas');const bgCtx=bgCanvas.getContext('2d');let nodes=[],signals=[];
+function resizeBg(){bgCanvas.width=window.innerWidth;bgCanvas.height=window.innerHeight;initNodes()}
+function initNodes(){nodes=[];for(let i=0;i<32;i++)nodes.push({x:Math.random()*bgCanvas.width,y:Math.random()*bgCanvas.height,vx:(Math.random()-.5)*.14,vy:(Math.random()-.5)*.14,r:Math.random()*2+1,pulse:Math.random()*Math.PI*2})}
+function launchSignal(){const i=Math.floor(Math.random()*nodes.length),n=nodes[i];let best=-1,bestD=Infinity;nodes.forEach((m,j)=>{if(j===i)return;const d=Math.hypot(m.x-n.x,m.y-n.y);if(d<200&&d<bestD){bestD=d;best=j}});if(best<0)return;signals.push({from:i,to:best,t:0,speed:.012+Math.random()*.013})}
+function drawBg(){bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>bgCanvas.width)n.vx*=-1;if(n.y<0||n.y>bgCanvas.height)n.vy*=-1;n.pulse+=.016});for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const d=Math.hypot(nodes[j].x-nodes[i].x,nodes[j].y-nodes[i].y);if(d<160){bgCtx.beginPath();bgCtx.moveTo(nodes[i].x,nodes[i].y);bgCtx.lineTo(nodes[j].x,nodes[j].y);bgCtx.strokeStyle=`rgba(0,229,160,${(1-d/160)*.05})`;bgCtx.lineWidth=.7;bgCtx.stroke()}}
+signals=signals.filter(s=>s.t<=1);signals.forEach(s=>{s.t+=s.speed;const a=nodes[s.from],b=nodes[s.to];const sx=a.x+(b.x-a.x)*s.t,sy=a.y+(b.y-a.y)*s.t;bgCtx.beginPath();bgCtx.arc(sx,sy,2,0,Math.PI*2);bgCtx.fillStyle=`rgba(0,229,160,${.5*(1-Math.abs(s.t-.5)*2)})`;bgCtx.fill()});
+nodes.forEach(n=>{const pulse=.25+.15*Math.sin(n.pulse);bgCtx.beginPath();bgCtx.arc(n.x,n.y,n.r,0,Math.PI*2);bgCtx.fillStyle=`rgba(0,229,160,${pulse})`;bgCtx.fill()});requestAnimationFrame(drawBg)}
+setInterval(launchSignal,420);window.addEventListener('resize',resizeBg);resizeBg();drawBg();
+
+/* ── SCROLL REVEAL ── */
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');observer.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

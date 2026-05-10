@@ -85,25 +85,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* ── MASONRY GALLERY ── */
 .gallery-grid{
-  columns:3 280px;
-  column-gap:1.2rem;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.2rem;
 }
 .gallery-item{
-  break-inside:avoid;
-  margin-bottom:1.2rem;
   position:relative;
   overflow:hidden;
   border:1px solid var(--border);
   cursor:pointer;
   background:var(--card);
   transition:all .3s;
-  display:block;
+  aspect-ratio:1/1;   /* ← sabhi same square size */
 }
 .gallery-item:hover{border-color:rgba(0,229,160,.3);box-shadow:0 8px 32px rgba(0,0,0,.4)}
 .gallery-item img{
-  width:100%;display:block;
+  width:100%;height:100%;display:block;
   transition:transform .4s ease;
-  object-fit:cover;
+  object-fit:cover;        /* ← quality maintain, crop center se */
+  object-position:center;
 }
 .gallery-item:hover img{transform:scale(1.04)}
 .gallery-overlay{
@@ -217,13 +217,16 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
 .mobile-nav a{font-family:'Space Mono',monospace;font-size:1rem;color:var(--muted);text-decoration:none;letter-spacing:.18em;transition:color .2s;padding:.4rem 0}
 .mobile-nav a:hover,.mobile-nav a.nav-page-active{color:var(--accent)}
 .mobile-nav .mobile-pill{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--bg);background:var(--accent);padding:.55rem 1.6rem;letter-spacing:.1em;border-radius:1px;margin-top:.5rem;text-decoration:none}
-@media(max-width:900px){nav{padding:.8rem 1.5rem}.page-hero,.gallery-section{padding-left:1.5rem;padding-right:1.5rem}.gallery-grid{columns:2 200px}}
+@media(max-width:900px){nav{padding:.8rem 1.5rem}.page-hero,.gallery-section{padding-left:1.5rem;padding-right:1.5rem}.gallery-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){
   .nav-links,.nav-pill{display:none}
   .hamburger{display:flex}
   .mobile-nav{display:flex}
-  .gallery-grid{columns:1}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .add-photos-bar{flex-wrap:wrap;gap:.6rem}
+}
+@media(max-width:420px){
+  .gallery-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -287,10 +290,10 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
     <div class="admin-toolbar-inner">
       <span class="admin-badge">🔐 ADMIN MODE</span>
       <div class="admin-actions">
-        <button class="btn-add-photos" onclick="document.getElementById('fileInput').click()"><span>＋</span> ADD PHOTOS</button>
-        <button class="btn-clear" onclick="clearUploaded()">✕ CLEAR UPLOADED</button>
-        <input type="file" id="fileInput" multiple accept="image/*" onchange="handleGalleryUpload(event)">
         <span class="photo-count" id="photoCount">0 PHOTOS</span>
+        <span style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.06em">
+          📂 Photo add karna? → <code style="color:var(--acc2);background:rgba(0,184,217,.08);padding:.1rem .4rem">images/</code> folder mein daalo + <code style="color:var(--acc2);background:rgba(0,184,217,.08);padding:.1rem .4rem">images.json</code> update karo → GitHub push karo
+        </span>
       </div>
       <button class="btn-admin-logout" onclick="adminLogout()">LOGOUT</button>
     </div>
@@ -367,34 +370,18 @@ function closeMenu(){const h=document.getElementById('hamburger'),m=document.get
 
 /* ═══════════════════════════════════════════════════════
    🔐 ADMIN PASSWORD — sirf tum jaano
-   Triple-click "Kunj" logo to open admin
+   Triple-click "Kunj" logo in nav to open admin panel
    ═══════════════════════════════════════════════════════ */
 const ADMIN_PASSWORD = 'kunj@admin2026';
 
 /* ═══════════════════════════════════════════════════════
-   ☁️  CLOUDINARY CONFIG
-   Setup karo (ek baar sirf):
-   1. cloudinary.com → free account banao
-   2. Dashboard mein apna Cloud Name copy karo
-   3. Settings → Upload → "Add upload preset" click karo
-      · Preset name: gallery_unsigned
-      · Signing Mode: Unsigned   ← zaroori hai!
-      · Save karo
-   4. Neeche CLOUDINARY_CLOUD_NAME mein apna naam daalo
-   ═══════════════════════════════════════════════════════ */
-const CLOUDINARY_CLOUD_NAME   = 'YOUR_CLOUD_NAME';    // ← YAHAN APNA CLOUD NAME DAALO
-const CLOUDINARY_UPLOAD_PRESET = 'gallery_unsigned';   // preset name jo banaya
-
-/* ═══════════════════════════════════════════════════════
-   FOLDER IMAGES (optional)
-   Local images/  folder se seedha add karo:
-   { file: 'campus.jpg', caption: 'IIT Bombay', tag: 'IIT' }
+   📁 PHOTOS FOLDER CONFIG
+   Bas itna karo:
+   1. Photo images/ folder mein daalo (GitHub pe)
+   2. images.json mein ek line add karo
+   3. GitHub pe push karo → Vercel auto-deploy karega
    ═══════════════════════════════════════════════════════ */
 const PHOTO_FOLDER = 'images/';
-const FOLDER_IMAGES = [
-  // { file: 'campus.jpg',     caption: 'IIT Bombay Campus', tag: 'IIT' },
-  // { file: 'cricket.jpg',    caption: 'Cricket match win!', tag: 'Cricket' },
-];
 
 /* ── STATE ── */
 let allPhotos = [];
@@ -420,7 +407,7 @@ document.querySelector('.nav-logo').addEventListener('click', function(e) {
   }
 });
 
-/* ── ADMIN LOGIN MODAL ── */
+/* ── ADMIN LOGIN ── */
 function openAdminLogin() {
   document.getElementById('adminLoginOverlay').classList.add('open');
   document.getElementById('adminPwInput').value = '';
@@ -457,117 +444,43 @@ function adminLogout() {
 }
 
 /* ════════════════════════════════════════════════════════
-   ☁️  CLOUDINARY UPLOAD
-   Photo seedha Cloudinary pe jaati hai → permanent URL milta hai
-   Sirf URL localStorage mein save hota hai (bahut chhota — koi limit nahi)
+   📂 INIT — images.json se photos fetch karo
+   images.json format:
+   [
+     { "file": "photo.jpg", "caption": "My Caption", "tag": "IIT" },
+     ...
+   ]
    ════════════════════════════════════════════════════════ */
-async function uploadToCloudinary(file) {
-  if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
-    throw new Error('Cloudinary setup nahi kiya! CLOUDINARY_CLOUD_NAME update karo.');
-  }
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-  formData.append('folder', 'kunj-gallery');
-
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
-    { method: 'POST', body: formData }
-  );
-  if (!res.ok) throw new Error('Cloudinary upload failed: ' + res.statusText);
-  const data = await res.json();
-  return data.secure_url; // permanent HTTPS URL
-}
-
-/* ── GALLERY UPLOAD (admin only) ── */
-async function handleGalleryUpload(e) {
-  if (!isAdmin) return;
-  const files = Array.from(e.target.files);
-  if (!files.length) return;
-
-  const countEl = document.getElementById('photoCount');
-  if (countEl) countEl.textContent = 'UPLOADING…';
-
-  let done = 0;
-  for (const file of files) {
-    try {
-      const url = await uploadToCloudinary(file);
-      const photo = {
-        src: url,
-        caption: file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
-        tag: 'General',
-        id: 'upload_' + Date.now() + '_' + Math.random().toString(36).slice(2),
-        source: 'upload'
-      };
-      allPhotos.push(photo);
-      saveToStorage(); // sirf URL + metadata save hota hai localStorage mein
-    } catch (err) {
-      alert('Upload error: ' + err.message);
-      console.error(err);
-    }
-    done++;
-    if (countEl) countEl.textContent = `UPLOADING ${done}/${files.length}…`;
-  }
-
-  renderGallery();
-  buildFilters();
-  updateCount();
-  e.target.value = '';
-}
-
-/* ── SAVE (sirf URLs + metadata — very small, no limit issues) ── */
-function saveToStorage() {
-  const uploads = allPhotos.filter(p => p.source === 'upload');
-  // Only storing URLs and text — each entry ~200 bytes, thousands of photos OK
-  const minimal = uploads.map(p => ({
-    id: p.id, src: p.src, caption: p.caption, tag: p.tag, source: p.source
-  }));
-  try { localStorage.setItem('galleryPhotos', JSON.stringify(minimal)); } catch(e) {
-    console.error('localStorage save failed:', e);
-  }
-}
-
-/* ── CLEAR UPLOADS (admin only) ── */
-function clearUploaded() {
-  if (!isAdmin) return;
-  if (!confirm('Clear all uploaded photos?\n(Cloudinary pe bhi rahein, sirf gallery se hatein)')) return;
-  allPhotos = allPhotos.filter(p => p.source !== 'upload');
-  localStorage.removeItem('galleryPhotos');
-  renderGallery();
-  buildFilters();
-  updateCount();
-}
-
-/* ── INIT ── */
-function initGallery() {
+async function initGallery() {
   if (sessionStorage.getItem('galleryAdmin') === '1') {
     isAdmin = true;
     document.getElementById('adminToolbar').style.display = 'block';
   }
 
-  // Folder images
-  FOLDER_IMAGES.forEach((item, i) => {
-    allPhotos.push({
-      src: PHOTO_FOLDER + item.file,
-      caption: item.caption || '',
-      tag: item.tag || 'General',
-      id: 'folder_' + i,
-      source: 'folder'
+  try {
+    // images.json fetch karo — yahi sab photos ki list hai
+    const res = await fetch('images.json?v=' + Date.now());
+    if (!res.ok) throw new Error('images.json nahi mila');
+    const list = await res.json();
+
+    list.forEach((item, i) => {
+      allPhotos.push({
+        src: PHOTO_FOLDER + item.file,
+        caption: item.caption || item.file.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
+        tag: item.tag || 'General',
+        id: 'img_' + i,
+        source: 'folder'
+      });
     });
-  });
-
-  // Cloudinary photos — sirf URL localStorage se load, actual image Cloudinary se serve hoti hai
-  const stored = JSON.parse(localStorage.getItem('galleryPhotos') || '[]');
-  stored.forEach(p => allPhotos.push(p));
-
-  // Cloudinary configured check
-  if (CLOUDINARY_CLOUD_NAME === 'YOUR_CLOUD_NAME') {
-    const toolbar = document.getElementById('adminToolbar');
-    if (toolbar) {
+  } catch (err) {
+    console.warn('images.json load error:', err.message);
+    // Agar images.json nahi mila toh helpful message dikhao (sirf admin ko)
+    if (isAdmin) {
+      const grid = document.getElementById('galleryGrid');
       const notice = document.createElement('div');
-      notice.style.cssText = 'background:rgba(255,96,96,.1);border:1px solid rgba(255,96,96,.3);padding:.6rem 1rem;font-family:Space Mono,monospace;font-size:.6rem;color:#ff6060;letter-spacing:.05em;margin-bottom:.5rem';
-      notice.innerHTML = '⚠ CLOUDINARY_CLOUD_NAME set nahi hai — gallery.html mein line ~372 pe apna cloud name daalo. <a href="https://cloudinary.com" target="_blank" style="color:#00e5a0">cloudinary.com</a>';
-      toolbar.prepend(notice);
+      notice.style.cssText = 'font-family:Space Mono,monospace;font-size:.65rem;color:#ff6060;padding:1rem;border:1px solid rgba(255,96,96,.3);background:rgba(255,96,96,.05);letter-spacing:.05em;line-height:2';
+      notice.innerHTML = '⚠ <strong>images.json nahi mila!</strong><br>Project root mein images.json file banao. Format dekhne ke liye README padho.';
+      grid.prepend(notice);
     }
   }
 
@@ -625,10 +538,8 @@ function renderGallery(photos) {
     item.className = 'gallery-item';
     item.dataset.id = photo.id;
 
-    // Admin-only action buttons
     const adminBtns = isAdmin ? `
       <div class="gallery-action-btn" title="Edit" onclick="openCaptionModal('${photo.id}',event)">✏️</div>
-      ${photo.source==='upload' ? `<div class="gallery-action-btn del" title="Remove" onclick="removePhoto('${photo.id}',event)">✕</div>` : ''}
     ` : '';
 
     item.innerHTML = `
@@ -647,16 +558,6 @@ function renderGallery(photos) {
     });
     grid.appendChild(item);
   });
-}
-
-/* ── REMOVE PHOTO (admin) ── */
-function removePhoto(id, e) {
-  e.stopPropagation();
-  allPhotos = allPhotos.filter(p => p.id !== id);
-  saveToStorage();
-  renderGallery();
-  buildFilters();
-  updateCount();
 }
 
 /* ── LIGHTBOX ── */
@@ -696,7 +597,7 @@ document.addEventListener('keydown', e => {
   if (document.getElementById('adminLoginOverlay').classList.contains('open') && e.key === 'Escape') closeAdminLogin();
 });
 
-/* ── CAPTION EDIT (admin only) ── */
+/* ── CAPTION EDIT (admin) ── */
 function openCaptionModal(id, e) {
   if (!isAdmin) return;
   e.stopPropagation();
@@ -712,7 +613,7 @@ function saveCaption() {
   if (photo) {
     photo.caption = document.getElementById('captionInput').value.trim() || photo.caption;
     photo.tag = document.getElementById('captionTagInput').value.trim() || 'General';
-    saveToStorage();
+    // Note: yeh sirf memory mein hai — permanent change ke liye images.json edit karo
     renderGallery();
     buildFilters();
   }

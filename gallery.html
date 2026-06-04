@@ -5,246 +5,165 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gallery — Kunjbihari</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07101f;--bg2:#0c1a2e;--bg3:#0f2040;--accent:#00e5a0;--acc2:#00b8d9;--acc3:#7c6cfa;--text:#d9e8f5;--muted:#7a93b4;--dim:#3a4d63;--border:#172234;--red:#ff6060;--card:#0c1828;}
+:root{--bg:#0f1117;--bg2:#161b27;--bg3:#1d2438;--surface:#1a2030;--surface2:#212840;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#eef0f7;--text2:#9ba3be;--text3:#5a6380;--accent:#6C8EF5;--accent2:#4F6FE8;--accent3:#8AA4FF;--gold:#E8C97A;--success:#5DD1A5;--card-shadow:0 8px 40px rgba(0,0,0,0.4),0 1px 0 rgba(255,255,255,0.04) inset;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Lora',serif;overflow-x:hidden}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
-#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:99px}
+::selection{background:rgba(108,142,245,0.3);color:var(--text)}
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.85rem 3rem;background:rgba(7,16,31,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.nav-logo{display:flex;align-items:center;gap:.75rem;text-decoration:none}
-.logo-photo-wrap{position:relative;width:38px;height:38px;flex-shrink:0}
-.logo-photo{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--accent);display:block}
-.logo-photo-placeholder{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,rgba(0,229,160,.15),rgba(124,108,250,.2));border:1.5px solid rgba(0,229,160,.4);display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;position:relative;overflow:hidden;}
-.logo-photo-placeholder input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.logo-photo-ring{position:absolute;inset:-3px;border-radius:50%;border:1px solid transparent;background:linear-gradient(135deg,var(--accent),var(--acc3)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg)}}
-.logo-wordmark{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.1rem;color:var(--text);letter-spacing:-.02em;line-height:1}
-.logo-wordmark em{color:var(--accent);font-style:normal}
-.nav-links{display:flex;gap:1.8rem;list-style:none}
-.nav-links a{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);text-decoration:none;letter-spacing:.1em;transition:color .2s;position:relative;padding-bottom:2px}
-.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--accent);transition:width .25s}
-.nav-links a:hover,.nav-links a.nav-page-active{color:var(--accent)}
-.nav-links a.nav-page-active::after{width:100%}
-.nav-pill{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--bg);background:var(--accent);padding:.25rem .8rem;letter-spacing:.08em;border-radius:1px;text-decoration:none;transition:background .2s}
-.nav-pill:hover{background:#00ffb2}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+/* BACKGROUND */
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 20% 10%,rgba(108,142,245,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 85% 70%,rgba(79,111,232,0.05) 0%,transparent 55%);}
+.bg-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.aurora-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.5;animation:auroraFloat linear infinite;}
+.aurora-orb:nth-child(1){width:500px;height:500px;background:radial-gradient(circle,rgba(108,142,245,0.2),transparent 70%);top:-10%;left:-5%;animation-duration:22s;}
+.aurora-orb:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,rgba(79,111,232,0.15),transparent 70%);bottom:-5%;right:5%;animation-duration:28s;animation-delay:-10s;}
+.aurora-orb:nth-child(3){width:320px;height:320px;background:radial-gradient(circle,rgba(138,164,255,0.1),transparent 70%);top:40%;left:60%;animation-duration:34s;animation-delay:-5s;}
+@keyframes auroraFloat{0%{transform:translate(0,0) scale(1);}25%{transform:translate(40px,-30px) scale(1.08);}50%{transform:translate(-20px,50px) scale(0.95);}75%{transform:translate(-50px,-20px) scale(1.05);}100%{transform:translate(0,0) scale(1);}}
 
-/* ── PAGE HERO ── */
-.page-hero{position:relative;z-index:1;padding:9rem 3rem 3rem;max-width:1100px;margin:0 auto}
-.page-breadcrumb{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.18em;margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem}
-.page-breadcrumb a{color:var(--muted);text-decoration:none;transition:color .2s}.page-breadcrumb a:hover{color:var(--accent)}
-.page-breadcrumb span{color:var(--dim)}
-.page-title{font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(2.8rem,5.5vw,5rem);line-height:.95;letter-spacing:-.04em;margin-bottom:1.2rem}
-.page-title em{color:var(--accent);font-style:normal}
-.page-subtitle{font-family:'Lora',serif;font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:540px;margin-bottom:1.5rem}
-.page-subtitle strong{color:var(--text)}
+/* NAV */
+nav{position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);z-index:1000;width:calc(100% - 3rem);max-width:1080px;display:flex;align-items:center;justify-content:space-between;padding:0.65rem 1.2rem 0.65rem 1rem;background:rgba(22,27,39,0.85);backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border2);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.5),0 1px 0 rgba(255,255,255,0.06) inset;transition:background 0.3s;}
+nav.scrolled{background:rgba(15,17,23,0.95);}
+.nav-logo{display:flex;align-items:center;gap:0.7rem;text-decoration:none;flex-shrink:0;}
+.logo-mark{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.25s;}
+.nav-logo:hover .logo-mark{transform:rotate(-5deg) scale(1.05);}
+.logo-name{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.95rem;color:var(--text);letter-spacing:-0.02em;}
+.logo-role{font-family:'DM Mono',monospace;font-size:0.48rem;color:var(--text3);letter-spacing:0.15em;display:block;margin-top:2px;}
+.nav-links{display:flex;gap:0.15rem;list-style:none;align-items:center;}
+.nav-links a{font-size:0.8rem;font-weight:500;color:var(--text2);text-decoration:none;padding:0.38rem 0.85rem;border-radius:999px;transition:all 0.2s;white-space:nowrap;}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.06);}
+.nav-links a.active{color:var(--text);background:rgba(108,142,245,0.15);}
+.hamburger{display:none;flex-direction:column;gap:5px;width:38px;height:38px;cursor:pointer;background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:50%;padding:9px;transition:all 0.2s;}
+.hamburger span{display:block;height:1.5px;background:var(--text2);border-radius:2px;transition:all 0.28s;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--accent3);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--accent3);}
+.mobile-nav{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,12,18,0.97);backdrop-filter:blur(30px);flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.mobile-nav.open{opacity:1;pointer-events:all;}
+.mobile-nav a{font-size:1.4rem;font-weight:600;color:var(--text2);text-decoration:none;padding:0.8rem 2rem;transition:color 0.2s;}
+.mobile-nav a:hover{color:var(--accent3);}
 
-/* ── UPLOAD ZONE ── */
-.gallery-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 3rem 6rem}
+/* PAGE */
+.page-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2.5rem;}
+.page-hero{padding:8rem 0 3rem;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.breadcrumb a{color:var(--text2);text-decoration:none;transition:color 0.2s;}
+.breadcrumb a:hover{color:var(--accent3);}
+.page-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.0;letter-spacing:-0.03em;color:var(--text);margin-bottom:0.8rem;}
+.page-title em{color:var(--accent3);font-style:italic;}
+.page-sub{font-size:1rem;color:var(--text2);line-height:1.7;max-width:520px;}
 
-/* ── HOW-TO NOTICE ── */
-.setup-notice{
-  border:1px solid rgba(0,229,160,.18);
-  background:rgba(0,229,160,.04);
-  padding:1.4rem 1.8rem;
-  margin-bottom:2.5rem;
-  display:flex;align-items:flex-start;gap:1rem;
-}
-.setup-notice-icon{font-size:1.4rem;flex-shrink:0;margin-top:.1rem}
-.setup-notice-text{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);line-height:1.8;letter-spacing:.03em}
-.setup-notice-text strong{color:var(--accent);display:block;margin-bottom:.4rem;font-size:.7rem}
-.setup-notice-text code{color:var(--acc2);background:rgba(0,184,217,.07);padding:.1rem .4rem}
+/* FILTER BAR */
+.gallery-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2.5rem 6rem;}
+.filter-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.filter-btn{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;padding:0.38rem 1rem;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:999px;transition:all 0.2s;}
+.filter-btn:hover,.filter-btn.active{border-color:rgba(108,142,245,0.4);color:var(--accent3);background:rgba(108,142,245,0.07);}
 
-/* ── ADD PHOTOS BUTTON ── */
-.add-photos-bar{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap}
-.btn-add-photos{
-  font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;
-  padding:.75rem 1.8rem;background:rgba(0,229,160,.08);color:var(--accent);
-  border:1px solid rgba(0,229,160,.3);cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
-  transition:all .2s;display:inline-flex;align-items:center;gap:.6rem;
-}
-.btn-add-photos:hover{background:rgba(0,229,160,.15);border-color:var(--accent)}
-.btn-clear{
-  font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;
-  padding:.75rem 1.4rem;background:transparent;color:var(--muted);
-  border:1px solid var(--border);cursor:pointer;transition:all .2s;
-}
-.btn-clear:hover{border-color:var(--red);color:var(--red)}
-#fileInput{display:none}
-.photo-count{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.1em}
+/* GALLERY GRID */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;}
+.gallery-item{position:relative;overflow:hidden;border:1px solid var(--border);border-radius:16px;cursor:pointer;background:var(--surface);transition:all 0.3s;aspect-ratio:1/1;}
+.gallery-item:hover{border-color:rgba(108,142,245,0.3);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 1px 0 rgba(255,255,255,0.04) inset;}
+.gallery-item img{width:100%;height:100%;display:block;transition:transform 0.4s ease;object-fit:cover;object-position:center;}
+.gallery-item:hover img{transform:scale(1.05);}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,17,23,0.92) 0%,transparent 55%);opacity:0;transition:opacity 0.3s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.3rem;border-radius:16px;}
+.gallery-item:hover .gallery-overlay{opacity:1;}
+.gallery-overlay-tag{font-family:'DM Mono',monospace;font-size:0.58rem;color:var(--accent3);letter-spacing:0.12em;margin-bottom:0.3rem;}
+.gallery-overlay-name{font-size:0.88rem;font-weight:500;color:var(--text);}
 
-/* ── FILTER ── */
-.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
-.filter-btn{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;padding:.35rem 1rem;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
-.filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(0,229,160,.05)}
+/* EXPAND BUTTON */
+.gallery-expand{position:absolute;top:0.7rem;right:0.7rem;width:30px;height:30px;border-radius:50%;background:rgba(15,17,23,0.85);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:0.75rem;cursor:pointer;opacity:0;transition:all 0.2s;color:var(--text2);}
+.gallery-item:hover .gallery-expand{opacity:1;}
+.gallery-expand:hover{border-color:rgba(108,142,245,0.5);color:var(--accent3);}
 
-/* ── MASONRY GALLERY ── */
-.gallery-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1.2rem;
-}
-.gallery-item{
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--border);
-  cursor:pointer;
-  background:var(--card);
-  transition:all .3s;
-  aspect-ratio:1/1;   /* ← sabhi same square size */
-}
-.gallery-item:hover{border-color:rgba(0,229,160,.3);box-shadow:0 8px 32px rgba(0,0,0,.4)}
-.gallery-item img{
-  width:100%;height:100%;display:block;
-  transition:transform .4s ease;
-  object-fit:cover;        /* ← quality maintain, crop center se */
-  object-position:center;
-}
-.gallery-item:hover img{transform:scale(1.04)}
-.gallery-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(7,16,31,.9) 0%,transparent 50%);
-  opacity:0;transition:opacity .3s;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:1.2rem;
-}
-.gallery-item:hover .gallery-overlay{opacity:1}
-.gallery-overlay-name{font-family:'Outfit',sans-serif;font-weight:600;font-size:.82rem;color:var(--text)}
-.gallery-overlay-tag{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--accent);letter-spacing:.1em;margin-bottom:.3rem}
-.gallery-actions{position:absolute;top:.7rem;right:.7rem;display:flex;gap:.4rem;opacity:0;transition:opacity .2s}
-.gallery-item:hover .gallery-actions{opacity:1}
-.gallery-action-btn{
-  width:28px;height:28px;border-radius:50%;
-  background:rgba(7,16,31,.85);border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.75rem;cursor:pointer;transition:all .2s;
-  color:var(--muted);
-}
-.gallery-action-btn:hover{border-color:var(--accent);color:var(--accent)}
-.gallery-action-btn.del:hover{border-color:var(--red);color:var(--red)}
+/* EMPTY */
+.gallery-empty{text-align:center;padding:5rem 2rem;border:1px dashed var(--border2);border-radius:20px;background:rgba(108,142,245,0.02);}
+.gallery-empty-icon{font-size:3rem;margin-bottom:1rem;display:block;opacity:0.4;}
+.gallery-empty-title{font-family:'Playfair Display',serif;font-weight:600;font-size:1.2rem;color:var(--text2);margin-bottom:0.5rem;}
+.gallery-empty-sub{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--text3);letter-spacing:0.1em;}
 
-/* ── EMPTY STATE ── */
-.gallery-empty{
-  text-align:center;padding:5rem 2rem;
-  border:1px dashed rgba(0,229,160,.15);
-  background:rgba(0,229,160,.02);
-}
-.gallery-empty-icon{font-size:3rem;margin-bottom:1rem;display:block;opacity:.4}
-.gallery-empty-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.2rem;color:var(--muted);margin-bottom:.5rem}
-.gallery-empty-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.1em;line-height:1.8}
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s;backdrop-filter:blur(16px);}
+.lightbox.open{opacity:1;pointer-events:all;}
+.lightbox-inner{position:relative;max-width:90vw;max-height:88vh;display:flex;flex-direction:column;align-items:center;gap:1rem;}
+.lightbox-img{max-width:90vw;max-height:80vh;object-fit:contain;border:1px solid var(--border2);border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,0.7);}
+.lightbox-caption{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--text2);letter-spacing:0.1em;text-align:center;}
+.lightbox-close{position:fixed;top:1.5rem;right:1.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text2);cursor:pointer;background:var(--surface);border:1px solid var(--border2);padding:0.4rem 0.9rem;border-radius:999px;transition:all 0.2s;z-index:301;}
+.lightbox-close:hover{color:var(--accent3);border-color:rgba(108,142,245,0.4);}
+.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);font-size:1.3rem;color:var(--text2);cursor:pointer;background:var(--surface);border:1px solid var(--border2);width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all 0.2s;z-index:301;}
+.lightbox-nav:hover{color:var(--accent3);border-color:rgba(108,142,245,0.4);}
+.lightbox-nav.prev{left:1rem;}
+.lightbox-nav.next{right:1rem;}
+.lightbox-counter{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--text3);letter-spacing:0.12em;}
 
-/* ── LIGHTBOX ── */
-.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(12px)}
-.lightbox.open{opacity:1;pointer-events:all}
-.lightbox-inner{position:relative;max-width:90vw;max-height:88vh;display:flex;flex-direction:column;align-items:center;gap:1rem}
-.lightbox-img{max-width:90vw;max-height:80vh;object-fit:contain;border:1px solid rgba(0,229,160,.15);box-shadow:0 24px 80px rgba(0,0,0,.6)}
-.lightbox-caption{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-align:center}
-.lightbox-close{position:fixed;top:1.5rem;right:1.5rem;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);cursor:pointer;background:rgba(7,16,31,.9);border:1px solid var(--border);padding:.35rem .9rem;transition:all .2s;z-index:301}
-.lightbox-close:hover{color:var(--accent);border-color:var(--accent)}
-.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);font-family:'Space Mono',monospace;font-size:1.2rem;color:var(--muted);cursor:pointer;background:rgba(7,16,31,.85);border:1px solid var(--border);width:44px;height:44px;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:301}
-.lightbox-nav:hover{color:var(--accent);border-color:var(--accent)}
-.lightbox-nav.prev{left:1rem}
-.lightbox-nav.next{right:1rem}
-.lightbox-counter{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:.12em}
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);background:linear-gradient(to bottom,transparent,var(--bg2));}
+.footer-bottom-bar{max-width:1100px;margin:0 auto;padding:1.8rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
+.foot-name{font-family:'Playfair Display',serif;font-size:1rem;color:var(--text2);font-weight:600;}
+.foot-name span{color:var(--accent3);}
+.foot-copy{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--text3);}
+/* admin secret */
+.admin-secret{font-size:0.85rem;color:transparent;cursor:pointer;user-select:none;padding:0.2rem 0.4rem;}
+.admin-secret:hover{color:var(--text3);}
 
-/* ── TAG CHIP ON IMAGE ── */
-.gallery-tag-input{display:none}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
 
-/* ── EDIT CAPTION MODAL ── */
-.caption-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:400;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
-.caption-modal.open{opacity:1;pointer-events:all}
-.caption-box{background:var(--bg2);border:1px solid rgba(0,229,160,.2);padding:2rem;max-width:400px;width:90%;display:flex;flex-direction:column;gap:1rem}
-.caption-box h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;color:var(--text)}
-.caption-input{font-family:'Space Mono',monospace;font-size:.7rem;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:.65rem 1rem;width:100%;outline:none;transition:border-color .2s;letter-spacing:.04em}
-.caption-input:focus{border-color:var(--accent)}
-.caption-tag-input{font-family:'Space Mono',monospace;font-size:.7rem;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:.65rem 1rem;width:100%;outline:none;transition:border-color .2s;letter-spacing:.04em}
-.caption-tag-input:focus{border-color:var(--acc2)}
-.caption-btns{display:flex;gap:.6rem}
-.caption-save{font-family:'Space Mono',monospace;font-size:.65rem;padding:.5rem 1.2rem;background:var(--accent);color:var(--bg);border:none;cursor:pointer;letter-spacing:.08em;transition:background .2s}
-.caption-save:hover{background:#00ffb2}
-.caption-cancel{font-family:'Space Mono',monospace;font-size:.65rem;padding:.5rem 1rem;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;transition:all .2s}
-.caption-cancel:hover{border-color:var(--muted);color:var(--text)}
+/* ADMIN MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:400;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.25s;backdrop-filter:blur(10px);}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{background:var(--bg2);border:1px solid var(--border2);border-radius:20px;padding:2rem;max-width:360px;width:90%;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center;}
+.modal-box h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--text);}
+.modal-box p{font-size:0.82rem;color:var(--text2);}
+.modal-input{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:0.7rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text);outline:none;transition:border-color 0.2s;text-align:center;}
+.modal-input:focus{border-color:rgba(108,142,245,0.5);}
+.modal-error{font-family:'DM Mono',monospace;font-size:0.6rem;color:#f87171;letter-spacing:0.08em;min-height:1rem;}
+.modal-btns{display:flex;gap:0.6rem;width:100%;}
+.btn-modal-confirm{flex:1;font-weight:600;font-size:0.85rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:0.65rem;border:none;border-radius:999px;cursor:pointer;transition:all 0.2s;}
+.btn-modal-confirm:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(108,142,245,0.4);}
+.btn-modal-cancel{flex:1;font-weight:500;font-size:0.85rem;color:var(--text2);background:transparent;padding:0.65rem;border:1px solid var(--border2);border-radius:999px;cursor:pointer;transition:all 0.2s;}
+.btn-modal-cancel:hover{border-color:rgba(255,255,255,0.2);color:var(--text);}
+.admin-bar{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2.5rem 1.5rem;display:none;}
+.admin-bar-inner{background:rgba(108,142,245,0.06);border:1px solid rgba(108,142,245,0.2);border-radius:14px;padding:0.9rem 1.4rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;}
+.admin-badge{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--accent3);letter-spacing:0.12em;}
+.btn-admin-logout{font-family:'DM Mono',monospace;font-size:0.58rem;padding:0.4rem 0.9rem;background:transparent;color:#f87171;border:1px solid rgba(248,113,113,0.3);border-radius:999px;cursor:pointer;margin-left:auto;transition:all 0.2s;}
+.btn-admin-logout:hover{background:rgba(248,113,113,0.07);border-color:#f87171;}
 
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
-.reveal.vis{opacity:1;transform:translateY(0)}
-
-/* ── FOOTER ── */
-/* ── ADMIN TOOLBAR ── */
-.admin-toolbar{position:relative;z-index:1;background:rgba(124,108,250,.06);border:1px solid rgba(124,108,250,.2);margin-bottom:1.8rem}
-.admin-toolbar-inner{display:flex;align-items:center;gap:1rem;padding:.9rem 1.4rem;flex-wrap:wrap}
-.admin-badge{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--acc3);letter-spacing:.12em;flex-shrink:0}
-.admin-actions{display:flex;align-items:center;gap:.7rem;flex:1;flex-wrap:wrap}
-.btn-admin-logout{font-family:'Space Mono',monospace;font-size:.58rem;padding:.4rem .9rem;background:transparent;color:var(--red);border:1px solid rgba(255,96,96,.3);cursor:pointer;letter-spacing:.1em;transition:all .2s;margin-left:auto;flex-shrink:0}
-.btn-admin-logout:hover{background:rgba(255,96,96,.08);border-color:var(--red)}
-/* ── ADMIN LOGIN MODAL ── */
-.admin-login-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(10px)}
-.admin-login-overlay.open{opacity:1;pointer-events:all}
-.admin-login-box{background:var(--bg2);border:1px solid rgba(124,108,250,.3);padding:2.5rem 2rem;max-width:340px;width:90%;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center}
-.admin-login-icon{font-size:2.2rem}
-.admin-login-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text)}
-.admin-login-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.1em}
-.admin-pw-input{font-family:'Space Mono',monospace;font-size:.75rem;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:.7rem 1rem;width:100%;outline:none;transition:border-color .2s;letter-spacing:.1em;text-align:center}
-.admin-pw-input:focus{border-color:var(--acc3)}
-.admin-pw-error{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--red);letter-spacing:.08em;min-height:1rem}
-.admin-login-btns{display:flex;gap:.6rem;width:100%}
-.admin-login-btn{font-family:'Space Mono',monospace;font-size:.68rem;padding:.6rem 0;background:var(--acc3);color:#fff;border:none;cursor:pointer;letter-spacing:.1em;flex:1;transition:opacity .2s}
-.admin-login-btn:hover{opacity:.85}
-.admin-cancel-btn{font-family:'Space Mono',monospace;font-size:.68rem;padding:.6rem 0;background:transparent;color:var(--muted);border:1px solid var(--border);cursor:pointer;letter-spacing:.1em;flex:1;transition:all .2s}
-.admin-cancel-btn:hover{border-color:var(--muted);color:var(--text)}
-
-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(7,16,31,.95)}
-.foot-name{font-family:'Outfit',sans-serif;font-size:.88rem;color:var(--muted);font-weight:500}
-.admin-secret-link{font-size:.85rem;color:transparent;cursor:pointer;user-select:none;transition:color .3s;padding:.2rem .4rem;border-radius:2px}
-.admin-secret-link:hover{color:var(--dim)}
-.foot-name span{color:var(--accent)}
-.foot-copy{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--dim);letter-spacing:.1em}
-
-/* ── HAMBURGER ── */
-.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;cursor:pointer;background:none;border:1px solid var(--border);padding:6px;flex-shrink:0;transition:border-color .2s}
-.hamburger:hover{border-color:var(--accent)}
-.hamburger span{display:block;height:1.5px;background:var(--muted);border-radius:1px;transition:all .3s}
-.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--accent)}
-.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--accent)}
-.mobile-nav{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:99;background:rgba(7,16,31,.97);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:2rem;opacity:0;pointer-events:none;transition:opacity .3s}
-.mobile-nav.open{opacity:1;pointer-events:all}
-.mobile-nav a{font-family:'Space Mono',monospace;font-size:1rem;color:var(--muted);text-decoration:none;letter-spacing:.18em;transition:color .2s;padding:.4rem 0}
-.mobile-nav a:hover,.mobile-nav a.nav-page-active{color:var(--accent)}
-.mobile-nav .mobile-pill{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--bg);background:var(--accent);padding:.55rem 1.6rem;letter-spacing:.1em;border-radius:1px;margin-top:.5rem;text-decoration:none}
-@media(max-width:900px){nav{padding:.8rem 1.5rem}.page-hero,.gallery-section{padding-left:1.5rem;padding-right:1.5rem}.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:700px){
-  .nav-links,.nav-pill{display:none}
-  .hamburger{display:flex}
-  .mobile-nav{display:flex}
-  .gallery-grid{grid-template-columns:repeat(2,1fr)}
-  .add-photos-bar{flex-wrap:wrap;gap:.6rem}
+  .nav-links{display:none;}.hamburger{display:flex;}.mobile-nav{display:flex;}
+  .page-wrap,.gallery-section{padding-left:1.5rem;padding-right:1.5rem;}
+  .page-hero{padding-top:7rem;}
 }
-@media(max-width:420px){
-  .gallery-grid{grid-template-columns:1fr}
-}
+@media(max-width:420px){.gallery-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<canvas id="bg-canvas"></canvas>
+<div class="bg-mesh"></div>
+<div class="bg-aurora">
+  <div class="aurora-orb"></div>
+  <div class="aurora-orb"></div>
+  <div class="aurora-orb"></div>
+</div>
 
-<nav>
+<!-- NAV -->
+<nav id="mainNav">
   <a class="nav-logo" href="index.html">
-    <div class="logo-photo-wrap">
-      <div class="logo-photo-ring"></div>
-      <div class="logo-photo-placeholder" id="logoPlaceholder" title="Click to upload your photo">
-        🧑‍💻
-        <input type="file" accept="image/*" onchange="handlePhotoUpload(event)">
-      </div>
-      <img class="logo-photo" id="logoPhoto" src="" alt="Kunj" style="display:none;position:absolute;top:0;left:0">
+    <div class="logo-mark">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+        <defs><linearGradient id="kg1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#8AA4FF"/><stop offset="100%" stop-color="#4F6FE8"/></linearGradient></defs>
+        <path d="M10 6 L10 30" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M10 18 L24 7" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M10 18 L24 29" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
+        <circle cx="10" cy="6" r="2" fill="#8AA4FF" opacity="0.7"/>
+        <circle cx="10" cy="30" r="2" fill="#4F6FE8" opacity="0.7"/>
+      </svg>
     </div>
-    <div>
-      <div class="logo-wordmark"><em>Ku</em>nj</div>
+    <div class="logo-text">
+      <div class="logo-name">Kunjbihari</div>
+      <span class="logo-role">DATA SCIENTIST · NRI</span>
     </div>
   </a>
   <ul class="nav-links">
@@ -254,87 +173,57 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
     <li><a href="index.html#projects">Projects</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="freelance.html">Freelance</a></li>
-    <li><a href="gallery.html" class="nav-page-active">Gallery</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li>
   </ul>
-  <a href="freelance.html" class="nav-pill">Hire Me →</a>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-<!-- MOBILE NAV DRAWER -->
+
+<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
-  <a href="index.html" onclick="closeMenu()">HOME</a>
-  <a href="index.html#about" onclick="closeMenu()">ABOUT</a>
-  <a href="index.html#experience" onclick="closeMenu()">EXPERIENCE</a>
-  <a href="index.html#projects" onclick="closeMenu()">PROJECTS</a>
-  <a href="blog.html" onclick="closeMenu()">BLOG</a>
-  <a href="freelance.html" onclick="closeMenu()">FREELANCE</a>
-  <a href="gallery.html" class="nav-page-active" onclick="closeMenu()">GALLERY</a>
-  <a href="freelance.html" class="mobile-pill">HIRE ME →</a>
+  <a href="index.html">Home</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#experience">Experience</a>
+  <a href="index.html#projects">Projects</a>
+  <a href="blog.html">Blog</a>
+  <a href="freelance.html">Freelance</a>
+  <a href="gallery.html">Gallery</a>
 </div>
 
 <!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="page-breadcrumb">
-    <a href="index.html">HOME</a><span>/</span><span style="color:var(--accent)">GALLERY</span>
+<div class="page-wrap">
+  <div class="page-hero reveal">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Gallery</div>
+    <h1 class="page-title">Life <em>Beyond</em> the Terminal</h1>
+    <p class="page-sub">Moments from campus, travel, and everything in between — a glimpse into life outside the code.</p>
   </div>
-  <h1 class="page-title reveal">My <em>Gallery</em></h1>
-  <p class="page-subtitle reveal">A glimpse beyond the terminal — moments from life, projects, and everything in between.</p>
+</div>
+
+<!-- ADMIN BAR -->
+<div class="admin-bar" id="adminBar">
+  <div class="admin-bar-inner">
+    <span class="admin-badge">🔐 ADMIN MODE</span>
+    <span style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--text3);">Photo add karna → <code style="color:var(--accent3)">images/</code> folder + <code style="color:var(--accent3)">images.json</code> update karo → deploy</span>
+    <button class="btn-admin-logout" onclick="adminLogout()">Logout</button>
+  </div>
 </div>
 
 <!-- GALLERY SECTION -->
 <div class="gallery-section">
-
-  <!-- ADMIN TOOLBAR (hidden by default, shown only when admin logged in) -->
-  <div class="admin-toolbar" id="adminToolbar" style="display:none">
-    <div class="admin-toolbar-inner">
-      <span class="admin-badge">🔐 ADMIN MODE</span>
-      <div class="admin-actions">
-        <span class="photo-count" id="photoCount">0 PHOTOS</span>
-        <span style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.06em">
-          📂 Photo add karna? → <code style="color:var(--acc2);background:rgba(0,184,217,.08);padding:.1rem .4rem">images/</code> folder mein daalo + <code style="color:var(--acc2);background:rgba(0,184,217,.08);padding:.1rem .4rem">images.json</code> update karo → GitHub push karo
-        </span>
-      </div>
-      <button class="btn-admin-logout" onclick="adminLogout()">LOGOUT</button>
-    </div>
+  <div class="filter-row" id="filterBar">
+    <button class="filter-btn active" onclick="filterGallery('all',this)">All</button>
   </div>
-
-  <!-- Filter Bar -->
-  <div class="filter-bar" id="filterBar">
-    <button class="filter-btn active" onclick="filterGallery('all',this)">ALL</button>
-  </div>
-
-  <!-- Gallery Grid -->
   <div class="gallery-grid reveal" id="galleryGrid">
     <div class="gallery-empty" id="emptyState">
       <span class="gallery-empty-icon">🖼️</span>
       <div class="gallery-empty-title">No photos yet</div>
-      <div class="gallery-empty-sub">PHOTOS COMING SOON</div>
-    </div>
-  </div>
-
-  <!-- Secret admin trigger: triple-click the footer logo, or URL ?admin -->
-  <div id="adminHint" style="display:none"></div>
-</div>
-
-<!-- ADMIN LOGIN MODAL -->
-<div class="admin-login-overlay" id="adminLoginOverlay">
-  <div class="admin-login-box">
-    <div class="admin-login-icon">🔐</div>
-    <h3 class="admin-login-title">Admin Access</h3>
-    <p class="admin-login-sub">Enter password to manage gallery</p>
-    <input class="admin-pw-input" type="password" id="adminPwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdminPw()">
-    <div class="admin-pw-error" id="adminPwError"></div>
-    <div class="admin-login-btns">
-      <button class="admin-login-btn" onclick="checkAdminPw()">ENTER</button>
-      <button class="admin-cancel-btn" onclick="closeAdminLogin()">CANCEL</button>
+      <div class="gallery-empty-sub">PHOTOS LOADING...</div>
     </div>
   </div>
 </div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOverlay(event)">
-  <button class="lightbox-close" onclick="closeLightbox()">✕ CLOSE</button>
+  <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
   <button class="lightbox-nav prev" onclick="navLightbox(-1)">‹</button>
   <button class="lightbox-nav next" onclick="navLightbox(1)">›</button>
   <div class="lightbox-inner">
@@ -344,172 +233,94 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
   </div>
 </div>
 
-<!-- CAPTION EDIT MODAL -->
-<div class="caption-modal" id="captionModal">
-  <div class="caption-box">
-    <h3>Edit Photo Info</h3>
-    <input class="caption-input" type="text" id="captionInput" placeholder="Caption (e.g. IIT Bombay Campus)" maxlength="80">
-    <input class="caption-tag-input" type="text" id="captionTagInput" placeholder="Tag (e.g. Life · IIT · Travel · Gym)" maxlength="20">
-    <div class="caption-btns">
-      <button class="caption-save" onclick="saveCaption()">SAVE</button>
-      <button class="caption-cancel" onclick="closeCaptionModal()">CANCEL</button>
+<!-- ADMIN LOGIN MODAL -->
+<div class="modal-overlay" id="adminLoginOverlay">
+  <div class="modal-box">
+    <div style="font-size:2rem">🔐</div>
+    <h3>Admin Access</h3>
+    <p>Enter password to manage gallery</p>
+    <input class="modal-input" type="password" id="adminPwInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkAdminPw()">
+    <div class="modal-error" id="adminPwError"></div>
+    <div class="modal-btns">
+      <button class="btn-modal-confirm" onclick="checkAdminPw()">Enter</button>
+      <button class="btn-modal-cancel" onclick="closeAdminLogin()">Cancel</button>
     </div>
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
-  <div class="foot-name">Kunj<span>bihari</span> · IIT Bombay MS</div>
-  <div class="foot-copy">© 2026 · Life in frames</div>
-  <span class="admin-secret-link" onclick="openAdminLogin()" title="Admin">⚙</span>
+  <div class="footer-bottom-bar">
+    <div class="foot-name">Kunj<span>bihari</span> — Data Scientist</div>
+    <div class="foot-copy">© 2026 · All rights reserved</div>
+    <span class="admin-secret" onclick="openAdminLogin()" title="">⚙</span>
+  </div>
 </footer>
 
 <script>
-/* ── HAMBURGER ── */
-function toggleMenu(){const h=document.getElementById('hamburger'),m=document.getElementById('mobileNav');h.classList.toggle('open');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':''}
-function closeMenu(){const h=document.getElementById('hamburger'),m=document.getElementById('mobileNav');h.classList.remove('open');m.classList.remove('open');document.body.style.overflow=''}
+/* NAV SCROLL */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
 
-/* ═══════════════════════════════════════════════════════
-   🔐 ADMIN PASSWORD — sirf tum jaano
-   Triple-click "Kunj" logo in nav to open admin panel
-   ═══════════════════════════════════════════════════════ */
-const ADMIN_PASSWORD = 'kunj@admin2026';
-
-/* ═══════════════════════════════════════════════════════
-   📁 PHOTOS FOLDER CONFIG
-   Bas itna karo:
-   1. Photo images/ folder mein daalo (GitHub pe)
-   2. images.json mein ek line add karo
-   3. GitHub pe push karo → Vercel auto-deploy karega
-   ═══════════════════════════════════════════════════════ */
-const PHOTO_FOLDER = 'images/';
-
-/* ── STATE ── */
-let allPhotos = [];
-let filteredPhotos = [];
-let lightboxIdx = 0;
-let editingId = null;
-let isAdmin = false;
-
-/* ── PROFILE PHOTO UPLOAD (nav logo) ── */
-function handlePhotoUpload(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{const img=document.getElementById('logoPhoto');const ph=document.getElementById('logoPlaceholder');img.src=ev.target.result;img.style.display='block';ph.style.display='none';localStorage.setItem('profilePhoto',ev.target.result)};reader.readAsDataURL(file)}
-const savedPfp=localStorage.getItem('profilePhoto');if(savedPfp){const img=document.getElementById('logoPhoto');const ph=document.getElementById('logoPlaceholder');img.src=savedPfp;img.style.display='block';ph.style.display='none'}
-
-/* ── ADMIN: TRIPLE-CLICK LOGO ── */
-let logoClickCount = 0, logoClickTimer = null;
-document.querySelector('.nav-logo').addEventListener('click', function(e) {
-  if (e.target.tagName === 'INPUT') return;
-  logoClickCount++;
-  clearTimeout(logoClickTimer);
-  logoClickTimer = setTimeout(() => { logoClickCount = 0; }, 600);
-  if (logoClickCount >= 3) {
-    logoClickCount = 0;
-    if (!isAdmin) openAdminLogin(); else adminLogout();
-  }
+/* HAMBURGER */
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', function(e){
+  e.stopPropagation();
+  this.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
 });
-
-/* ── ADMIN LOGIN ── */
-function openAdminLogin() {
-  document.getElementById('adminLoginOverlay').classList.add('open');
-  document.getElementById('adminPwInput').value = '';
-  document.getElementById('adminPwError').textContent = '';
-  setTimeout(() => document.getElementById('adminPwInput').focus(), 100);
-  document.body.style.overflow = 'hidden';
-}
-function closeAdminLogin() {
-  document.getElementById('adminLoginOverlay').classList.remove('open');
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  hamburger.classList.remove('open');
+  mobileNav.classList.remove('open');
   document.body.style.overflow = '';
-}
-function checkAdminPw() {
-  const val = document.getElementById('adminPwInput').value;
-  if (val === ADMIN_PASSWORD) {
-    isAdmin = true;
-    sessionStorage.setItem('galleryAdmin', '1');
-    closeAdminLogin();
-    document.getElementById('adminToolbar').style.display = 'block';
-    renderGallery();
-    updateCount();
-  } else {
-    const err = document.getElementById('adminPwError');
-    err.textContent = '✕ INCORRECT PASSWORD';
-    document.getElementById('adminPwInput').value = '';
-    document.getElementById('adminPwInput').focus();
-    setTimeout(() => { err.textContent = ''; }, 2000);
-  }
-}
-function adminLogout() {
-  isAdmin = false;
-  sessionStorage.removeItem('galleryAdmin');
-  document.getElementById('adminToolbar').style.display = 'none';
-  renderGallery();
-}
+}));
 
-/* ════════════════════════════════════════════════════════
-   📂 INIT — images.json se photos fetch karo
-   images.json format:
-   [
-     { "file": "photo.jpg", "caption": "My Caption", "tag": "IIT" },
-     ...
-   ]
-   ════════════════════════════════════════════════════════ */
+/* SCROLL REVEAL */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); observer.unobserve(e.target); }});
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ─── GALLERY STATE ─── */
+const PHOTO_FOLDER = 'images/';
+const ADMIN_PASSWORD = 'kunj@admin2026';
+let allPhotos = [], filteredPhotos = [], lightboxIdx = 0, isAdmin = false;
+
+/* ─── INIT ─── */
 async function initGallery() {
-  if (sessionStorage.getItem('galleryAdmin') === '1') {
-    isAdmin = true;
-    document.getElementById('adminToolbar').style.display = 'block';
-  }
-
   try {
-    // images.json fetch karo — yahi sab photos ki list hai
-    const res = await fetch('images.json?v=' + Date.now());
-    if (!res.ok) throw new Error('images.json nahi mila');
-    const list = await res.json();
-
-    list.forEach((item, i) => {
-      allPhotos.push({
-        src: PHOTO_FOLDER + item.file,
-        caption: item.caption || item.file.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
-        tag: item.tag || 'General',
-        id: 'img_' + i,
-        source: 'folder'
-      });
-    });
-  } catch (err) {
-    console.warn('images.json load error:', err.message);
-    // Agar images.json nahi mila toh helpful message dikhao (sirf admin ko)
-    if (isAdmin) {
-      const grid = document.getElementById('galleryGrid');
-      const notice = document.createElement('div');
-      notice.style.cssText = 'font-family:Space Mono,monospace;font-size:.65rem;color:#ff6060;padding:1rem;border:1px solid rgba(255,96,96,.3);background:rgba(255,96,96,.05);letter-spacing:.05em;line-height:2';
-      notice.innerHTML = '⚠ <strong>images.json nahi mila!</strong><br>Project root mein images.json file banao. Format dekhne ke liye README padho.';
-      grid.prepend(notice);
-    }
+    const res = await fetch('images.json?t=' + Date.now());
+    const data = await res.json();
+    allPhotos = data.map((p, i) => ({
+      id: 'p' + i,
+      src: PHOTO_FOLDER + p.file,
+      caption: p.caption || '',
+      tag: p.tag || 'General'
+    }));
+  } catch(e) {
+    allPhotos = [];
   }
-
-  renderGallery();
+  filteredPhotos = [...allPhotos];
   buildFilters();
-  updateCount();
+  renderGallery();
 }
 
-/* ── UPDATE COUNT ── */
-function updateCount() {
-  const el = document.getElementById('photoCount');
-  if (el) el.textContent = allPhotos.length + ' PHOTO' + (allPhotos.length !== 1 ? 'S' : '');
-}
-
-/* ── BUILD FILTERS ── */
+/* ─── FILTERS ─── */
 function buildFilters() {
-  const tags = ['all', ...new Set(allPhotos.map(p => p.tag).filter(Boolean))];
+  const tags = ['all', ...new Set(allPhotos.map(p => p.tag))];
   const bar = document.getElementById('filterBar');
   bar.innerHTML = '';
   tags.forEach(tag => {
     const btn = document.createElement('button');
     btn.className = 'filter-btn' + (tag === 'all' ? ' active' : '');
-    btn.textContent = tag === 'all' ? 'ALL' : tag.toUpperCase();
+    btn.textContent = tag === 'all' ? 'All' : tag;
     btn.onclick = () => filterGallery(tag, btn);
     bar.appendChild(btn);
   });
 }
 
-/* ── FILTER ── */
 function filterGallery(tag, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -517,13 +328,12 @@ function filterGallery(tag, btn) {
   renderGallery(filteredPhotos);
 }
 
-/* ── RENDER GALLERY ── */
+/* ─── RENDER ─── */
 function renderGallery(photos) {
   photos = photos || allPhotos;
   filteredPhotos = photos;
   const grid = document.getElementById('galleryGrid');
   const empty = document.getElementById('emptyState');
-
   if (photos.length === 0) {
     grid.innerHTML = '';
     grid.appendChild(empty);
@@ -532,35 +342,25 @@ function renderGallery(photos) {
   }
   empty.style.display = 'none';
   grid.innerHTML = '';
-
   photos.forEach((photo, idx) => {
     const item = document.createElement('div');
     item.className = 'gallery-item';
-    item.dataset.id = photo.id;
-
-    const adminBtns = isAdmin ? `
-      <div class="gallery-action-btn" title="Edit" onclick="openCaptionModal('${photo.id}',event)">✏️</div>
-    ` : '';
-
     item.innerHTML = `
       <img src="${photo.src}" alt="${photo.caption||''}" loading="lazy" onerror="this.parentElement.style.display='none'">
       <div class="gallery-overlay">
         <div class="gallery-overlay-tag">${photo.tag||''}</div>
         <div class="gallery-overlay-name">${photo.caption||'Untitled'}</div>
       </div>
-      <div class="gallery-actions">
-        <div class="gallery-action-btn" title="Expand" onclick="openLightbox(${idx},event)">⤢</div>
-        ${adminBtns}
-      </div>
+      <div class="gallery-expand" onclick="openLightbox(${idx},event)" title="Expand">⤢</div>
     `;
     item.addEventListener('click', e => {
-      if (!e.target.closest('.gallery-actions')) openLightbox(idx, e);
+      if (!e.target.closest('.gallery-expand')) openLightbox(idx, e);
     });
     grid.appendChild(item);
   });
 }
 
-/* ── LIGHTBOX ── */
+/* ─── LIGHTBOX ─── */
 function openLightbox(idx, e) {
   if (e) e.stopPropagation();
   lightboxIdx = idx;
@@ -587,58 +387,42 @@ function closeLightboxOverlay(e) {
   if (e.target === document.getElementById('lightbox')) closeLightbox();
 }
 
+/* ─── ADMIN ─── */
+function openAdminLogin() {
+  document.getElementById('adminLoginOverlay').classList.add('open');
+  document.getElementById('adminPwInput').value = '';
+  document.getElementById('adminPwError').textContent = '';
+  setTimeout(() => document.getElementById('adminPwInput').focus(), 100);
+  document.body.style.overflow = 'hidden';
+}
+function closeAdminLogin() {
+  document.getElementById('adminLoginOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function checkAdminPw() {
+  const pw = document.getElementById('adminPwInput').value;
+  if (pw === ADMIN_PASSWORD) {
+    isAdmin = true;
+    document.getElementById('adminBar').style.display = 'block';
+    closeAdminLogin();
+  } else {
+    document.getElementById('adminPwError').textContent = 'Incorrect password';
+  }
+}
+function adminLogout() {
+  isAdmin = false;
+  document.getElementById('adminBar').style.display = 'none';
+}
+
 document.addEventListener('keydown', e => {
   if (document.getElementById('lightbox').classList.contains('open')) {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowRight') navLightbox(1);
     if (e.key === 'ArrowLeft') navLightbox(-1);
   }
-  if (document.getElementById('captionModal').classList.contains('open') && e.key === 'Escape') closeCaptionModal();
   if (document.getElementById('adminLoginOverlay').classList.contains('open') && e.key === 'Escape') closeAdminLogin();
 });
 
-/* ── CAPTION EDIT (admin) ── */
-function openCaptionModal(id, e) {
-  if (!isAdmin) return;
-  e.stopPropagation();
-  editingId = id;
-  const photo = allPhotos.find(p => p.id === id);
-  if (!photo) return;
-  document.getElementById('captionInput').value = photo.caption || '';
-  document.getElementById('captionTagInput').value = photo.tag || '';
-  document.getElementById('captionModal').classList.add('open');
-}
-function saveCaption() {
-  const photo = allPhotos.find(p => p.id === editingId);
-  if (photo) {
-    photo.caption = document.getElementById('captionInput').value.trim() || photo.caption;
-    photo.tag = document.getElementById('captionTagInput').value.trim() || 'General';
-    // Note: yeh sirf memory mein hai — permanent change ke liye images.json edit karo
-    renderGallery();
-    buildFilters();
-  }
-  closeCaptionModal();
-}
-function closeCaptionModal() {
-  document.getElementById('captionModal').classList.remove('open');
-  editingId = null;
-}
-
-/* ── BG CANVAS ── */
-const bgCanvas=document.getElementById('bg-canvas');const bgCtx=bgCanvas.getContext('2d');let nodes=[],signals=[];
-function resizeBg(){bgCanvas.width=window.innerWidth;bgCanvas.height=window.innerHeight;initNodes()}
-function initNodes(){nodes=[];for(let i=0;i<30;i++)nodes.push({x:Math.random()*bgCanvas.width,y:Math.random()*bgCanvas.height,vx:(Math.random()-.5)*.13,vy:(Math.random()-.5)*.13,r:Math.random()*2+1,pulse:Math.random()*Math.PI*2})}
-function launchSignal(){const i=Math.floor(Math.random()*nodes.length),n=nodes[i];let best=-1,bestD=Infinity;nodes.forEach((m,j)=>{if(j===i)return;const d=Math.hypot(m.x-n.x,m.y-n.y);if(d<200&&d<bestD){bestD=d;best=j}});if(best<0)return;signals.push({from:i,to:best,t:0,speed:.011+Math.random()*.012})}
-function drawBg(){bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>bgCanvas.width)n.vx*=-1;if(n.y<0||n.y>bgCanvas.height)n.vy*=-1;n.pulse+=.016});for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const d=Math.hypot(nodes[j].x-nodes[i].x,nodes[j].y-nodes[i].y);if(d<155){bgCtx.beginPath();bgCtx.moveTo(nodes[i].x,nodes[i].y);bgCtx.lineTo(nodes[j].x,nodes[j].y);bgCtx.strokeStyle=`rgba(124,108,250,${(1-d/155)*.04})`;bgCtx.lineWidth=.7;bgCtx.stroke()}}
-signals=signals.filter(s=>s.t<=1);signals.forEach(s=>{s.t+=s.speed;const a=nodes[s.from],b=nodes[s.to];const sx=a.x+(b.x-a.x)*s.t,sy=a.y+(b.y-a.y)*s.t;bgCtx.beginPath();bgCtx.arc(sx,sy,2,0,Math.PI*2);bgCtx.fillStyle=`rgba(124,108,250,${.45*(1-Math.abs(s.t-.5)*2)})`;bgCtx.fill()});
-nodes.forEach(n=>{const pulse=.22+.14*Math.sin(n.pulse);bgCtx.beginPath();bgCtx.arc(n.x,n.y,n.r,0,Math.PI*2);bgCtx.fillStyle=`rgba(124,108,250,${pulse})`;bgCtx.fill()});requestAnimationFrame(drawBg)}
-setInterval(launchSignal,450);window.addEventListener('resize',resizeBg);resizeBg();drawBg();
-
-/* ── SCROLL REVEAL ── */
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');observer.unobserve(e.target)}})},{threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
-
-/* ── INIT ── */
 initGallery();
 </script>
 </body>

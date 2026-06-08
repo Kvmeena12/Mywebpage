@@ -3,134 +3,470 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog — Kunjbihari</title>
+<title>Blog — Kunjbihari Meena</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0f1117;--bg2:#161b27;--bg3:#1d2438;--surface:#1a2030;--surface2:#212840;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#eef0f7;--text2:#9ba3be;--text3:#5a6380;--accent:#6C8EF5;--accent2:#4F6FE8;--accent3:#8AA4FF;--gold:#E8C97A;--success:#5DD1A5;--card-shadow:0 8px 40px rgba(0,0,0,0.4),0 1px 0 rgba(255,255,255,0.04) inset;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:99px}
-.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 20% 10%,rgba(108,142,245,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 85% 70%,rgba(79,111,232,0.05) 0%,transparent 55%);}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%);}
-
-/* NAV */
-nav{position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);z-index:1000;width:calc(100% - 3rem);max-width:1080px;display:flex;align-items:center;justify-content:space-between;padding:0.65rem 1.2rem 0.65rem 1rem;background:rgba(22,27,39,0.85);backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border2);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.5),0 1px 0 rgba(255,255,255,0.06) inset;transition:background 0.3s;}
-nav.scrolled{background:rgba(15,17,23,0.95);}
-.nav-logo{display:flex;align-items:center;gap:0.7rem;text-decoration:none;flex-shrink:0;}
-.logo-mark{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.25s;}
-.nav-logo:hover .logo-mark{transform:rotate(-5deg) scale(1.05);}
-.logo-name{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.95rem;color:var(--text);letter-spacing:-0.02em;}
-.logo-role{font-family:'DM Mono',monospace;font-size:0.48rem;color:var(--text3);letter-spacing:0.15em;display:block;margin-top:2px;}
-.nav-links{display:flex;gap:0.15rem;list-style:none;align-items:center;}
-.nav-links a{font-size:0.8rem;font-weight:500;color:var(--text2);text-decoration:none;padding:0.38rem 0.85rem;border-radius:999px;transition:all 0.2s;white-space:nowrap;}
-.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.06);}
-.nav-links a.active{color:var(--text);background:rgba(108,142,245,0.15);}
-.nav-cta{font-size:0.78rem;font-weight:600;color:#fff;text-decoration:none;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:0.5rem 1.2rem;border-radius:999px;box-shadow:0 4px 16px rgba(108,142,245,0.35);transition:all 0.22s;white-space:nowrap;flex-shrink:0;}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(108,142,245,0.5);}
-.hamburger{display:none;flex-direction:column;gap:5px;width:38px;height:38px;cursor:pointer;background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:50%;padding:9px;transition:all 0.2s;}
-.hamburger span{display:block;height:1.5px;background:var(--text2);border-radius:2px;transition:all 0.28s;}
-.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--accent3);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--accent3);}
-.mobile-nav{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,12,18,0.97);backdrop-filter:blur(30px);flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-.mobile-nav.open{opacity:1;pointer-events:all;}
-.mobile-nav a{font-size:1.4rem;font-weight:600;color:var(--text2);text-decoration:none;padding:0.8rem 2rem;transition:color 0.2s;}
-.mobile-nav a:hover{color:var(--accent3);}
-.mobile-nav .mobile-cta{margin-top:1.5rem;font-size:1rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:0.75rem 2.5rem;border-radius:999px;}
-
-/* PAGE */
-.page-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2.5rem;}
-.page-hero{padding:8rem 0 3rem;}
-.breadcrumb{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
-.breadcrumb a{color:var(--text2);text-decoration:none;transition:color 0.2s;}
-.breadcrumb a:hover{color:var(--accent3);}
-.page-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.0;letter-spacing:-0.03em;color:var(--text);margin-bottom:0.8rem;}
-.page-title em{color:var(--accent3);font-style:italic;}
-.page-sub{font-size:1rem;color:var(--text2);line-height:1.7;max-width:520px;}
-
-/* FILTERS */
-.filter-row{display:flex;gap:0.5rem;flex-wrap:wrap;padding:0 0 3rem;position:relative;z-index:1;max-width:1100px;margin:0 auto;padding-left:2.5rem;padding-right:2.5rem;}
-.filter-btn{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;padding:0.38rem 1rem;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;border-radius:999px;transition:all 0.2s;}
-.filter-btn:hover,.filter-btn.active{border-color:rgba(108,142,245,0.4);color:var(--accent3);background:rgba(108,142,245,0.07);}
-
-/* BLOG GRID */
-.blog-section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2.5rem 6rem;}
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.4rem;}
-.blog-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.8rem 2rem;display:flex;flex-direction:column;gap:0.9rem;transition:all 0.3s;cursor:pointer;position:relative;overflow:hidden;}
-.blog-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--accent),var(--accent2),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.35s;}
-.blog-card:hover{border-color:rgba(108,142,245,0.22);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.45);}
-.blog-card:hover::after{transform:scaleX(1);}
-.blog-card.featured{grid-column:1/-1;}
-.blog-card-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
-.blog-tag{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;padding:0.25rem 0.7rem;border:1px solid rgba(108,142,245,0.25);color:var(--accent3);background:rgba(108,142,245,0.07);border-radius:999px;}
-.blog-date{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--text3);letter-spacing:0.08em;}
-.blog-title{font-family:'Playfair Display',serif;font-weight:600;font-size:1.1rem;color:var(--text);line-height:1.35;}
-.blog-featured .blog-title{font-size:1.5rem;}
-.blog-excerpt{font-size:0.88rem;color:var(--text2);line-height:1.75;flex:1;}
-.blog-footer{display:flex;align-items:center;justify-content:space-between;padding-top:0.7rem;border-top:1px solid var(--border);}
-.blog-read-time{font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--text3);}
-.blog-arrow{font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--accent3);transition:transform 0.2s;}
-.blog-card:hover .blog-arrow{transform:translateX(4px);}
-.featured-badge{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;padding:0.22rem 0.7rem;background:rgba(232,201,122,0.1);border:1px solid rgba(232,201,122,0.3);color:var(--gold);border-radius:999px;}
-
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:5rem 1.5rem 2rem;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(8px);}
-.modal-overlay.open{opacity:1;pointer-events:all;}
-.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:24px;max-width:760px;width:100%;max-height:80vh;overflow-y:auto;padding:2.5rem;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.7);}
-.modal::-webkit-scrollbar{width:3px}.modal::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:99px;}
-.modal-close{position:absolute;top:1.2rem;right:1.2rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--text2);cursor:pointer;background:var(--surface);border:1px solid var(--border2);padding:0.3rem 0.8rem;border-radius:999px;transition:all 0.2s;}
-.modal-close:hover{color:var(--accent3);border-color:rgba(108,142,245,0.4);}
-.modal-tag{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;padding:0.25rem 0.7rem;border:1px solid rgba(108,142,245,0.25);color:var(--accent3);background:rgba(108,142,245,0.07);border-radius:999px;display:inline-block;margin-bottom:1rem;}
-.modal-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.4rem,3vw,2rem);color:var(--text);line-height:1.2;margin-bottom:0.6rem;}
-.modal-meta{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--text3);letter-spacing:0.08em;margin-bottom:2rem;display:flex;gap:1.5rem;flex-wrap:wrap;}
-.modal-body h3{font-family:'Playfair Display',serif;font-weight:600;font-size:1.05rem;color:var(--text);margin:1.6rem 0 0.5rem;}
-.modal-body p{font-size:0.9rem;color:var(--text2);line-height:1.85;margin-bottom:0.9rem;}
-.modal-body code{font-family:'DM Mono',monospace;font-size:0.78rem;background:rgba(108,142,245,0.08);border:1px solid rgba(108,142,245,0.15);padding:0.12rem 0.4rem;border-radius:4px;color:var(--accent3);}
-.modal-body ul{padding-left:1.2rem;margin-bottom:1rem;}
-.modal-body ul li{font-size:0.88rem;color:var(--text2);line-height:1.75;margin-bottom:0.3rem;}
-.modal-body strong{color:var(--text);}
-.modal-divider{border:none;border-top:1px solid var(--border);margin:1.5rem 0;}
-
-/* FOOTER */
-footer{position:relative;z-index:1;border-top:1px solid var(--border);background:linear-gradient(to bottom,transparent,var(--bg2));}
-.footer-bottom-bar{max-width:1100px;margin:0 auto;padding:1.8rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
-.foot-name{font-family:'Playfair Display',serif;font-size:1rem;color:var(--text2);font-weight:600;}
-.foot-name span{color:var(--accent3);}
-.foot-copy{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--text3);}
-
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease;}
-.reveal.vis{opacity:1;transform:translateY(0);}
-
-@media(max-width:700px){
-  .nav-links,.nav-cta{display:none;}
-  .hamburger{display:flex;}
-  .mobile-nav{display:flex;}
-  .page-wrap,.filter-row,.blog-section{padding-left:1.5rem;padding-right:1.5rem;}
-  .blog-card.featured{grid-column:auto;}
-  .page-hero{padding-top:7rem;}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOKENS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+  --ink:       #0a0a0c;
+  --ink2:      #141418;
+  --ink3:      #1c1c22;
+  --ink4:      #252530;
+  --paper:     #f5f2ec;
+  --paper2:    #ede9e0;
+  --smoke:     #c8c3b8;
+  --dust:      #8a857a;
+  --ghost:     #4a4540;
+  --ember:     #e8541a;
+  --ember2:    #ff6b35;
+  --gold:      #c9a227;
+  --teal:      #1a8a7a;
+  --text:      #f0ede6;
+  --text2:     #b5b0a8;
+  --text3:     #6e6860;
+  --border:    rgba(240,237,230,0.07);
+  --border2:   rgba(240,237,230,0.13);
 }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor { position:fixed;z-index:9999;pointer-events:none;width:10px;height:10px;background:var(--ember);border-radius:50%;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,background 0.2s;mix-blend-mode:exclusion; }
+.cursor-ring { position:fixed;z-index:9998;pointer-events:none;width:36px;height:36px;border:1px solid rgba(232,84,26,0.5);border-radius:50%;transform:translate(-50%,-50%); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:3px; }
+::-webkit-scrollbar-track { background:var(--ink2); }
+::-webkit-scrollbar-thumb { background:var(--ember); border-radius:3px; }
+::selection { background:rgba(232,84,26,0.25);color:var(--text); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BACKGROUND LAYERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* Noise */
+.noise { position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.028;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+
+/* Angled grid */
+.bg-grid {
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+.bg-grid::before {
+  content:'';position:absolute;inset:-50%;
+  background-image:
+    linear-gradient(rgba(240,237,230,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(240,237,230,0.025) 1px,transparent 1px);
+  background-size:72px 72px;
+  transform:rotate(-8deg) scale(1.4);
+}
+
+/* Glowing radial orbs */
+.bg-orbs { position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden; }
+.orb {
+  position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;
+  animation:orbFloat linear infinite;
+}
+.orb-1 { width:600px;height:600px;background:radial-gradient(circle,rgba(232,84,26,0.09),transparent 70%);top:-15%;left:-10%;animation-duration:30s; }
+.orb-2 { width:450px;height:450px;background:radial-gradient(circle,rgba(201,162,39,0.07),transparent 70%);bottom:-5%;right:-8%;animation-duration:38s;animation-delay:-14s; }
+.orb-3 { width:350px;height:350px;background:radial-gradient(circle,rgba(26,138,122,0.05),transparent 70%);top:45%;left:55%;animation-duration:44s;animation-delay:-22s; }
+@keyframes orbFloat {
+  0%   { transform:translate(0,0) scale(1); }
+  25%  { transform:translate(30px,-25px) scale(1.06); }
+  50%  { transform:translate(-20px,40px) scale(0.96); }
+  75%  { transform:translate(-35px,-15px) scale(1.04); }
+  100% { transform:translate(0,0) scale(1); }
+}
+
+/* Moving ember particles canvas */
+/* done in JS */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAVBAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.6rem 3rem;
+  transition:padding 0.4s,background 0.4s;
+}
+nav.scrolled {
+  padding:1rem 3rem;
+  background:rgba(10,10,12,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-wordmark {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;font-weight:600;letter-spacing:0.05em;
+  color:var(--text);text-decoration:none;
+}
+.nav-wordmark em { color:var(--ember);font-style:normal; }
+.nav-links { display:flex;gap:2.2rem;list-style:none; }
+.nav-links a {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--text2);text-decoration:none;transition:color 0.2s;position:relative;
+}
+.nav-links a::after { content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--ember);transition:width 0.3s; }
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+.nav-links a.active { color:var(--text); }
+.nav-hire {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--ink);background:var(--ember);
+  padding:0.6rem 1.4rem;text-decoration:none;transition:all 0.22s;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+}
+.nav-hire:hover { background:var(--ember2);transform:translateY(-1px); }
+
+/* Hamburger */
+.hamburger { display:none;flex-direction:column;gap:5px;width:40px;height:40px;cursor:pointer;background:rgba(240,237,230,0.05);border:1px solid var(--border2);border-radius:50%;padding:10px;transition:all 0.2s; }
+.hamburger span { display:block;height:1.5px;background:var(--text2);border-radius:2px;transition:all 0.28s; }
+.hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg);background:var(--ember); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg);background:var(--ember); }
+.mobile-nav { display:none;position:fixed;inset:0;z-index:99;background:rgba(10,10,12,0.97);backdrop-filter:blur(30px);flex-direction:column;align-items:center;justify-content:center;gap:0.3rem;opacity:0;pointer-events:none;transition:opacity 0.3s; }
+.mobile-nav.open { opacity:1;pointer-events:all; }
+.mobile-nav a { font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:600;color:var(--text2);text-decoration:none;padding:0.7rem 2rem;transition:color 0.2s; }
+.mobile-nav a:hover { color:var(--ember); }
+.mobile-nav .m-cta { margin-top:1.5rem;font-size:1rem;color:var(--ink);background:var(--ember);padding:0.75rem 2.5rem;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); }
+
+@media(max-width:768px) {
+  nav { padding:1.2rem 1.5rem; }
+  nav.scrolled { padding:0.9rem 1.5rem; }
+  .nav-links,.nav-hire { display:none; }
+  .hamburger { display:flex; }
+  .mobile-nav { display:flex; }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PAGE HERO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.page-hero {
+  position:relative;z-index:2;
+  padding:10rem 3rem 5rem;
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;
+}
+
+.hero-left-col {}
+.breadcrumb {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:0.5rem;
+}
+.breadcrumb a { color:var(--text2);text-decoration:none;transition:color 0.2s; }
+.breadcrumb a:hover { color:var(--ember); }
+.breadcrumb-sep { color:var(--text3); }
+
+.page-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,6vw,6rem);
+  font-weight:300;line-height:0.95;letter-spacing:-0.03em;
+  color:var(--text);margin-bottom:1.5rem;
+}
+.page-title em { font-style:italic;color:var(--ember); }
+
+.page-sub {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;line-height:1.8;color:var(--text2);
+  max-width:440px;
+}
+
+.hero-right-col {
+  display:flex;flex-direction:column;gap:1.2rem;padding-bottom:0.5rem;
+}
+
+.hero-stat-mini {
+  background:var(--ink3);
+  border:1px solid var(--border2);
+  padding:1.2rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:border-color 0.3s;
+}
+.hero-stat-mini:hover { border-color:rgba(232,84,26,0.3); }
+.hsm-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--text3);
+}
+.hsm-val {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:600;color:var(--ember);
+}
+
+@media(max-width:900px) { .page-hero { grid-template-columns:1fr;gap:2rem;padding:8rem 2rem 3rem; } }
+@media(max-width:600px) { .page-hero { padding:7rem 1.5rem 2.5rem; } }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MARQUEE STRIP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.marquee-strip {
+  position:relative;z-index:2;
+  background:var(--ember);padding:0.9rem 0;overflow:hidden;
+}
+.marquee-inner { display:flex;white-space:nowrap;animation:marqueeScroll 28s linear infinite; }
+.marquee-item {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink);padding:0 2rem;flex-shrink:0;
+}
+@keyframes marqueeScroll { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FILTERS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.filter-wrap {
+  position:relative;z-index:2;
+  max-width:1200px;margin:0 auto;
+  padding:3rem 3rem 1.5rem;
+  display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
+}
+.filter-label {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--text3);
+}
+.filter-pills { display:flex;gap:0.5rem;flex-wrap:wrap; }
+.f-pill {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text2);border:1px solid var(--border2);
+  padding:0.38rem 1rem;background:transparent;cursor:pointer;transition:all 0.2s;
+}
+.f-pill:hover { color:var(--ember);border-color:rgba(232,84,26,0.35); }
+.f-pill.active { color:var(--ink);background:var(--ember);border-color:var(--ember); }
+
+@media(max-width:600px) { .filter-wrap { padding:2rem 1.5rem 1rem; } }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BLOG GRID
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.blog-wrap {
+  position:relative;z-index:2;
+  max-width:1200px;margin:0 auto;
+  padding:1.5rem 3rem 8rem;
+}
+
+.blog-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+
+/* Featured spans full width */
+.blog-card {
+  background:var(--ink3);
+  border:1px solid var(--border);
+  padding:2rem;
+  display:flex;flex-direction:column;gap:0.9rem;
+  cursor:pointer;transition:all 0.32s;
+  position:relative;overflow:hidden;
+}
+.blog-card::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--ember);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;
+}
+.blog-card:hover { border-color:rgba(232,84,26,0.25);transform:translateY(-5px);background:var(--ink4); }
+.blog-card:hover::before { transform:scaleX(1); }
+
+.blog-card.featured {
+  grid-column:1/-1;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2rem;align-items:start;
+  padding:2.5rem;
+}
+.blog-card.featured .bc-content { display:flex;flex-direction:column;gap:0.9rem; }
+.bc-pull-quote {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:300;font-style:italic;
+  color:var(--text2);line-height:1.5;
+  border-left:3px solid var(--ember);padding-left:1.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+}
+
+.bc-head { display:flex;align-items:center;justify-content:space-between;gap:0.5rem;flex-wrap:wrap; }
+.bc-tag {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:0.25rem 0.7rem;border:1px solid rgba(232,84,26,0.3);
+  color:var(--ember);background:rgba(232,84,26,0.07);
+}
+.bc-date {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.1em;color:var(--text3);
+}
+.bc-featured-badge {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.55rem;letter-spacing:0.12em;
+  color:var(--gold);background:rgba(201,162,39,0.1);
+  border:1px solid rgba(201,162,39,0.3);padding:0.22rem 0.7rem;
+}
+
+.bc-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;font-weight:600;color:var(--text);line-height:1.3;
+}
+.blog-card.featured .bc-title { font-size:1.65rem; }
+
+.bc-excerpt { font-size:0.87rem;color:var(--text2);line-height:1.78;flex:1; }
+
+.bc-footer {
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:0.8rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:0.5rem;
+}
+.bc-read-time {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.1em;color:var(--text3);
+}
+.bc-arrow {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.06em;color:var(--ember);
+  transition:transform 0.2s;
+}
+.blog-card:hover .bc-arrow { transform:translateX(5px); }
+
+@media(max-width:900px) { .blog-grid{grid-template-columns:1fr 1fr;} .blog-card.featured{grid-template-columns:1fr;} .bc-pull-quote{display:none;} }
+@media(max-width:600px) { .blog-grid{grid-template-columns:1fr;} .blog-card.featured{grid-column:auto;} .blog-wrap{padding:1rem 1.5rem 5rem;} }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MODAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.modal-overlay {
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:5rem 1.5rem 2rem;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;
+}
+.modal-overlay.open { opacity:1;pointer-events:all; }
+
+.modal {
+  background:var(--ink2);
+  border:1px solid var(--border2);
+  max-width:720px;width:100%;
+  max-height:80vh;overflow-y:auto;
+  padding:2.5rem;position:relative;
+  box-shadow:0 40px 100px rgba(0,0,0,0.8);
+}
+.modal::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ember),var(--gold),var(--teal)); }
+.modal::-webkit-scrollbar{width:3px}.modal::-webkit-scrollbar-thumb{background:var(--ember);}
+
+.modal-close {
+  position:absolute;top:1.2rem;right:1.2rem;
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;
+  color:var(--text2);cursor:pointer;background:var(--ink3);
+  border:1px solid var(--border2);padding:0.3rem 0.8rem;transition:all 0.2s;
+}
+.modal-close:hover { color:var(--ember);border-color:rgba(232,84,26,0.4); }
+
+.modal-tag {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--ember);background:rgba(232,84,26,0.08);border:1px solid rgba(232,84,26,0.25);
+  padding:0.25rem 0.7rem;display:inline-block;margin-bottom:1.2rem;
+}
+.modal-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;
+  color:var(--text);line-height:1.15;margin-bottom:0.8rem;
+}
+.modal-meta {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;color:var(--text3);letter-spacing:0.1em;
+  display:flex;gap:1.5rem;flex-wrap:wrap;
+  margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);
+}
+.modal-body h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:600;font-size:1.15rem;color:var(--text);
+  margin:1.8rem 0 0.6rem;
+}
+.modal-body p { font-size:0.9rem;color:var(--text2);line-height:1.88;margin-bottom:1rem; }
+.modal-body strong { color:var(--text);font-weight:600; }
+.modal-body em { color:var(--ember);font-style:italic; }
+.modal-body code {
+  font-family:'JetBrains Mono',monospace;font-size:0.78rem;
+  background:rgba(232,84,26,0.08);border:1px solid rgba(232,84,26,0.2);
+  padding:0.12rem 0.45rem;color:var(--ember);
+}
+.modal-body ul { padding-left:1.2rem;margin-bottom:1rem; }
+.modal-body ul li { font-size:0.88rem;color:var(--text2);line-height:1.8;margin-bottom:0.35rem; }
+.modal-body ul li::marker { color:var(--ember); }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+footer {
+  position:relative;z-index:2;
+  background:var(--ink);border-top:1px solid var(--border);
+}
+.foot-inner {
+  max-width:1200px;margin:0 auto;
+  padding:3rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.foot-brand {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:300;color:var(--text);letter-spacing:-0.02em;
+}
+.foot-brand em { color:var(--ember);font-style:italic; }
+.foot-copy {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.12em;color:var(--text3);
+}
+.foot-links { display:flex;gap:1rem; }
+.foot-links a {
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text2);text-decoration:none;transition:color 0.2s;
+}
+.foot-links a:hover { color:var(--ember); }
+
+@media(max-width:600px) { .foot-inner { flex-direction:column;align-items:flex-start;padding:2rem 1.5rem; } }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ANIMATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.reveal { opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.vis { opacity:1;transform:translateY(0); }
+.rd1 { transition-delay:0.1s; }
+.rd2 { transition-delay:0.2s; }
+.rd3 { transition-delay:0.3s; }
 </style>
 </head>
 <body>
-<div class="bg-mesh"></div>
 
+<div class="noise"></div>
+<div class="bg-grid"></div>
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+<canvas id="particleCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAVBAR -->
 <nav id="mainNav">
-  <a class="nav-logo" href="index.html">
-    <div class="logo-mark">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-        <defs><linearGradient id="kg1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#8AA4FF"/><stop offset="100%" stop-color="#4F6FE8"/></linearGradient></defs>
-        <path d="M10 6 L10 30" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
-        <path d="M10 18 L24 7" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
-        <path d="M10 18 L24 29" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
-        <circle cx="10" cy="6" r="2" fill="#8AA4FF" opacity="0.7"/>
-        <circle cx="10" cy="30" r="2" fill="#4F6FE8" opacity="0.7"/>
-      </svg>
-    </div>
-    <div>
-    </div>
-  </a>
+  <a class="nav-wordmark" href="index.html">Kunj<em>bihari</em></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#about">About</a></li>
@@ -138,80 +474,202 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);background
     <li><a href="index.html#projects">Projects</a></li>
     <li><a href="blog.html" class="active">Blog</a></li>
     <li><a href="freelance.html">Freelance</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <a class="nav-hire" href="mailto:kunj07382@gmail.com">Hire Me</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
-  <a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#experience">Experience</a>
-  <a href="index.html#projects">Projects</a><a href="blog.html">Blog</a><a href="freelance.html">Freelance</a>
-  <a href="gallery.html">Gallery</a><a href="freelance.html" class="mobile-cta">Hire Me →</a>
+  <a href="index.html">Home</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#experience">Experience</a>
+  <a href="index.html#projects">Projects</a>
+  <a href="blog.html">Blog</a>
+  <a href="freelance.html">Freelance</a>
+  <a href="freelance.html" class="m-cta">Hire Me →</a>
 </div>
 
-<div class="page-wrap">
-  <div class="page-hero reveal">
-    <div class="breadcrumb"><a href="index.html">Home</a> / Blog</div>
-    <h1 class="page-title">Writing &amp; <em>Insights</em></h1>
+<!-- PAGE HERO -->
+<div class="page-hero reveal">
+  <div class="hero-left-col">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span>Blog</span>
+    </div>
+    <h1 class="page-title">Writing &amp;<br><em>Insights</em></h1>
     <p class="page-sub">Thoughts on machine learning, generative AI, statistics, and the craft of building intelligent systems.</p>
+  </div>
+  <div class="hero-right-col reveal rd1">
+    <div class="hero-stat-mini">
+      <div class="hsm-label">Posts Published</div>
+      <div class="hsm-val">6</div>
+    </div>
+    <div class="hero-stat-mini">
+      <div class="hsm-label">Topics Covered</div>
+      <div class="hsm-val">5</div>
+    </div>
+    <div class="hero-stat-mini">
+      <div class="hsm-label">Latest Post</div>
+      <div class="hsm-val" style="font-size:1.1rem;color:var(--text2)">May 2026</div>
+    </div>
   </div>
 </div>
 
-<div class="filter-row" id="filterRow">
-  <button class="filter-btn active" data-tag="ALL">All Posts</button>
-  <button class="filter-btn" data-tag="GENAI">Generative AI</button>
-  <button class="filter-btn" data-tag="ML">Machine Learning</button>
-  <button class="filter-btn" data-tag="STATS">Statistics</button>
-  <button class="filter-btn" data-tag="NLP">NLP</button>
-  <button class="filter-btn" data-tag="CAREER">Career</button>
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">Generative AI</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Machine Learning</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Statistics</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">NLP</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Career</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">LangGraph</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">RAG Systems</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Bayesian Modeling</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Generative AI</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Machine Learning</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Statistics</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">NLP</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Career</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">LangGraph</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">RAG Systems</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Bayesian Modeling</span><span class="marquee-item">◆</span>
+  </div>
 </div>
 
-<div class="blog-section">
+<!-- FILTERS -->
+<div class="filter-wrap reveal">
+  <span class="filter-label">Filter →</span>
+  <div class="filter-pills" id="filterRow">
+    <button class="f-pill active" data-tag="ALL">All Posts</button>
+    <button class="f-pill" data-tag="GENAI">Generative AI</button>
+    <button class="f-pill" data-tag="ML">Machine Learning</button>
+    <button class="f-pill" data-tag="STATS">Statistics</button>
+    <button class="f-pill" data-tag="NLP">NLP</button>
+    <button class="f-pill" data-tag="CAREER">Career</button>
+  </div>
+</div>
+
+<!-- BLOG GRID -->
+<div class="blog-wrap">
   <div class="blog-grid" id="blogGrid">
 
-    <div class="blog-card featured reveal" data-tag="GENAI" data-title="The Architecture of Agentic AI: How LangGraph Changes Everything" data-date="May 2026" data-read="8 min read" data-excerpt="<p>When people talk about &quot;agentic AI&quot;, they often mean a model that can take actions. But what makes an AI truly <strong>agentic</strong> is the ability to plan, reason about state, and course-correct based on intermediate feedback.</p><p>LangGraph introduces a fundamentally different paradigm — instead of linear chains, you define <em>stateful graphs</em> where each node is a function and edges represent conditional logic.</p><h3>Why Graphs Over Chains?</h3><p>Traditional LangChain pipelines are powerful but linear. LangGraph lets you build systems that branch, loop, and revisit decisions — much closer to how a real analyst or engineer would approach a complex problem.</p><p>This is particularly powerful when combined with tool-calling LLMs that can introspect their own outputs and decide what to do next.</p><h3>Building a Multi-Agent System</h3><p>In my resume evaluation project, I built a 5-agent pipeline: Parser, Analyzer, Scorer, Explainer, and Validator. Each agent has a clear responsibility, and the graph ensures clean handoffs with typed state across the entire workflow.</p><p>The result? A system that produces explainable, section-level resume scoring with 94% role-fit accuracy — something no single-prompt approach could achieve.</p>">
-      <div class="blog-card-head">
-        <span class="blog-tag">GENAI</span>
-        <span class="featured-badge">⭐ FEATURED</span>
-        <span class="blog-date">May 2026</span>
+    <!-- FEATURED -->
+    <div class="blog-card featured reveal"
+      data-tag="GENAI"
+      data-title="The Architecture of Agentic AI: How LangGraph Changes Everything"
+      data-date="May 2026" data-read="8 min read"
+      data-excerpt="&lt;p&gt;When people talk about &amp;quot;agentic AI&amp;quot;, they often mean a model that can take actions. But what makes an AI truly &lt;strong&gt;agentic&lt;/strong&gt; is the ability to plan, reason about state, and course-correct based on intermediate feedback.&lt;/p&gt;&lt;p&gt;LangGraph introduces a fundamentally different paradigm — instead of linear chains, you define &lt;em&gt;stateful graphs&lt;/em&gt; where each node is a function and edges represent conditional logic.&lt;/p&gt;&lt;h3&gt;Why Graphs Over Chains?&lt;/h3&gt;&lt;p&gt;Traditional LangChain pipelines are powerful but linear. LangGraph lets you build systems that branch, loop, and revisit decisions — much closer to how a real analyst or engineer would approach a complex problem.&lt;/p&gt;&lt;p&gt;In my resume evaluation project, I built a 5-agent pipeline: Parser, Analyzer, Scorer, Explainer, and Validator. Each agent has a clear responsibility, and the graph ensures clean handoffs with typed state across the workflow.&lt;/p&gt;&lt;p&gt;The result? A system that produces explainable, section-level resume scoring with &lt;strong&gt;94% role-fit accuracy&lt;/strong&gt; — something no single-prompt approach could achieve.&lt;/p&gt;">
+      <div class="bc-content">
+        <div class="bc-head">
+          <span class="bc-tag">GENAI</span>
+          <span class="bc-featured-badge">⭐ FEATURED</span>
+          <span class="bc-date">May 2026</span>
+        </div>
+        <div class="bc-title">The Architecture of Agentic AI: How LangGraph Changes Everything</div>
+        <div class="bc-excerpt">When people talk about "agentic AI", they often mean a model that can take actions. But what makes an AI truly agentic is the ability to plan, reason about state, and course-correct — LangGraph introduces stateful graphs that change how we build AI systems entirely.</div>
+        <div class="bc-footer">
+          <span class="bc-read-time">8 min read</span>
+          <span class="bc-arrow">Read more →</span>
+        </div>
       </div>
-      <div class="blog-title">The Architecture of Agentic AI: How LangGraph Changes Everything</div>
-      <div class="blog-excerpt">When people talk about "agentic AI", they often mean a model that can take actions. But what makes an AI truly agentic is the ability to plan, reason about state, and course-correct — LangGraph introduces stateful graphs that change how we think about AI systems entirely.</div>
-      <div class="blog-footer"><span class="blog-read-time">8 min read</span><span class="blog-arrow">Read more →</span></div>
+      <div class="bc-pull-quote">
+        "The key insight of LangGraph is that intelligence is not a single forward pass — it's an iterative, stateful loop that revises its own outputs."
+      </div>
     </div>
 
-    <div class="blog-card reveal" data-tag="ML" data-title="XGBoost vs Neural Networks: When to Use Which" data-date="Apr 2026" data-read="6 min read" data-excerpt="<p>After training XGBoost on 1.2M NYC taxi records and achieving R² = 0.94, I kept getting asked: why not use a neural network? The answer is nuanced.</p><h3>Structured Data Still Belongs to Gradient Boosting</h3><p>On tabular, structured data, XGBoost consistently outperforms neural networks in accuracy, training time, and interpretability. The reasons are well-understood: decision trees naturally capture feature interactions without needing layers of learned representations.</p><p>Neural networks shine when data has spatial structure (images), sequential dependencies (text/time series), or when you have millions of training samples and want to learn representations from scratch.</p><h3>My Rule of Thumb</h3><p>&lt;100K rows + tabular = XGBoost first. Large unstructured data = deep learning. Hybrid signals = ensemble. This has held up across every project I've worked on.</p>">
-      <div class="blog-card-head"><span class="blog-tag">ML</span><span class="blog-date">Apr 2026</span></div>
-      <div class="blog-title">XGBoost vs Neural Networks: When to Use Which</div>
-      <div class="blog-excerpt">After training XGBoost on 1.2M NYC taxi records and achieving R² = 0.94, I kept getting asked: why not use a neural network? The answer is nuanced and depends on data structure, not hype.</div>
-      <div class="blog-footer"><span class="blog-read-time">6 min read</span><span class="blog-arrow">Read →</span></div>
+    <!-- POST 2 -->
+    <div class="blog-card reveal"
+      data-tag="ML"
+      data-title="XGBoost vs Neural Networks: When to Use Which"
+      data-date="Apr 2026" data-read="6 min read"
+      data-excerpt="&lt;p&gt;After training XGBoost on 1.2M NYC taxi records and achieving R² = 0.94, I kept getting asked: why not use a neural network? The answer is nuanced.&lt;/p&gt;&lt;h3&gt;Structured Data Still Belongs to Gradient Boosting&lt;/h3&gt;&lt;p&gt;On tabular, structured data, XGBoost consistently outperforms neural networks in accuracy, training time, and interpretability. Decision trees naturally capture feature interactions without needing layers of learned representations.&lt;/p&gt;&lt;p&gt;Neural networks shine when data has spatial structure (images), sequential dependencies (text/time series), or when you have millions of training samples.&lt;/p&gt;&lt;h3&gt;My Rule of Thumb&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;&lt;100K rows + tabular = XGBoost first.&lt;/strong&gt; Large unstructured data = deep learning. Hybrid signals = ensemble. This has held across every project.&lt;/p&gt;">
+      <div class="bc-head">
+        <span class="bc-tag">ML</span>
+        <span class="bc-date">Apr 2026</span>
+      </div>
+      <div class="bc-title">XGBoost vs Neural Networks: When to Use Which</div>
+      <div class="bc-excerpt">After achieving R² = 0.94 with XGBoost on 1.2M records, I kept getting asked: why not a neural network? The answer depends on data structure, not hype.</div>
+      <div class="bc-footer">
+        <span class="bc-read-time">6 min read</span>
+        <span class="bc-arrow">Read →</span>
+      </div>
     </div>
 
-    <div class="blog-card reveal" data-tag="NLP" data-title="RAG Systems in Production: Lessons from Building a DSA Assistant" data-date="Mar 2026" data-read="7 min read" data-excerpt="<p>Retrieval-Augmented Generation sounds simple: retrieve relevant context, pass it to an LLM, get a good answer. In practice, the engineering details determine whether your system is reliable or embarrassingly wrong.</p><h3>The Chunking Problem</h3><p>How you split documents matters enormously. Fixed-size chunks lose semantic coherence. Sentence-based chunking preserves meaning but creates uneven sizes. I settled on recursive character splitting with 512-token chunks and 50-token overlap — a good default that works across most document types.</p><h3>Embedding Model Choice</h3><p>For the DSA assistant, I used <code>all-MiniLM-L6-v2</code> — fast, small, and surprisingly accurate for algorithm documentation. For financial text, a domain-specific model like FinBERT-embeddings is worth the latency cost.</p><h3>Hallucination Rate Down 67%</h3><p>By combining retrieval with a confidence gate (only answer if top-k similarity &gt; 0.78), the system's hallucination rate dropped from ~18% to under 6%.</p>">
-      <div class="blog-card-head"><span class="blog-tag">NLP</span><span class="blog-date">Mar 2026</span></div>
-      <div class="blog-title">RAG Systems in Production: Lessons from Building a DSA Assistant</div>
-      <div class="blog-excerpt">Retrieval-Augmented Generation sounds simple in theory. The engineering details — chunking strategy, embedding choice, confidence thresholds — determine whether your system is reliable or embarrassingly wrong.</div>
-      <div class="blog-footer"><span class="blog-read-time">7 min read</span><span class="blog-arrow">Read →</span></div>
+    <!-- POST 3 -->
+    <div class="blog-card reveal rd1"
+      data-tag="NLP"
+      data-title="RAG Systems in Production: Lessons from Building a DSA Assistant"
+      data-date="Mar 2026" data-read="7 min read"
+      data-excerpt="&lt;p&gt;Retrieval-Augmented Generation sounds simple: retrieve relevant context, pass it to an LLM, get a good answer. In practice, the engineering details determine whether your system is reliable or embarrassingly wrong.&lt;/p&gt;&lt;h3&gt;The Chunking Problem&lt;/h3&gt;&lt;p&gt;How you split documents matters enormously. Fixed-size chunks lose semantic coherence. I settled on recursive character splitting with 512-token chunks and 50-token overlap — a solid default across most document types.&lt;/p&gt;&lt;h3&gt;Embedding Model Choice&lt;/h3&gt;&lt;p&gt;For the DSA assistant, I used &lt;code&gt;all-MiniLM-L6-v2&lt;/code&gt; — fast, small, and surprisingly accurate for algorithm documentation.&lt;/p&gt;&lt;h3&gt;Hallucination Rate Down 67%&lt;/h3&gt;&lt;p&gt;By combining retrieval with a confidence gate (only answer if top-k similarity &gt; 0.78), the system's hallucination rate dropped from ~18% to under 6%.&lt;/p&gt;">
+      <div class="bc-head">
+        <span class="bc-tag">NLP</span>
+        <span class="bc-date">Mar 2026</span>
+      </div>
+      <div class="bc-title">RAG Systems in Production: Lessons from Building a DSA Assistant</div>
+      <div class="bc-excerpt">Chunking strategy, embedding choice, confidence thresholds — the engineering details of RAG determine whether your system is reliable or embarrassingly wrong.</div>
+      <div class="bc-footer">
+        <span class="bc-read-time">7 min read</span>
+        <span class="bc-arrow">Read →</span>
+      </div>
     </div>
 
-    <div class="blog-card reveal" data-tag="STATS" data-title="Why Every ML Engineer Should Learn Bayesian Statistics" data-date="Feb 2026" data-read="5 min read" data-excerpt="<p>Frequentist statistics gives you a p-value. Bayesian statistics gives you a probability distribution over your hypothesis. For real-world decision-making, the latter is almost always what you actually want.</p><h3>Updating Beliefs with Evidence</h3><p>The core of Bayesian thinking is Bayes' theorem: posterior ∝ likelihood × prior. Every time you get new data, you update your belief. This is how humans actually reason — and it's how a well-designed ML system should reason too.</p><h3>Practical Applications</h3><p>In my coursework at IIT Bombay, I used PyMC for hierarchical Bayesian models on survey data. The ability to model uncertainty explicitly — rather than collapsing it into a single point estimate — leads to better-calibrated predictions and more honest uncertainty quantification.</p>">
-      <div class="blog-card-head"><span class="blog-tag">STATS</span><span class="blog-date">Feb 2026</span></div>
-      <div class="blog-title">Why Every ML Engineer Should Learn Bayesian Statistics</div>
-      <div class="blog-excerpt">Frequentist statistics gives you a p-value. Bayesian statistics gives you a probability distribution over your hypothesis. For real-world decision-making, the latter is almost always what you actually want.</div>
-      <div class="blog-footer"><span class="blog-read-time">5 min read</span><span class="blog-arrow">Read →</span></div>
+    <!-- POST 4 -->
+    <div class="blog-card reveal rd2"
+      data-tag="STATS"
+      data-title="Why Every ML Engineer Should Learn Bayesian Statistics"
+      data-date="Feb 2026" data-read="5 min read"
+      data-excerpt="&lt;p&gt;Frequentist statistics gives you a p-value. Bayesian statistics gives you a &lt;strong&gt;probability distribution over your hypothesis&lt;/strong&gt;. For real-world decision-making, the latter is almost always what you actually want.&lt;/p&gt;&lt;h3&gt;Updating Beliefs with Evidence&lt;/h3&gt;&lt;p&gt;The core of Bayesian thinking: posterior ∝ likelihood × prior. Every time you get new data, you update your belief. This is how humans actually reason — and how a well-designed ML system should reason.&lt;/p&gt;&lt;h3&gt;Practical Applications&lt;/h3&gt;&lt;p&gt;At IIT Bombay, I used PyMC for hierarchical Bayesian models on survey data. Modeling uncertainty explicitly — rather than collapsing it into a single point estimate — leads to better-calibrated predictions.&lt;/p&gt;">
+      <div class="bc-head">
+        <span class="bc-tag">STATS</span>
+        <span class="bc-date">Feb 2026</span>
+      </div>
+      <div class="bc-title">Why Every ML Engineer Should Learn Bayesian Statistics</div>
+      <div class="bc-excerpt">Frequentist stats gives you a p-value. Bayesian stats gives you a probability distribution over your hypothesis. For real-world decisions, the latter is almost always what you want.</div>
+      <div class="bc-footer">
+        <span class="bc-read-time">5 min read</span>
+        <span class="bc-arrow">Read →</span>
+      </div>
     </div>
 
-    <div class="blog-card reveal" data-tag="CAREER" data-title="From IIT Bombay to NRI: My Path into Data Science Consulting" data-date="Jan 2026" data-read="4 min read" data-excerpt="<p>Landing a role at Nomura Research Institute as a fresh MS graduate wasn't luck — it was the result of deliberately building a portfolio that bridged academic rigor and real-world engineering.</p><h3>What Actually Matters</h3><p>Interviewers at tier-1 consulting firms don't care about your CGPA as much as your ability to think clearly about ambiguous problems. The projects that got me through the door were ones where I could explain the business impact — not just the model metrics.</p><h3>The Portfolio Strategy</h3><p>I built projects across the full stack of data science: forecasting (NYC taxi), NLP (review sentiment), GenAI (RAG assistant), and agentic AI (multi-agent resume evaluator). Each one demonstrated a different capability and came with a clean GitHub README explaining the problem, approach, and results.</p><p>If I had to give one piece of advice: build things that could plausibly exist in a real company, not toy classifiers on Titanic data.</p>">
-      <div class="blog-card-head"><span class="blog-tag">CAREER</span><span class="blog-date">Jan 2026</span></div>
-      <div class="blog-title">From IIT Bombay to NRI: My Path into Data Science Consulting</div>
-      <div class="blog-excerpt">Landing a role at Nomura Research Institute wasn't luck — it was the result of deliberately building a portfolio that bridged academic rigor and real-world engineering. Here's what I learned.</div>
-      <div class="blog-footer"><span class="blog-read-time">4 min read</span><span class="blog-arrow">Read →</span></div>
+    <!-- POST 5 -->
+    <div class="blog-card reveal"
+      data-tag="CAREER"
+      data-title="From IIT Bombay to NRI: My Path into Data Science Consulting"
+      data-date="Jan 2026" data-read="4 min read"
+      data-excerpt="&lt;p&gt;Landing a role at Nomura Research Institute as a fresh MS graduate wasn't luck — it was deliberate portfolio-building that bridged academic rigor and real-world engineering.&lt;/p&gt;&lt;h3&gt;What Actually Matters&lt;/h3&gt;&lt;p&gt;Interviewers at tier-1 consulting firms don't care about your CGPA as much as your ability to think clearly about ambiguous problems. The projects that got me through the door were ones where I could explain &lt;strong&gt;business impact&lt;/strong&gt; — not just model metrics.&lt;/p&gt;&lt;h3&gt;The Portfolio Strategy&lt;/h3&gt;&lt;p&gt;I built across the full stack: forecasting (NYC taxi), NLP (review sentiment), GenAI (RAG assistant), and agentic AI (multi-agent resume evaluator). Each demonstrated a different capability with a clean GitHub README explaining the problem, approach, and results.&lt;/p&gt;">
+      <div class="bc-head">
+        <span class="bc-tag">CAREER</span>
+        <span class="bc-date">Jan 2026</span>
+      </div>
+      <div class="bc-title">From IIT Bombay to NRI: My Path into Data Science Consulting</div>
+      <div class="bc-excerpt">Landing the NRI role wasn't luck — it was deliberate portfolio-building that bridged academic rigor and real-world engineering. Here's what actually worked.</div>
+      <div class="bc-footer">
+        <span class="bc-read-time">4 min read</span>
+        <span class="bc-arrow">Read →</span>
+      </div>
     </div>
 
-    <div class="blog-card reveal" data-tag="GENAI" data-title="Fine-Tuning vs Prompt Engineering: A Practical Decision Framework" data-date="Dec 2025" data-read="6 min read" data-excerpt="<p>The question I get asked most often: should I fine-tune an LLM or invest in better prompt engineering? The honest answer is: try prompting first, fine-tune only if you have to.</p><h3>When Prompting is Enough</h3><p>For most business applications — summarization, extraction, classification, Q&A — a well-crafted prompt with good examples achieves 80-90% of what fine-tuning would. The cost difference is enormous: prompting is free beyond API calls; fine-tuning requires labeled data, GPU time, and careful evaluation.</p><h3>When Fine-Tuning Wins</h3><p>Fine-tuning wins when: (1) you need consistent output format across thousands of calls, (2) you're working in a specialized domain where the base model lacks vocabulary, or (3) you need to distill a complex reasoning pattern that can't be captured in a prompt.</p>">
-      <div class="blog-card-head"><span class="blog-tag">GENAI</span><span class="blog-date">Dec 2025</span></div>
-      <div class="blog-title">Fine-Tuning vs Prompt Engineering: A Practical Decision Framework</div>
-      <div class="blog-excerpt">The question I get asked most often: should I fine-tune an LLM or invest in better prompt engineering? The honest answer depends on your data, budget, and how much consistency you actually need.</div>
-      <div class="blog-footer"><span class="blog-read-time">6 min read</span><span class="blog-arrow">Read →</span></div>
+    <!-- POST 6 -->
+    <div class="blog-card reveal rd1"
+      data-tag="GENAI"
+      data-title="Fine-Tuning vs Prompt Engineering: A Practical Decision Framework"
+      data-date="Dec 2025" data-read="6 min read"
+      data-excerpt="&lt;p&gt;The question I get asked most: should I fine-tune an LLM or invest in better prompt engineering? &lt;strong&gt;Try prompting first, fine-tune only if you have to.&lt;/strong&gt;&lt;/p&gt;&lt;h3&gt;When Prompting is Enough&lt;/h3&gt;&lt;p&gt;For most applications — summarization, extraction, classification, Q&amp;A — a well-crafted prompt with good examples achieves 80-90% of what fine-tuning would. The cost difference is enormous.&lt;/p&gt;&lt;h3&gt;When Fine-Tuning Wins&lt;/h3&gt;&lt;p&gt;Fine-tuning wins when: (1) you need consistent output format at scale, (2) you're in a specialized domain where the base model lacks vocabulary, or (3) you need to distill a complex reasoning pattern that can't be captured in a prompt.&lt;/p&gt;">
+      <div class="bc-head">
+        <span class="bc-tag">GENAI</span>
+        <span class="bc-date">Dec 2025</span>
+      </div>
+      <div class="bc-title">Fine-Tuning vs Prompt Engineering: A Practical Decision Framework</div>
+      <div class="bc-excerpt">Should you fine-tune an LLM or invest in better prompts? The honest answer depends on your data, budget, and how much consistency you actually need.</div>
+      <div class="bc-footer">
+        <span class="bc-read-time">6 min read</span>
+        <span class="bc-arrow">Read →</span>
+      </div>
     </div>
 
   </div>
@@ -225,38 +683,94 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);background
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-bottom-bar">
-    <div class="foot-name">Kunj<span>bihari</span> — Data Scientist</div>
-    <div class="foot-copy">© 2026 · All rights reserved</div>
+  <div class="foot-inner">
+    <div class="foot-brand">Kunj<em>bihari</em></div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="freelance.html">Freelance</a>
+      <a href="mailto:kunj07382@gmail.com">Email</a>
+    </div>
+    <div class="foot-copy">© 2026 Kunjbihari Meena</div>
   </div>
 </footer>
 
 <script>
-const nav=document.getElementById('mainNav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
-const hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobileNav');
-hamburger.addEventListener('click',function(e){e.stopPropagation();this.classList.toggle('open');mobileNav.classList.toggle('open');document.body.style.overflow=mobileNav.classList.contains('open')?'hidden':'';});
-mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileNav.classList.remove('open');document.body.style.overflow='';}));
+/* CURSOR */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
 
-// Filter
+/* PARTICLE CANVAS */
+(function(){
+  const c=document.getElementById('particleCanvas');
+  const ctx=c.getContext('2d');
+  let pts=[];
+  function resize(){c.width=innerWidth;c.height=innerHeight;}
+  function init(){
+    pts=[];
+    for(let i=0;i<60;i++) pts.push({
+      x:Math.random()*c.width,y:Math.random()*c.height,
+      r:Math.random()*1.2+0.3,
+      vx:(Math.random()-0.5)*0.15,vy:(Math.random()-0.5)*0.15,
+      a:Math.random()*0.25+0.06,
+      hue:Math.random()<0.6?20:45
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    pts.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>c.width)p.vx*=-1;
+      if(p.y<0||p.y>c.height)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`hsla(${p.hue},90%,55%,${p.a})`;ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(232,84,26,${0.05*(1-d/110)})`;ctx.lineWidth=0.5;ctx.stroke();}
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();init();});
+  resize();init();draw();
+})();
+
+/* NAVBAR */
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true});
+
+/* HAMBURGER */
+const hbg=document.getElementById('hamburger'),mNav=document.getElementById('mobileNav');
+hbg.addEventListener('click',function(e){e.stopPropagation();this.classList.toggle('open');mNav.classList.toggle('open');document.body.style.overflow=mNav.classList.contains('open')?'hidden':'';});
+mNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hbg.classList.remove('open');mNav.classList.remove('open');document.body.style.overflow='';}));
+
+/* FILTER */
 document.getElementById('filterRow').addEventListener('click',e=>{
-  if(!e.target.classList.contains('filter-btn'))return;
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  e.target.classList.add('active');
-  const tag=e.target.dataset.tag;
+  const btn=e.target.closest('.f-pill');if(!btn)return;
+  document.querySelectorAll('.f-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const tag=btn.dataset.tag;
   document.querySelectorAll('.blog-card').forEach(c=>{
     c.style.display=(tag==='ALL'||c.dataset.tag===tag)?'':'none';
   });
 });
 
-// Modal
+/* MODAL */
 const overlay=document.getElementById('modalOverlay');
 const modalContent=document.getElementById('modalContent');
 document.querySelectorAll('.blog-card').forEach(card=>{
   card.addEventListener('click',()=>{
     const d=card.dataset;
-    modalContent.innerHTML=`<span class="modal-tag">${d.tag}</span><h2 class="modal-title">${d.title}</h2><div class="modal-meta"><span>${d.date}</span><span>${d.read}</span></div><div class="modal-body">${d.excerpt}</div>`;
+    modalContent.innerHTML=`
+      <span class="modal-tag">${d.tag}</span>
+      <h2 class="modal-title">${d.title}</h2>
+      <div class="modal-meta"><span>${d.date}</span><span>${d.read}</span></div>
+      <div class="modal-body">${d.excerpt}</div>`;
     overlay.classList.add('open');
     document.body.style.overflow='hidden';
   });
@@ -265,8 +779,11 @@ document.getElementById('modalClose').addEventListener('click',()=>{overlay.clas
 overlay.addEventListener('click',e=>{if(e.target===overlay){overlay.classList.remove('open');document.body.style.overflow='';}});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){overlay.classList.remove('open');document.body.style.overflow='';}});
 
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');observer.unobserve(e.target);}});},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+/* SCROLL REVEAL */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>

@@ -3,159 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Freelance — Kunjbihari</title>
+<title>Freelance — Kunjbihari Meena</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0f1117;--bg2:#161b27;--bg3:#1d2438;--surface:#1a2030;--surface2:#212840;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.12);--text:#eef0f7;--text2:#9ba3be;--text3:#5a6380;--accent:#6C8EF5;--accent2:#4F6FE8;--accent3:#8AA4FF;--gold:#E8C97A;--success:#5DD1A5;--card-shadow:0 8px 40px rgba(0,0,0,0.4),0 1px 0 rgba(255,255,255,0.04) inset;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent2);border-radius:99px}
-.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 20% 10%,rgba(108,142,245,0.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 85% 70%,rgba(79,111,232,0.05) 0%,transparent 55%);}
-.bg-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
-.aurora-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.5;animation:auroraFloat linear infinite;}
-.aurora-orb:nth-child(1){width:500px;height:500px;background:radial-gradient(circle,rgba(108,142,245,0.22),transparent 70%);top:-10%;left:-5%;animation-duration:22s;}
-.aurora-orb:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,rgba(79,111,232,0.18),transparent 70%);bottom:-5%;right:5%;animation-duration:28s;animation-delay:-10s;}
-.aurora-orb:nth-child(3){width:320px;height:320px;background:radial-gradient(circle,rgba(138,164,255,0.12),transparent 70%);top:40%;left:60%;animation-duration:34s;animation-delay:-5s;}
-@keyframes auroraFloat{0%{transform:translate(0,0) scale(1);}25%{transform:translate(40px,-30px) scale(1.08);}50%{transform:translate(-20px,50px) scale(0.95);}75%{transform:translate(-50px,-20px) scale(1.05);}100%{transform:translate(0,0) scale(1);}}
-
-nav{position:fixed;top:1.2rem;left:50%;transform:translateX(-50%);z-index:1000;width:calc(100% - 3rem);max-width:1080px;display:flex;align-items:center;justify-content:space-between;padding:0.65rem 1.2rem 0.65rem 1rem;background:rgba(22,27,39,0.85);backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border2);border-radius:999px;box-shadow:0 8px 32px rgba(0,0,0,0.5),0 1px 0 rgba(255,255,255,0.06) inset;transition:background 0.3s;}
-nav.scrolled{background:rgba(15,17,23,0.95);}
-.nav-logo{display:flex;align-items:center;gap:0.7rem;text-decoration:none;flex-shrink:0;}
-.logo-mark{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform 0.25s;}
-.nav-logo:hover .logo-mark{transform:rotate(-5deg) scale(1.05);}
-.logo-name{font-family:'DM Sans',sans-serif;font-weight:700;font-size:0.95rem;color:var(--text);letter-spacing:-0.02em;}
-.logo-role{font-family:'DM Mono',monospace;font-size:0.48rem;color:var(--text3);letter-spacing:0.15em;display:block;margin-top:2px;}
-.nav-links{display:flex;gap:0.15rem;list-style:none;align-items:center;}
-.nav-links a{font-size:0.8rem;font-weight:500;color:var(--text2);text-decoration:none;padding:0.38rem 0.85rem;border-radius:999px;transition:all 0.2s;white-space:nowrap;}
-.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.06);}
-.nav-links a.active{color:var(--text);background:rgba(108,142,245,0.15);}
-.nav-cta{font-size:0.78rem;font-weight:600;color:#fff;text-decoration:none;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:0.5rem 1.2rem;border-radius:999px;box-shadow:0 4px 16px rgba(108,142,245,0.35);transition:all 0.22s;white-space:nowrap;flex-shrink:0;}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(108,142,245,0.5);}
-.hamburger{display:none;flex-direction:column;gap:5px;width:38px;height:38px;cursor:pointer;background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:50%;padding:9px;}
-.hamburger span{display:block;height:1.5px;background:var(--text2);border-radius:2px;transition:all 0.28s;}
-.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--accent3);}
-.hamburger.open span:nth-child(2){opacity:0;}
-.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--accent3);}
-.mobile-nav{display:none;position:fixed;inset:0;z-index:999;background:rgba(10,12,18,0.97);backdrop-filter:blur(30px);flex-direction:column;align-items:center;justify-content:center;gap:0.2rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-.mobile-nav.open{opacity:1;pointer-events:all;}
-.mobile-nav a{font-size:1.4rem;font-weight:600;color:var(--text2);text-decoration:none;padding:0.8rem 2rem;transition:color 0.2s;}
-.mobile-nav a:hover{color:var(--accent3);}
-.mobile-nav .mobile-cta{margin-top:1.5rem;font-size:1rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:0.75rem 2.5rem;border-radius:999px;}
-
-.page-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 2.5rem;}
-.page-hero{padding:8rem 0 3rem;}
-.breadcrumb{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--text3);margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
-.breadcrumb a{color:var(--text2);text-decoration:none;transition:color 0.2s;}
-.breadcrumb a:hover{color:var(--accent3);}
-.page-title{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.0;letter-spacing:-0.03em;color:var(--text);margin-bottom:0.8rem;}
-.page-title em{color:var(--accent3);font-style:italic;}
-.page-sub{font-size:1rem;color:var(--text2);line-height:1.7;max-width:520px;margin-bottom:1.5rem;}
-.avail-badge{display:inline-flex;align-items:center;gap:0.6rem;font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;color:var(--success);background:rgba(93,209,165,0.08);border:1px solid rgba(93,209,165,0.25);padding:0.4rem 1rem;border-radius:999px;}
-.avail-dot{width:7px;height:7px;border-radius:50%;background:var(--success);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{box-shadow:0 0 8px var(--success)}50%{box-shadow:0 0 16px var(--success)}}
-
-section{position:relative;z-index:1;padding:4rem 2.5rem;}
-.sec-inner{max-width:1100px;margin:0 auto;}
-.sec-eyebrow{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.22em;color:var(--accent3);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.6rem;}
-.sec-eyebrow::before{content:'';width:20px;height:1px;background:var(--accent3);display:block;}
-.sec-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3vw,2.5rem);color:var(--text);margin-bottom:0.5rem;letter-spacing:-0.02em;}
-.sec-title em{color:var(--accent3);font-style:italic;}
-.section-divider{height:1px;margin:0;background:linear-gradient(to right,transparent,var(--border2),transparent);}
-
-/* SERVICES */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.3rem;margin-top:2.5rem;}
-.service-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden;}
-.service-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--accent),var(--accent2));border-radius:3px 0 0 3px;transform:scaleY(0);transform-origin:top;transition:transform 0.35s;}
-.service-card:hover{border-color:rgba(108,142,245,0.22);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.45);}
-.service-card:hover::before{transform:scaleY(1);}
-.service-icon{width:48px;height:48px;background:rgba(108,142,245,0.1);border:1px solid rgba(108,142,245,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1.3rem;}
-.service-name{font-family:'Playfair Display',serif;font-weight:600;font-size:1.1rem;color:var(--text);margin-bottom:0.6rem;}
-.service-desc{font-size:0.88rem;line-height:1.75;color:var(--text2);margin-bottom:1.2rem;}
-.service-tags{display:flex;flex-wrap:wrap;gap:0.35rem;}
-.stag{font-size:0.72rem;color:var(--text3);background:var(--bg2);border:1px solid var(--border);padding:0.22rem 0.6rem;border-radius:999px;}
-
-/* PRICING */
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.3rem;margin-top:2.5rem;}
-.pricing-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2rem;transition:all 0.3s;}
-.pricing-card.highlighted{border-color:rgba(108,142,245,0.4);background:linear-gradient(135deg,rgba(108,142,245,0.08),rgba(79,111,232,0.04));box-shadow:0 0 0 1px rgba(108,142,245,0.2);}
-.pricing-card:hover{border-color:rgba(108,142,245,0.3);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.4);}
-.pricing-tier{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;color:var(--text3);margin-bottom:0.8rem;}
-.pricing-tier.featured-tier{color:var(--accent3);}
-.pricing-price{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--text);margin-bottom:0.3rem;line-height:1;}
-.pricing-price span{font-size:1rem;font-weight:400;color:var(--text3);font-family:'DM Sans',sans-serif;}
-.pricing-desc{font-size:0.85rem;color:var(--text2);margin-bottom:1.5rem;line-height:1.6;}
-.pricing-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.8rem;}
-.pricing-features li{font-size:0.85rem;color:var(--text2);display:flex;align-items:flex-start;gap:0.6rem;line-height:1.5;}
-.pricing-features li::before{content:'✓';color:var(--success);font-weight:700;flex-shrink:0;}
-.btn-outline{display:block;text-align:center;font-weight:600;font-size:0.9rem;color:var(--accent3);text-decoration:none;border:1px solid rgba(108,142,245,0.35);padding:0.7rem 1.5rem;border-radius:999px;transition:all 0.22s;}
-.btn-outline:hover{background:rgba(108,142,245,0.08);border-color:rgba(108,142,245,0.5);}
-.btn-filled{display:block;text-align:center;font-weight:600;font-size:0.9rem;color:#fff;text-decoration:none;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:0.7rem 1.5rem;border-radius:999px;box-shadow:0 4px 16px rgba(108,142,245,0.35);transition:all 0.22s;}
-.btn-filled:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,142,245,0.5);}
-
-/* PROCESS */
-.process-list{margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem;}
-.process-item{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:1.5rem 2rem;display:flex;align-items:flex-start;gap:1.5rem;transition:all 0.3s;}
-.process-item:hover{border-color:rgba(108,142,245,0.2);transform:translateX(4px);}
-.process-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:rgba(108,142,245,0.25);line-height:1;flex-shrink:0;min-width:2.5rem;}
-.process-name{font-weight:600;font-size:0.95rem;color:var(--text);margin-bottom:0.3rem;}
-.process-desc{font-size:0.85rem;color:var(--text2);line-height:1.6;}
-
-/* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2.5rem;}
-.contact-info{display:flex;flex-direction:column;gap:1rem;}
-.contact-item{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.3rem 1.5rem;transition:all 0.3s;}
-.contact-item:hover{border-color:rgba(108,142,245,0.2);}
-.contact-item-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.18em;color:var(--text3);margin-bottom:0.3rem;}
-.contact-item-value{font-size:0.9rem;color:var(--text2);}
-.contact-item-value a{color:var(--accent3);text-decoration:none;}
-.contact-form{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2rem;}
-.form-group{margin-bottom:1.2rem;}
-.form-label{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--text3);display:block;margin-bottom:0.5rem;}
-.form-input,.form-textarea{width:100%;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:0.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:0.9rem;color:var(--text);outline:none;transition:border-color 0.2s;resize:vertical;}
-.form-input:focus,.form-textarea:focus{border-color:rgba(108,142,245,0.5);}
-.form-textarea{min-height:120px;}
-.form-submit{width:100%;font-weight:600;font-size:0.9rem;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:0.85rem;border:none;border-radius:999px;cursor:pointer;box-shadow:0 4px 16px rgba(108,142,245,0.35);transition:all 0.22s;}
-.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,142,245,0.5);}
-
-footer{position:relative;z-index:1;border-top:1px solid var(--border);background:linear-gradient(to bottom,transparent,var(--bg2));}
-.footer-bottom-bar{max-width:1100px;margin:0 auto;padding:1.8rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;}
-.foot-name{font-family:'Playfair Display',serif;font-size:1rem;color:var(--text2);font-weight:600;}
-.foot-name span{color:var(--accent3);}
-.foot-copy{font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--text3);}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s ease,transform 0.65s ease;}
-.reveal.vis{opacity:1;transform:translateY(0);}
-
-@media(max-width:900px){.contact-grid{grid-template-columns:1fr;}}
-@media(max-width:700px){
-  .nav-links,.nav-cta{display:none;}.hamburger{display:flex;}.mobile-nav{display:flex;}
-  .page-wrap,section{padding-left:1.5rem;padding-right:1.5rem;}
-  .page-hero{padding-top:7rem;}
+:root {
+  --ink:#0a0a0c;--ink2:#141418;--ink3:#1c1c22;--ink4:#252530;
+  --paper:#f5f2ec;--paper2:#ede9e0;--smoke:#c8c3b8;--dust:#8a857a;--ghost:#4a4540;
+  --ember:#e8541a;--ember2:#ff6b35;--gold:#c9a227;--teal:#1a8a7a;
+  --text:#f0ede6;--text2:#b5b0a8;--text3:#6e6860;
+  --border:rgba(240,237,230,0.07);--border2:rgba(240,237,230,0.13);
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--ink);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none;}
+
+.cursor{position:fixed;z-index:9999;pointer-events:none;width:10px;height:10px;background:var(--ember);border-radius:50%;transform:translate(-50%,-50%);mix-blend-mode:exclusion;}
+.cursor-ring{position:fixed;z-index:9998;pointer-events:none;width:36px;height:36px;border:1px solid rgba(232,84,26,0.5);border-radius:50%;transform:translate(-50%,-50%);}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--ink2)}::-webkit-scrollbar-thumb{background:var(--ember);border-radius:3px}
+::selection{background:rgba(232,84,26,0.25);color:var(--text)}
+
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.bg-grid::before{content:'';position:absolute;inset:-50%;background-image:linear-gradient(rgba(240,237,230,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(240,237,230,0.025) 1px,transparent 1px);background-size:72px 72px;transform:rotate(-8deg) scale(1.4);}
+.bg-orbs{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbFloat linear infinite;}
+.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(232,84,26,0.08),transparent 70%);top:-15%;left:-10%;animation-duration:30s;}
+.orb-2{width:450px;height:450px;background:radial-gradient(circle,rgba(201,162,39,0.06),transparent 70%);bottom:-5%;right:-8%;animation-duration:38s;animation-delay:-14s;}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-25px) scale(1.06)}50%{transform:translate(-20px,40px) scale(0.96)}75%{transform:translate(-35px,-15px) scale(1.04)}100%{transform:translate(0,0) scale(1)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.6rem 3rem;transition:padding 0.4s,background 0.4s;}
+nav.scrolled{padding:1rem 3rem;background:rgba(10,10,12,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-wordmark{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;letter-spacing:0.05em;color:var(--text);text-decoration:none;}
+.nav-wordmark em{color:var(--ember);font-style:normal;}
+.nav-links{display:flex;gap:2.2rem;list-style:none;}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--ember);transition:width 0.3s;}
+.nav-links a:hover{color:var(--text)}.nav-links a:hover::after,.nav-links a.active::after{width:100%}.nav-links a.active{color:var(--text)}
+.nav-hire{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink);background:var(--ember);padding:0.6rem 1.4rem;text-decoration:none;transition:all 0.22s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+.nav-hire:hover{background:var(--ember2);transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;width:40px;height:40px;cursor:pointer;background:rgba(240,237,230,0.05);border:1px solid var(--border2);border-radius:50%;padding:10px;transition:all 0.2s;}
+.hamburger span{display:block;height:1.5px;background:var(--text2);border-radius:2px;transition:all 0.28s;}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:var(--ember);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:var(--ember);}
+.mobile-nav{display:none;position:fixed;inset:0;z-index:99;background:rgba(10,10,12,0.97);backdrop-filter:blur(30px);flex-direction:column;align-items:center;justify-content:center;gap:0.3rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.mobile-nav.open{opacity:1;pointer-events:all;}
+.mobile-nav a{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:600;color:var(--text2);text-decoration:none;padding:0.7rem 2rem;transition:color 0.2s;}
+.mobile-nav a:hover{color:var(--ember);}
+.mobile-nav .m-cta{margin-top:1.5rem;font-size:1rem;color:var(--ink);background:var(--ember);padding:0.75rem 2.5rem;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));}
+@media(max-width:768px){nav{padding:1.2rem 1.5rem;}nav.scrolled{padding:0.9rem 1.5rem;}.nav-links,.nav-hire{display:none;}.hamburger{display:flex;}.mobile-nav{display:flex;}}
+
+/* ━ PAGE HERO */
+.page-hero{position:relative;z-index:2;min-height:90vh;display:flex;align-items:center;overflow:hidden;}
+.hero-bg-text{position:absolute;right:-2rem;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:22vw;font-weight:700;color:rgba(240,237,230,0.02);line-height:1;pointer-events:none;user-select:none;letter-spacing:-0.05em;}
+.hero-inner{max-width:1200px;margin:0 auto;padding:8rem 3rem 5rem;width:100%;}
+.hero-overline{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--ember);margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem;}
+.hero-overline::before{content:'';width:30px;height:1px;background:var(--ember);}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(4rem,7vw,7rem);font-weight:300;line-height:0.92;letter-spacing:-0.03em;color:var(--text);margin-bottom:1.5rem;}
+.hero-h1 em{display:block;font-style:italic;color:var(--ember);}
+.hero-h1 .sub{display:block;font-size:0.45em;font-style:normal;color:var(--text2);font-family:'Syne',sans-serif;font-weight:400;letter-spacing:0.08em;margin-bottom:0.3rem;}
+
+/* Status banner */
+.status-banner{display:inline-flex;align-items:center;gap:1rem;background:rgba(201,162,39,0.08);border:1px solid rgba(201,162,39,0.25);padding:1rem 1.5rem;margin-bottom:2.5rem;}
+.sb-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
+.sb-text{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);}
+.sb-note{font-size:0.82rem;color:var(--text2);}
+
+.hero-desc{font-family:'Cormorant Garamond',serif;font-size:1.2rem;line-height:1.85;color:var(--text2);max-width:580px;margin-bottom:2.5rem;}
+.hero-desc strong{color:var(--text);font-weight:600;}
+.hero-cta-row{display:flex;gap:1rem;flex-wrap:wrap;}
+.btn-main{font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.08em;color:var(--ink);background:var(--ember);padding:0.9rem 2rem;text-decoration:none;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all 0.22s;}
+.btn-main:hover{background:var(--ember2);transform:translateY(-2px);}
+.btn-outline{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2);border:1px solid var(--border2);padding:0.9rem 1.8rem;text-decoration:none;transition:all 0.22s;}
+.btn-outline:hover{color:var(--text);border-color:rgba(240,237,230,0.35);}
+
+@media(max-width:900px){.hero-inner{padding:8rem 2rem 4rem;}}
+@media(max-width:600px){.hero-inner{padding:7rem 1.5rem 3rem;}}
+
+/* ━ MARQUEE */
+.marquee-strip{position:relative;z-index:2;background:var(--ember);padding:0.9rem 0;overflow:hidden;}
+.marquee-inner{display:flex;white-space:nowrap;animation:marqueeScroll 28s linear infinite;}
+.marquee-item{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);padding:0 2rem;flex-shrink:0;}
+@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ━ SERVICES */
+.services-section{position:relative;z-index:2;padding:7rem 3rem;}
+.sec-container{max-width:1200px;margin:0 auto;}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--ember);margin-bottom:0.7rem;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,3.8rem);font-weight:300;line-height:1.1;color:var(--text);letter-spacing:-0.02em;margin-bottom:3.5rem;}
+.sec-title em{font-style:italic;color:var(--ember);}
+
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.service-card{background:var(--ink3);border:1px solid var(--border);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:all 0.3s;}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ember);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.service-card:hover{border-color:rgba(232,84,26,0.25);transform:translateY(-4px);}
+.service-card:hover::before{transform:scaleX(1);}
+.sc-num{font-family:'JetBrains Mono',monospace;font-size:2.5rem;font-weight:400;color:rgba(232,84,26,0.12);line-height:1;margin-bottom:1.2rem;}
+.sc-icon{font-size:1.8rem;margin-bottom:1rem;display:block;}
+.sc-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.8rem;}
+.sc-desc{font-size:0.87rem;color:var(--text2);line-height:1.8;margin-bottom:1.2rem;}
+.sc-price{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;color:var(--gold);border-top:1px solid var(--border);padding-top:0.8rem;}
+
+@media(max-width:900px){.services-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.services-grid{grid-template-columns:1fr;}.services-section{padding:5rem 1.5rem;}}
+
+/* ━ PROCESS */
+.process-section{position:relative;z-index:2;background:var(--paper);padding:7rem 3rem;}
+.process-section .sec-num{color:var(--ember);}
+.process-section .sec-title{color:var(--ink);}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.proc-step{padding:2.5rem 2rem;border-right:1px solid var(--paper2);position:relative;transition:background 0.3s;}
+.proc-step:last-child{border-right:none;}
+.proc-step:hover{background:#fff;}
+.proc-step::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--ember);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.proc-step:hover::before{transform:scaleX(1);}
+.ps-num{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:700;color:rgba(232,84,26,0.1);line-height:1;margin-bottom:0.5rem;}
+.ps-title{font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;color:var(--ink);margin-bottom:0.7rem;}
+.ps-desc{font-size:0.82rem;color:var(--ghost);line-height:1.7;}
+
+@media(max-width:768px){.process-grid{grid-template-columns:1fr 1fr;}.proc-step{border-right:1px solid var(--paper2);border-bottom:1px solid var(--paper2);}.proc-step:nth-child(2n){border-right:none;}.proc-step:nth-last-child(-n+2){border-bottom:none;}}
+@media(max-width:500px){.process-grid{grid-template-columns:1fr;}.proc-step{border-right:none;}.process-section{padding:5rem 1.5rem;}}
+
+/* ━ CONTACT SECTION */
+.contact-section{position:relative;z-index:2;padding:7rem 3rem;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.contact-left{}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem;}
+.form-group{}
+.form-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:0.5rem;}
+.form-input,.form-textarea{width:100%;background:var(--ink3);border:1px solid var(--border2);color:var(--text);font-family:'Syne',sans-serif;font-size:0.9rem;padding:0.85rem 1rem;outline:none;transition:border-color 0.2s;resize:none;}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text3);}
+.form-input:focus,.form-textarea:focus{border-color:rgba(232,84,26,0.5);}
+.form-textarea{min-height:140px;}
+.form-submit{font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;letter-spacing:0.06em;color:var(--ink);background:var(--ember);border:none;padding:1rem 2.5rem;cursor:pointer;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));transition:all 0.22s;align-self:flex-start;}
+.form-submit:hover{background:var(--ember2);transform:translateY(-2px);}
+
+.contact-right{}
+.contact-info-card{background:var(--ink3);border:1px solid var(--border);padding:2.5rem;margin-bottom:1.5rem;position:relative;}
+.contact-info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--ember),var(--gold));}
+.cic-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--text3);margin-bottom:0.4rem;}
+.cic-val{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--text);margin-bottom:1.2rem;}
+.cic-val a{color:var(--ember);text-decoration:none;}
+.cic-val a:hover{text-decoration:underline;}
+.cic-note{font-size:0.82rem;color:var(--text2);line-height:1.7;}
+
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:2.5rem;}.contact-section{padding:5rem 2rem;}}
+@media(max-width:600px){.contact-section{padding:4rem 1.5rem;}}
+
+/* ━ FOOTER */
+footer{position:relative;z-index:2;background:var(--ink);border-top:1px solid var(--border);}
+.foot-inner{max-width:1200px;margin:0 auto;padding:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.foot-brand{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--text);letter-spacing:-0.02em;}
+.foot-brand em{color:var(--ember);font-style:italic;}
+.foot-links{display:flex;gap:1rem;}
+.foot-links a{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.2s;}
+.foot-links a:hover{color:var(--ember);}
+.foot-copy{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.12em;color:var(--text3);}
+@media(max-width:600px){.foot-inner{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem;}}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}
 </style>
 </head>
 <body>
-<div class="bg-mesh"></div>
-<div class="bg-aurora">
-  <div class="aurora-orb"></div>
-  <div class="aurora-orb"></div>
-  <div class="aurora-orb"></div>
-</div>
 
+<div class="noise"></div>
+<div class="bg-grid"></div>
+<div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+<canvas id="particleCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAVBAR -->
 <nav id="mainNav">
-  <a class="nav-logo" href="index.html">
-    <div class="logo-mark">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
-        <defs><linearGradient id="kg1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#8AA4FF"/><stop offset="100%" stop-color="#4F6FE8"/></linearGradient></defs>
-        <path d="M10 6 L10 30" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
-        <path d="M10 18 L24 7" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
-        <path d="M10 18 L24 29" stroke="url(#kg1)" stroke-width="3.2" stroke-linecap="round"/>
-        <circle cx="10" cy="6" r="2" fill="#8AA4FF" opacity="0.7"/>
-        <circle cx="10" cy="30" r="2" fill="#4F6FE8" opacity="0.7"/>
-      </svg>
-    </div>
-  </a>
+  <a class="nav-wordmark" href="index.html">Kunj<em>bihari</em></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="index.html#about">About</a></li>
@@ -163,204 +187,243 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);background
     <li><a href="index.html#projects">Projects</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="freelance.html" class="active">Freelance</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Get in Touch →</a>
+  <a class="nav-hire" href="mailto:kunj07382@gmail.com">Hire Me</a>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-nav" id="mobileNav">
-  <a href="index.html">Home</a><a href="index.html#about">About</a><a href="index.html#experience">Experience</a>
-  <a href="index.html#projects">Projects</a><a href="blog.html">Blog</a><a href="freelance.html">Freelance</a>
-  <a href="gallery.html">Gallery</a><a href="#contact" class="mobile-cta">Get in Touch →</a>
+  <a href="index.html">Home</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#experience">Experience</a>
+  <a href="index.html#projects">Projects</a>
+  <a href="blog.html">Blog</a>
+  <a href="freelance.html">Freelance</a>
+  <a href="mailto:kunj07382@gmail.com" class="m-cta">Email Me →</a>
 </div>
 
-<div class="page-wrap">
-  <div class="page-hero reveal">
-    <div class="breadcrumb"><a href="index.html">Home</a> / Freelance</div>
-    <h1 class="page-title">Work With <em>Me</em></h1>
-    <p class="page-sub">I'm currently working full-time at NRI (Nomura Research Institute), so I'm <strong>not taking on new freelance projects at this time</strong>. However, feel free to connect for future collaboration — I may open up capacity later. If you have a particularly interesting or impactful project, drop me a message and we can discuss.</p>
-    <div class="avail-badge" style="border-color:rgba(232,201,122,0.35);background:rgba(232,201,122,0.07);color:var(--gold);"><span class="avail-dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold);"></span>CURRENTLY FOCUSED ON FULL-TIME ROLE</div>
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-bg-text">hire</div>
+  <div class="hero-inner reveal">
+    <div class="hero-overline">05 · Freelance & Consulting</div>
+    <h1 class="hero-h1">
+      <span class="sub">Available for</span>
+      Work
+      <em>With Me</em>
+    </h1>
+
+    <!-- AVAILABILITY STATUS -->
+    <div class="status-banner">
+      <div class="sb-dot"></div>
+      <div class="sb-text">Focused on NRI Role</div>
+      <div class="sb-note">Currently joining NRI full-time June 2026. Open to select research & consulting engagements.</div>
+    </div>
+
+    <p class="hero-desc">
+      I bring <strong>IIT Bombay-level rigor</strong> and production engineering skills to freelance data science, ML consulting, and AI system design. From statistical modeling to agentic AI pipelines — I build things that actually work in the real world.
+    </p>
+    <div class="hero-cta-row">
+      <a class="btn-main" href="mailto:kunj07382@gmail.com">Let's Talk →</a>
+      <a class="btn-outline" href="Kunjbihari___AI_ML_Engineer.pdf" target="_blank">Download CV</a>
+    </div>
   </div>
 </div>
 
-<section>
-  <div class="sec-inner">
-    <div class="sec-eyebrow">01 · SERVICES</div>
-    <h2 class="sec-title">What I <em>Offer</em></h2>
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <span class="marquee-item">ML Consulting</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">NLP Systems</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">RAG Pipelines</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Agentic AI</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Statistical Modeling</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Data Engineering</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">LangChain · LangGraph</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">ML Consulting</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">NLP Systems</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">RAG Pipelines</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Agentic AI</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Statistical Modeling</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">Data Engineering</span><span class="marquee-item">◆</span>
+    <span class="marquee-item">LangChain · LangGraph</span><span class="marquee-item">◆</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="sec-container">
+    <div class="sec-num reveal">01 · Services</div>
+    <h2 class="sec-title reveal">What I <em>Offer</em></h2>
     <div class="services-grid">
       <div class="service-card reveal">
-        <div class="service-icon">🤖</div>
-        <div class="service-name">Generative AI & LLM Solutions</div>
-        <div class="service-desc">End-to-end RAG pipelines, multi-agent systems, prompt engineering, and LLM fine-tuning for business applications. From chatbots to intelligent document processing.</div>
-        <div class="service-tags"><span class="stag">LangChain</span><span class="stag">LangGraph</span><span class="stag">RAG</span><span class="stag">Vector DBs</span><span class="stag">Groq</span></div>
+        <div class="sc-num">01</div>
+        <span class="sc-icon">🤖</span>
+        <div class="sc-title">Generative AI & LLM Systems</div>
+        <div class="sc-desc">RAG pipelines, prompt engineering, fine-tuning, and multi-agent orchestration using LangChain, LangGraph, and AutoGen. Production-ready architectures with hallucination mitigation.</div>
+        <div class="sc-price">From consultation to full deployment</div>
+      </div>
+      <div class="service-card reveal rd1">
+        <div class="sc-num">02</div>
+        <span class="sc-icon">📊</span>
+        <div class="sc-title">ML Modeling & Forecasting</div>
+        <div class="sc-desc">End-to-end ML pipelines — feature engineering, model selection, validation, and deployment. Specializing in XGBoost, ARIMA/SARIMA, Bayesian models, and ensemble methods.</div>
+        <div class="sc-price">Project-based or hourly</div>
+      </div>
+      <div class="service-card reveal rd2">
+        <div class="sc-num">03</div>
+        <span class="sc-icon">🗂️</span>
+        <div class="sc-title">NLP & Text Analytics</div>
+        <div class="sc-desc">Sentiment analysis, entity recognition, document classification, and embedding-based systems. Experience with BERT, RoBERTa, FinBERT, and transformer fine-tuning.</div>
+        <div class="sc-price">Per-project scoping</div>
       </div>
       <div class="service-card reveal">
-        <div class="service-icon">📈</div>
-        <div class="service-name">ML Modeling & Forecasting</div>
-        <div class="service-desc">Predictive models, time series forecasting, classification and regression pipelines. Production-ready code with documentation and evaluation reports.</div>
-        <div class="service-tags"><span class="stag">Python</span><span class="stag">XGBoost</span><span class="stag">ARIMA</span><span class="stag">Scikit-learn</span><span class="stag">TensorFlow</span></div>
+        <div class="sc-num">04</div>
+        <span class="sc-icon">🔢</span>
+        <div class="sc-title">Statistical Consulting</div>
+        <div class="sc-desc">Bayesian modeling, causal inference, experimental design, and hypothesis testing. IIT Bombay-trained statistical rigor applied to real business questions.</div>
+        <div class="sc-price">Hourly or retainer</div>
       </div>
-      <div class="service-card reveal">
-        <div class="service-icon">📊</div>
-        <div class="service-name">Data Analytics & Dashboards</div>
-        <div class="service-desc">Exploratory data analysis, statistical insights, and interactive dashboards. Turn raw data into actionable intelligence with clear visual communication.</div>
-        <div class="service-tags"><span class="stag">Pandas</span><span class="stag">Streamlit</span><span class="stag">EDA</span><span class="stag">SQL</span><span class="stag">Matplotlib</span></div>
+      <div class="service-card reveal rd1">
+        <div class="sc-num">05</div>
+        <span class="sc-icon">⚙️</span>
+        <div class="sc-title">Data Engineering</div>
+        <div class="sc-desc">Data pipeline design, web scraping at scale, ETL workflows, and EDA dashboards with Streamlit. Handling millions of records cleanly and efficiently.</div>
+        <div class="sc-price">Project-based</div>
       </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🔬</div>
-        <div class="service-name">NLP & Text Analytics</div>
-        <div class="service-desc">Sentiment analysis, entity extraction, document classification, and embedding-based similarity systems. Transformer-based pipelines fine-tuned for your domain.</div>
-        <div class="service-tags"><span class="stag">BERT</span><span class="stag">Transformers</span><span class="stag">spaCy</span><span class="stag">FinBERT</span><span class="stag">UMAP</span></div>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🧮</div>
-        <div class="service-name">Statistical Modeling</div>
-        <div class="service-desc">Bayesian inference, hypothesis testing, A/B testing, causal inference, and quantitative research. Rigorous statistical methods grounded in my IIT Bombay training.</div>
-        <div class="service-tags"><span class="stag">PyMC</span><span class="stag">Bayesian</span><span class="stag">R</span><span class="stag">Causal Inference</span></div>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-icon">🏗️</div>
-        <div class="service-name">Data Engineering</div>
-        <div class="service-desc">Data pipeline design, web scraping at scale, ETL workflows, and NLP preprocessing pipelines. Clean, reproducible code with proper documentation.</div>
-        <div class="service-tags"><span class="stag">Pipelines</span><span class="stag">Web Scraping</span><span class="stag">NER</span><span class="stag">PyMuPDF</span><span class="stag">APIs</span></div>
+      <div class="service-card reveal rd2">
+        <div class="sc-num">06</div>
+        <span class="sc-icon">🎓</span>
+        <div class="sc-title">Research Collaboration</div>
+        <div class="sc-desc">Open to academic and applied research partnerships. Published work in sentiment analysis and LLM-based emotion mining. Journal-quality analysis and write-up support.</div>
+        <div class="sc-price">Case-by-case basis</div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<section>
-  <div class="sec-inner">
-    <div class="sec-eyebrow">02 · PRICING</div>
-    <h2 class="sec-title">Transparent <em>Pricing</em></h2>
-    <div class="pricing-grid">
-      <div class="pricing-card reveal">
-        <div class="pricing-tier">STARTER</div>
-        <div class="pricing-price">₹15K<span> / project</span></div>
-        <div class="pricing-desc">Quick analysis, scripts, or small ML models with clean code and documentation.</div>
-        <ul class="pricing-features">
-          <li>EDA & statistical analysis</li>
-          <li>Baseline ML model + evaluation</li>
-          <li>Python scripts / notebooks</li>
-          <li>Basic documentation</li>
-          <li>1 revision round</li>
-        </ul>
-        <a href="mailto:kunj07382@gmail.com?subject=Starter Project Inquiry" class="btn-outline">Get Started →</a>
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="sec-container">
+    <div class="sec-num reveal">02 · Process</div>
+    <h2 class="sec-title reveal">How I <em>Work</em></h2>
+    <div class="process-grid">
+      <div class="proc-step reveal">
+        <div class="ps-num">01</div>
+        <div class="ps-title">Discovery Call</div>
+        <div class="ps-desc">We talk through the problem, your data, constraints, and success metrics. I ask the dumb questions early so I don't waste your time later.</div>
       </div>
-      <div class="pricing-card highlighted reveal">
-        <div class="pricing-tier featured-tier">★ MOST POPULAR · PROFESSIONAL</div>
-        <div class="pricing-price">₹40K<span> / project</span></div>
-        <div class="pricing-desc">Full ML pipeline or GenAI solution with production-ready code, testing, and deployment guidance.</div>
-        <ul class="pricing-features">
-          <li>Complete ML / GenAI pipeline</li>
-          <li>RAG system or agentic workflow</li>
-          <li>Production-ready code + tests</li>
-          <li>Streamlit dashboard or API</li>
-          <li>Full documentation + walkthrough</li>
-          <li>3 revision rounds</li>
-        </ul>
-        <a href="mailto:kunj07382@gmail.com?subject=Professional Project Inquiry" class="btn-filled">Let's Work Together →</a>
+      <div class="proc-step reveal rd1">
+        <div class="ps-num">02</div>
+        <div class="ps-title">Scoping & Proposal</div>
+        <div class="ps-desc">I send a clear written proposal: what I'll build, what I won't, timeline, and fixed or capped price. No ambiguity.</div>
       </div>
-      <div class="pricing-card reveal">
-        <div class="pricing-tier">ENTERPRISE / CUSTOM</div>
-        <div class="pricing-price">Custom<span> pricing</span></div>
-        <div class="pricing-desc">Large-scale systems, long-term engagements, or complex multi-phase projects. Let's discuss scope first.</div>
-        <ul class="pricing-features">
-          <li>Custom scope & timeline</li>
-          <li>Multi-agent AI systems</li>
-          <li>Ongoing support & iterations</li>
-          <li>Team collaboration</li>
-          <li>NDA available</li>
-        </ul>
-        <a href="mailto:kunj07382@gmail.com?subject=Enterprise Project Inquiry" class="btn-outline">Contact for Quote →</a>
+      <div class="proc-step reveal rd2">
+        <div class="ps-num">03</div>
+        <div class="ps-title">Build & Iterate</div>
+        <div class="ps-desc">Regular check-ins with working demos. I share intermediate results so you can redirect early. Version-controlled code throughout.</div>
+      </div>
+      <div class="proc-step reveal rd3">
+        <div class="ps-num">04</div>
+        <div class="ps-title">Handoff & Support</div>
+        <div class="ps-desc">Clean code, documentation, and a walkthrough. Two weeks of follow-up support included on all projects.</div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="section-divider"></div>
-
-<section>
-  <div class="sec-inner">
-    <div class="sec-eyebrow">03 · PROCESS</div>
-    <h2 class="sec-title">How It <em>Works</em></h2>
-    <div class="process-list">
-      <div class="process-item reveal"><div class="process-num">01</div><div><div class="process-name">Discovery Call</div><div class="process-desc">We discuss your problem, requirements, data availability, and expected outcomes. I ask the right questions to scope accurately.</div></div></div>
-      <div class="process-item reveal"><div class="process-num">02</div><div><div class="process-name">Proposal & Agreement</div><div class="process-desc">I send a clear proposal with scope, timeline, deliverables, and pricing. No hidden costs. We agree before work begins.</div></div></div>
-      <div class="process-item reveal"><div class="process-num">03</div><div><div class="process-name">Build & Iterate</div><div class="process-desc">I work in structured phases with regular check-ins. You see progress at each milestone and can give feedback before we move forward.</div></div></div>
-      <div class="process-item reveal"><div class="process-num">04</div><div><div class="process-name">Delivery & Handoff</div><div class="process-desc">Clean, documented code delivered via GitHub. I walk you through everything and ensure you can maintain or extend the work yourself.</div></div></div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<section id="contact">
-  <div class="sec-inner">
-    <div class="sec-eyebrow">04 · CONTACT</div>
-    <h2 class="sec-title">Start a <em>Conversation</em></h2>
+<!-- CONTACT -->
+<section class="contact-section">
+  <div class="sec-container">
+    <div class="sec-num reveal">03 · Contact</div>
+    <h2 class="sec-title reveal">Start a <em>Conversation</em></h2>
     <div class="contact-grid">
-      <div class="contact-info reveal">
-        <div class="contact-item">
-          <div class="contact-item-label">EMAIL</div>
-          <div class="contact-item-value"><a href="mailto:kunj07382@gmail.com">kunj07382@gmail.com</a></div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-label">PHONE / WHATSAPP</div>
-          <div class="contact-item-value">+91-6375292488</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-label">LOCATION</div>
-          <div class="contact-item-value">Gurgaon, India · Open to remote</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-label">RESPONSE TIME</div>
-          <div class="contact-item-value">Typically within 24 hours</div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-label">CONNECT</div>
-          <div class="contact-item-value"><a href="https://www.linkedin.com/in/kvmeena/" target="_blank">LinkedIn</a> · <a href="https://github.com/Kvmeena12" target="_blank">GitHub</a></div>
-        </div>
+      <div class="contact-left reveal">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input class="form-input" type="text" placeholder="Rahul Sharma" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input class="form-input" type="email" placeholder="rahul@company.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Project Type</label>
+            <input class="form-input" type="text" placeholder="e.g. RAG system, ML model, NLP pipeline">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tell me about your project</label>
+            <textarea class="form-textarea" placeholder="Describe your problem, data available, and what success looks like..." required></textarea>
+          </div>
+          <button class="form-submit" type="submit">Send Message →</button>
+        </form>
       </div>
-      <div class="contact-form reveal">
-        <div class="form-group">
-          <label class="form-label">YOUR NAME</label>
-          <input class="form-input" type="text" placeholder="Full name">
+      <div class="contact-right reveal rd1">
+        <div class="contact-info-card">
+          <div class="cic-label">Direct Email</div>
+          <div class="cic-val"><a href="mailto:kunj07382@gmail.com">kunj07382@gmail.com</a></div>
+          <div class="cic-label">Phone</div>
+          <div class="cic-val">+91-6375292488</div>
+          <div class="cic-label">LinkedIn</div>
+          <div class="cic-val"><a href="https://www.linkedin.com/in/kvmeena/" target="_blank">linkedin.com/in/kvmeena</a></div>
+          <div class="cic-note">Best way to reach me is email. I respond within 24 hours on weekdays.</div>
         </div>
-        <div class="form-group">
-          <label class="form-label">EMAIL ADDRESS</label>
-          <input class="form-input" type="email" placeholder="you@company.com">
+        <div class="contact-info-card">
+          <div class="cic-label">Current Status</div>
+          <div class="cic-val" style="color:var(--gold);">Joining NRI — June 2026</div>
+          <div class="cic-note">Primarily focused on my full-time role at Nomura Research Institute. Open to research collaborations and select high-impact consulting work that fits my schedule.</div>
         </div>
-        <div class="form-group">
-          <label class="form-label">PROJECT TYPE</label>
-          <input class="form-input" type="text" placeholder="e.g. RAG system, ML model, analytics dashboard">
-        </div>
-        <div class="form-group">
-          <label class="form-label">TELL ME ABOUT YOUR PROJECT</label>
-          <textarea class="form-textarea" placeholder="Describe the problem you're solving, your data, timeline, and any specific requirements..."></textarea>
-        </div>
-        <button class="form-submit" onclick="window.location.href='mailto:kunj07382@gmail.com?subject=Freelance Project Inquiry'">Send Message →</button>
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-bottom-bar">
-    <div class="foot-name">Kunj<span>bihari</span> — Data Scientist</div>
-    <div class="foot-copy">© 2026 · All rights reserved</div>
+  <div class="foot-inner">
+    <div class="foot-brand">Kunj<em>bihari</em></div>
+    <div class="foot-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="mailto:kunj07382@gmail.com">Email</a>
+    </div>
+    <div class="foot-copy">© 2026 Kunjbihari Meena</div>
   </div>
 </footer>
 
 <script>
+/* CURSOR */
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function ar(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
+
+/* PARTICLES */
+(function(){const c=document.getElementById('particleCanvas'),ctx=c.getContext('2d');let pts=[];function resize(){c.width=innerWidth;c.height=innerHeight;}function init(){pts=[];for(let i=0;i<55;i++)pts.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.2+0.3,vx:(Math.random()-0.5)*0.15,vy:(Math.random()-0.5)*0.15,a:Math.random()*0.22+0.05,hue:Math.random()<0.6?20:45});}function draw(){ctx.clearRect(0,0,c.width,c.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>c.width)p.vx*=-1;if(p.y<0||p.y>c.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`hsla(${p.hue},90%,55%,${p.a})`;ctx.fill();});for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(232,84,26,${0.045*(1-d/110)})`;ctx.lineWidth=0.5;ctx.stroke();}}requestAnimationFrame(draw);}window.addEventListener('resize',()=>{resize();init();});resize();init();draw();})();
+
+/* NAV */
 const nav=document.getElementById('mainNav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
-const hamburger=document.getElementById('hamburger'),mobileNav=document.getElementById('mobileNav');
-hamburger.addEventListener('click',function(e){e.stopPropagation();this.classList.toggle('open');mobileNav.classList.toggle('open');document.body.style.overflow=mobileNav.classList.contains('open')?'hidden':'';});
-mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileNav.classList.remove('open');document.body.style.overflow='';}));
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');observer.unobserve(e.target);}});},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true});
+
+/* HAMBURGER */
+const hbg=document.getElementById('hamburger'),mNav=document.getElementById('mobileNav');
+hbg.addEventListener('click',function(e){e.stopPropagation();this.classList.toggle('open');mNav.classList.toggle('open');document.body.style.overflow=mNav.classList.contains('open')?'hidden':'';});
+mNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hbg.classList.remove('open');mNav.classList.remove('open');document.body.style.overflow='';}));
+
+/* FORM */
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.form-submit');
+  btn.textContent='Message Sent ✓';
+  btn.style.background='var(--teal)';
+  btn.disabled=true;
+  setTimeout(()=>{btn.textContent='Send Message →';btn.style.background='';btn.disabled=false;e.target.reset();},3000);
+}
+
+/* REVEAL */
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
